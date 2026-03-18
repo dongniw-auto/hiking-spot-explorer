@@ -375,3 +375,13 @@
   font-weight: 500;
   margin-top: 8px;
 }
+
+.fee-value.free {
+  color: #2d5016;
+  font-weight: 600;
+}
+
+.fee-value.paid {
+  color: #f57f17;
+  font-weight: 600;
+}

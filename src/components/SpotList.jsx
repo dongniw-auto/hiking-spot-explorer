@@ -77,6 +77,11 @@ export default function SpotList({ spots, selectedSpot, onSpotSelect, onPlanVisi
                 )}
               </div>
             </div>
+            {spot.entranceFee && (
+              <div className={`fee-badge ${spot.entranceFee === 'Free' ? 'free' : 'paid'}`}>
+                {spot.entranceFee === 'Free' ? 'Free Entry' : spot.entranceFee}
+              </div>
+            )}
             <p className="spot-desc">{spot.description}</p>
             {spot.sourceUrl && (
               <a className="source-link" href={spot.sourceUrl} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>

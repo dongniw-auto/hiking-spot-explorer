@@ -201,6 +201,12 @@ export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onD
                 <span>Parking</span>
                 <span>{spot.parkingInfo}</span>
               </div>
+              {spot.entranceFee && (
+                <div className="detail-row">
+                  <span>Entrance Fee</span>
+                  <span className={`fee-value ${spot.entranceFee === 'Free' ? 'free' : 'paid'}`}>{spot.entranceFee}</span>
+                </div>
+              )}
             </div>
             <div className="highlights">
               <strong>Highlights:</strong>

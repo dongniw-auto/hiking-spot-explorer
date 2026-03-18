@@ -242,3 +242,22 @@
 .plan-btn.has-plan:hover {
   background: #2980b9;
 }
+
+.fee-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.fee-badge.free {
+  background: #e8f5e0;
+  color: #2d5016;
+}
+
+.fee-badge.paid {
+  background: #fff8e1;
+  color: #f57f17;
+}
