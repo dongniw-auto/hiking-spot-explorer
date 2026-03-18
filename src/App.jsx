@@ -118,8 +118,8 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Hiking Spot Explorer</h1>
-        <p className="subtitle">Discover trails, plan your visit, bring the whole family</p>
+        <h1>Stardust</h1>
+        <p className="subtitle">Discover trails, museums, heritage sites & hidden gems</p>
       </header>
 
       <SearchBar
@@ -142,7 +142,7 @@ function App() {
         <div className="list-section">
           <div className="list-header">
             <h2 className="section-title">
-              {filteredSpots.length} Trail{filteredSpots.length !== 1 ? 's' : ''} Found
+              {filteredSpots.length} Place{filteredSpots.length !== 1 ? 's' : ''} Found
             </h2>
             {Object.keys(savedPlans).length > 0 && (
               <button className="saved-plans-btn" onClick={() => setShowSavedPlans(true)}>

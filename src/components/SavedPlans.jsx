@@ -30,7 +30,7 @@ export default function SavedPlans({ plans, spots, onClose, onDeletePlan, onOpen
         </div>
         <div className="plans-body">
           {entries.length === 0 ? (
-            <p className="no-plans">No saved plans yet. Use "Plan Visit" on any trail to get started.</p>
+            <p className="no-plans">No saved plans yet. Use "Plan Visit" on any place to get started.</p>
           ) : (
             entries.map(({ spotId, plan, spot }) => (
               <div key={spotId} className="plan-card">

@@ -60,7 +60,7 @@ export default function SearchBar({ onSearch, onLocationSearch, filters, onFilte
           <input
             type="text"
             className="search-input"
-            placeholder="Search trails by name, city, or region..."
+            placeholder="Search places by name, city, or region..."
             value={query}
             onChange={(e) => {
               setQuery(e.target.value)

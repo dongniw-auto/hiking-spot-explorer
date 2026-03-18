@@ -22,7 +22,7 @@ export default function SpotList({ spots, selectedSpot, onSpotSelect, onPlanVisi
   if (spots.length === 0) {
     return (
       <div className="no-results">
-        <p>No trails found matching your criteria.</p>
+        <p>No places found matching your criteria.</p>
         <p>Try adjusting your filters or search terms.</p>
       </div>
     )
