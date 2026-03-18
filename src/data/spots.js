@@ -386,6 +386,32 @@ export const SAMPLE_SPOTS = [
     sourceUrl: "https://www.alltrails.com/parks/us/california/lexington-reservoir-county-park",
     image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=250&fit=crop"
   },
+
+  // === Other Popular Bay Area Spots (not county parks) ===
+  {
+    id: 201,
+    name: "Rancho San Antonio - High Meadow Loop",
+    location: "Cupertino, CA",
+    region: "Santa Clara County",
+    lat: 37.3330,
+    lng: -122.0958,
+    difficulty: "moderate",
+    distance: 5.5,
+    elevationGain: 800,
+    estimatedHikingTime: 150,
+    rating: 4.7,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    petNotes: "No dogs allowed anywhere in the preserve to protect wildlife.",
+    kidNotes: "Deer Hollow Farm (free, working farm) is a huge hit with kids. The farm trail is flat and stroller-friendly (1 mi). Older kids enjoy the full High Meadow Loop.",
+    description: "One of the Bay Area's most popular preserves with rolling meadows, oak woodlands, and the beloved Deer Hollow Farm. Incredible variety of trails for all levels.",
+    highlights: ["Deer Hollow Farm", "High Meadow views", "Oak woodlands", "Wildlife viewing"],
+    bestSeason: "Year-round",
+    parkingInfo: "Free parking but lots fill by 9am on weekends. Arrive early! Additional overflow lot on Cristo Rey Dr.",
+    sourceUrl: "https://www.openspace.org/preserves/rancho-san-antonio",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
+  },
 ]
 
 export const PACK_LIST_TEMPLATES = {
