@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { PACK_LIST_TEMPLATES } from '../data/spots'
 import './VisitPlanner.css'
 
@@ -12,14 +12,47 @@ function estimateDrivingTime(distanceMiles) {
   return Math.round(distanceMiles * 2)
 }
 
+function haversineDistanceMiles(lat1, lng1, lat2, lng2) {
+  const toRad = (deg) => (deg * Math.PI) / 180
+  const R = 3959 // Earth radius in miles
+  const dLat = toRad(lat2 - lat1)
+  const dLng = toRad(lng2 - lng1)
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
+
 export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onDeletePlan }) {
   const [visitDate, setVisitDate] = useState(savedPlan?.visitDate || '')
   const [startTime, setStartTime] = useState(savedPlan?.startTime || '08:00')
   const [drivingDistance, setDrivingDistance] = useState(savedPlan?.drivingDistance || 30)
+  const [locationStatus, setLocationStatus] = useState('')
   const [bringPets, setBringPets] = useState(savedPlan?.bringPets || false)
   const [bringKids, setBringKids] = useState(savedPlan?.bringKids || false)
   const [checkedItems, setCheckedItems] = useState(savedPlan?.checkedItems || {})
   const [saved, setSaved] = useState(!!savedPlan)
+
+  useEffect(() => {
+    if (savedPlan?.drivingDistance) return
+    if (!navigator.geolocation) return
+    setLocationStatus('Estimating distance...')
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const straightLine = haversineDistanceMiles(
+          pos.coords.latitude, pos.coords.longitude,
+          spot.lat, spot.lng
+        )
+        const roadEstimate = Math.round(straightLine * 1.3)
+        setDrivingDistance(Math.max(1, roadEstimate))
+        setLocationStatus('Based on your location')
+      },
+      () => {
+        setLocationStatus('')
+      },
+      { timeout: 5000 }
+    )
+  }, [spot.lat, spot.lng])
 
   const drivingTime = estimateDrivingTime(drivingDistance)
   const hikingTime = spot.estimatedHikingTime
@@ -76,13 +109,13 @@ export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onD
             </div>
             <div className="form-row">
               <label>
-                <span>Driving Distance (miles)</span>
+                <span>Driving Distance (miles){locationStatus && <em className="location-hint"> — {locationStatus}</em>}</span>
                 <input
                   type="number"
                   min="1"
                   max="500"
                   value={drivingDistance}
-                  onChange={(e) => setDrivingDistance(Number(e.target.value))}
+                  onChange={(e) => { setDrivingDistance(Number(e.target.value)); setLocationStatus('') }}
                 />
               </label>
             </div>

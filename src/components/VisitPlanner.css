@@ -228,6 +228,12 @@
   font-style: italic;
 }
 
+.location-hint {
+  font-style: italic;
+  color: var(--accent, #007aff);
+  font-weight: 400;
+}
+
 .info-note {
   padding: 10px 14px;
   border-radius: 10px;
