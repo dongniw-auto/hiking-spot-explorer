@@ -1,0 +1,82 @@
+.map-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.map-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 160px;
+}
+
+.map-popup strong {
+  font-size: 14px;
+  color: var(--text-h, #1a1a2e);
+}
+
+.popup-location {
+  font-size: 12px;
+  color: #888;
+}
+
+.popup-details {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.popup-tags {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.tag.pet {
+  background: #e8f5e0;
+  color: #2d5016;
+}
+
+.tag.kid {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.difficulty-badge {
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.difficulty-badge.easy {
+  background: #e8f5e0;
+  color: #2d5016;
+}
+
+.difficulty-badge.moderate {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.difficulty-badge.hard {
+  background: #ffebee;
+  color: #c62828;
+}
