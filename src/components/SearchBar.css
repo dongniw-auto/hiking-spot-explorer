@@ -1,0 +1,132 @@
+.search-bar {
+  background: var(--card-bg);
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.search-form {
+  margin-bottom: 12px;
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 0 12px;
+  transition: border-color 0.2s;
+}
+
+.search-input-wrap:focus-within {
+  border-color: var(--green);
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 12px;
+  font-size: 16px;
+  color: var(--text-h);
+  outline: none;
+  font-family: var(--sans);
+}
+
+.search-input::placeholder {
+  color: var(--text);
+}
+
+.location-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  color: var(--green);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.location-btn:hover {
+  background: var(--green-light);
+}
+
+.quick-regions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.quick-label {
+  font-size: 13px;
+  color: var(--text);
+}
+
+.region-chip {
+  background: var(--green-light);
+  color: var(--green-dark);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.region-chip:hover {
+  border-color: var(--green);
+  background: #d4edba;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-toggle input[type="checkbox"] {
+  accent-color: var(--green);
+  width: 16px;
+  height: 16px;
+}
+
+.filter-label {
+  color: var(--text-h);
+  font-weight: 500;
+}
+
+.difficulty-select {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-h);
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.difficulty-select:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
+}
