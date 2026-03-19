@@ -119,6 +119,15 @@ export default function SearchBar({ onSearch, onLocationSearch, filters, onFilte
           <span className="filter-label">Starred Only</span>
         </label>
         <select
+          className="category-select"
+          value={filters.category || 'all'}
+          onChange={(e) => onFilterChange({ ...filters, category: e.target.value })}
+        >
+          <option value="all">All Categories</option>
+          <option value="outdoors">Outdoors</option>
+          <option value="cafe">Cafes & Tea</option>
+        </select>
+        <select
           className="difficulty-select"
           value={filters.difficulty}
           onChange={(e) => onFilterChange({ ...filters, difficulty: e.target.value })}

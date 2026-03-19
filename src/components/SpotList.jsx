@@ -38,7 +38,11 @@ export default function SpotList({ spots, selectedSpot, onSpotSelect, onPlanVisi
         >
           <div className="spot-image-wrap">
             <img src={spot.image} alt={spot.name} className="spot-image" loading="lazy" />
-            <span className={`difficulty-pill ${spot.difficulty}`}>{spot.difficulty}</span>
+            {spot.category === 'cafe' ? (
+              <span className="difficulty-pill cafe">cafe</span>
+            ) : (
+              <span className={`difficulty-pill ${spot.difficulty}`}>{spot.difficulty}</span>
+            )}
             <button
               className={`star-btn ${starred.includes(spot.id) ? 'starred' : ''}`}
               onClick={(e) => { e.stopPropagation(); onToggleStar(spot.id) }}
@@ -53,13 +57,15 @@ export default function SpotList({ spots, selectedSpot, onSpotSelect, onPlanVisi
               {savedPlans[spot.id] && <span className="planned-badge">Planned</span>}
             </div>
             <p className="spot-location">{spot.location}</p>
-            <div className="spot-stats">
-              <span>{spot.distance} mi</span>
-              <span className="divider">|</span>
-              <span>{spot.elevationGain} ft gain</span>
-              <span className="divider">|</span>
-              <span>{formatTime(spot.estimatedHikingTime)}</span>
-            </div>
+            {spot.category !== 'cafe' && spot.distance != null && (
+              <div className="spot-stats">
+                <span>{spot.distance} mi</span>
+                <span className="divider">|</span>
+                <span>{spot.elevationGain} ft gain</span>
+                <span className="divider">|</span>
+                <span>{formatTime(spot.estimatedHikingTime)}</span>
+              </div>
+            )}
             <div className="spot-meta">
               <StarRating rating={spot.rating} />
               <div className="spot-tags">

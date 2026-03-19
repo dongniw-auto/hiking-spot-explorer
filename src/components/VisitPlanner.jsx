@@ -30,8 +30,11 @@ export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onD
   const [locationStatus, setLocationStatus] = useState('')
   const [bringPets, setBringPets] = useState(savedPlan?.bringPets || false)
   const [bringKids, setBringKids] = useState(savedPlan?.bringKids || false)
+  const isCafe = spot.category === 'cafe'
+  const [hikingTime, setHikingTime] = useState(savedPlan?.hikingTime || spot.estimatedHikingTime || 60)
+  const [breakTime, setBreakTime] = useState(savedPlan?.breakTime ?? (isCafe ? 45 : ((spot.estimatedHikingTime || 60) > 120 ? 30 : 15)))
   const [checkedItems, setCheckedItems] = useState(savedPlan?.checkedItems || {})
-  const [saved, setSaved] = useState(!!savedPlan)
+  const [justSaved, setJustSaved] = useState(false)
 
   useEffect(() => {
     if (savedPlan?.drivingDistance) return
@@ -55,12 +58,11 @@ export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onD
   }, [spot.lat, spot.lng])
 
   const drivingTime = estimateDrivingTime(drivingDistance)
-  const hikingTime = spot.estimatedHikingTime
-  const breakTime = hikingTime > 120 ? 30 : 15
-  const totalTime = drivingTime * 2 + hikingTime + breakTime
+  const totalTime = isCafe ? (drivingTime * 2 + breakTime) : (drivingTime * 2 + hikingTime + breakTime)
 
   const packList = useMemo(() => {
-    let items = [...PACK_LIST_TEMPLATES[spot.difficulty]]
+    if (isCafe) return []
+    let items = [...(PACK_LIST_TEMPLATES[spot.difficulty] || [])]
     if (bringPets && spot.petFriendly) {
       items = [...items, ...PACK_LIST_TEMPLATES.pet]
     }
@@ -131,18 +133,46 @@ export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onD
                   <span>{formatTime(drivingTime)}</span>
                 </div>
               </div>
-              <div className="time-item">
-                <span className="time-icon">🥾</span>
-                <div>
-                  <strong>Hiking ({spot.distance} mi)</strong>
-                  <span>{formatTime(hikingTime)}</span>
+              {!isCafe && (
+                <div className="time-item editable-time">
+                  <span className="time-icon">🥾</span>
+                  <div>
+                    <strong>Hiking ({spot.distance} mi)</strong>
+                    <div className="time-edit-row">
+                      <input
+                        type="number"
+                        className="time-input"
+                        min="5"
+                        max="1440"
+                        value={hikingTime}
+                        onChange={(e) => setHikingTime(Math.max(5, Number(e.target.value)))}
+                      />
+                      <span className="time-unit">min</span>
+                      <span className="time-formatted">= {formatTime(hikingTime)}</span>
+                      {hikingTime !== spot.estimatedHikingTime && (
+                        <button className="time-reset" onClick={() => setHikingTime(spot.estimatedHikingTime)} title="Reset to default">
+                          reset
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="time-item">
-                <span className="time-icon">☕</span>
+              )}
+              <div className="time-item editable-time">
+                <span className="time-icon">{isCafe ? '☕' : '☕'}</span>
                 <div>
-                  <strong>Break / Rest</strong>
-                  <span>{formatTime(breakTime)}</span>
+                  <strong>{isCafe ? 'Time at Cafe' : 'Break / Rest'}</strong>
+                  <div className="time-edit-row">
+                    <input
+                      type="number"
+                      className="time-input"
+                      min="0"
+                      max="300"
+                      value={breakTime}
+                      onChange={(e) => setBreakTime(Math.max(0, Number(e.target.value)))}
+                    />
+                    <span className="time-unit">min</span>
+                  </div>
                 </div>
               </div>
               <div className="time-item">
@@ -212,20 +242,24 @@ export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onD
           </section>
 
           <section className="planner-section">
-            <h4>Trail Info</h4>
+            <h4>{isCafe ? 'Details' : 'Trail Info'}</h4>
             <div className="trail-details">
-              <div className="detail-row">
-                <span>Difficulty</span>
-                <span className={`difficulty-badge ${spot.difficulty}`}>{spot.difficulty}</span>
-              </div>
-              <div className="detail-row">
-                <span>Distance</span>
-                <span>{spot.distance} miles</span>
-              </div>
-              <div className="detail-row">
-                <span>Elevation Gain</span>
-                <span>{spot.elevationGain} ft</span>
-              </div>
+              {!isCafe && (
+                <>
+                  <div className="detail-row">
+                    <span>Difficulty</span>
+                    <span className={`difficulty-badge ${spot.difficulty}`}>{spot.difficulty}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span>Distance</span>
+                    <span>{spot.distance} miles</span>
+                  </div>
+                  <div className="detail-row">
+                    <span>Elevation Gain</span>
+                    <span>{spot.elevationGain} ft</span>
+                  </div>
+                </>
+              )}
               <div className="detail-row">
                 <span>Best Season</span>
                 <span>{spot.bestSeason}</span>
@@ -251,42 +285,45 @@ export default function VisitPlanner({ spot, onClose, savedPlan, onSavePlan, onD
             </div>
           </section>
 
-          <section className="planner-section">
-            <h4>Pack List</h4>
-            <div className="pack-list">
-              {packList.map((item) => (
-                <label key={item} className="pack-item">
-                  <input
-                    type="checkbox"
-                    checked={!!checkedItems[item]}
-                    onChange={() => toggleItem(item)}
-                  />
-                  <span className={checkedItems[item] ? 'checked' : ''}>{item}</span>
-                </label>
-              ))}
-            </div>
-          </section>
+          {packList.length > 0 && (
+            <section className="planner-section">
+              <h4>Pack List</h4>
+              <div className="pack-list">
+                {packList.map((item) => (
+                  <label key={item} className="pack-item">
+                    <input
+                      type="checkbox"
+                      checked={!!checkedItems[item]}
+                      onChange={() => toggleItem(item)}
+                    />
+                    <span className={checkedItems[item] ? 'checked' : ''}>{item}</span>
+                  </label>
+                ))}
+              </div>
+            </section>
+          )}
 
           <div className="planner-actions">
             <button
               className="save-plan-btn"
               onClick={() => {
-                onSavePlan({ visitDate, startTime, drivingDistance, bringPets, bringKids, checkedItems, savedAt: new Date().toISOString() })
-                setSaved(true)
+                onSavePlan({ visitDate, startTime, drivingDistance, hikingTime, breakTime, bringPets, bringKids, checkedItems, savedAt: new Date().toISOString() })
+                setJustSaved(true)
+                setTimeout(() => setJustSaved(false), 2500)
               }}
             >
-              {saved ? 'Update Plan' : 'Save Plan'}
+              {savedPlan ? 'Update Plan' : 'Save Plan'}
             </button>
-            {saved && (
+            {savedPlan && (
               <button
                 className="delete-plan-btn"
-                onClick={() => { onDeletePlan(); setSaved(false) }}
+                onClick={() => { onDeletePlan() }}
               >
                 Delete Plan
               </button>
             )}
           </div>
-          {saved && <p className="save-confirm">Plan saved!</p>}
+          {justSaved && <p className="save-confirm">Plan saved!</p>}
         </div>
       </div>
     </div>

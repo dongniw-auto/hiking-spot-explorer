@@ -7,5 +7,11 @@ export default defineConfig({
   base: '/stardust/',
   build: {
     outDir: 'docs',
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/index.js',
+        assetFileNames: 'assets/index.[ext]',
+      },
+    },
   },
 })

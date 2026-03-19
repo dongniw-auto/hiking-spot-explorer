@@ -6,6 +6,18 @@
   margin-bottom: 20px;
 }
 
+.plans-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.plans-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .plans-page-header h1 {
   font-size: 34px;
   font-weight: 800;
@@ -16,6 +28,31 @@
 .plans-count {
   color: var(--text);
   font-size: 15px;
+}
+
+.view-toggle {
+  display: flex;
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.view-btn {
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.view-btn.active {
+  background: var(--card-bg);
+  color: var(--accent);
+  box-shadow: var(--shadow);
 }
 
 .plans-list {
@@ -109,8 +146,8 @@
 }
 
 .kid-chip {
-  background: rgba(0, 122, 255, 0.1);
-  color: var(--accent);
+  background: rgba(91, 143, 185, 0.1);
+  color: var(--blue);
 }
 
 .plan-card-actions {
@@ -127,6 +164,8 @@
   font-size: 13px;
   font-weight: 600;
   transition: opacity 0.2s;
+  text-decoration: none;
+  text-align: center;
 }
 
 .plan-action-btn:hover {
@@ -138,7 +177,16 @@
   color: white;
 }
 
+.plan-action-btn.gcal {
+  background: rgba(90, 158, 111, 0.12);
+  color: var(--green-dark);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+
 .plan-action-btn.remove {
-  background: rgba(255, 59, 48, 0.1);
+  background: rgba(200, 80, 64, 0.1);
   color: var(--red);
 }

@@ -19,19 +19,19 @@
 
 .map-popup strong {
   font-size: 14px;
-  color: var(--text-h, #1c1c1e);
+  color: var(--text-h, #2c2320);
 }
 
 .popup-location {
   font-size: 12px;
-  color: var(--text, #8e8e93);
+  color: var(--text, #9c8e82);
 }
 
 .popup-details {
   display: flex;
   gap: 8px;
   font-size: 12px;
-  color: var(--text-secondary, #636366);
+  color: var(--text-secondary, #6b5d52);
   margin-top: 4px;
 }
 
@@ -54,8 +54,8 @@
 }
 
 .tag.kid {
-  background: rgba(0, 122, 255, 0.1);
-  color: var(--accent, #007aff);
+  background: rgba(91, 143, 185, 0.1);
+  color: var(--accent, #c2703e);
 }
 
 .difficulty-badge {

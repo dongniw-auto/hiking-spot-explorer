@@ -8,8 +8,19 @@
 .app-header {
   background: var(--card-bg);
   padding: 52px 20px 16px;
-  text-align: center;
   border-bottom: 0.5px solid var(--border);
+}
+
+.app-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-header-row > div:first-child {
+  text-align: left;
 }
 
 .app-title {
@@ -17,7 +28,7 @@
   font-weight: 800;
   margin: 0 0 4px;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #007aff, #5856d6);
+  background: linear-gradient(135deg, #c2703e, #d4872e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -70,6 +81,33 @@
   }
 }
 
+@media (max-width: 600px) {
+  .app-header {
+    padding: 44px 14px 12px;
+  }
+
+  .app-title {
+    font-size: 26px;
+  }
+
+  .app-subtitle {
+    font-size: 13px;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .map-section {
+    height: 280px;
+    border-radius: 12px;
+  }
+
+  .section-title {
+    font-size: 12px;
+  }
+}
+
 .list-header {
   display: flex;
   align-items: center;
@@ -97,7 +135,7 @@
   left: 0;
   right: 0;
   display: flex;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 252, 248, 0.92);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-top: 0.5px solid var(--border);

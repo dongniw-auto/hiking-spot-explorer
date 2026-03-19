@@ -41,13 +41,13 @@
   top: 12px;
   float: right;
   margin-right: 12px;
-  background: var(--bg, #f2f2f7);
+  background: var(--bg, #faf6f2);
   border: none;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   font-size: 15px;
-  color: var(--text-secondary, #636366);
+  color: var(--text-secondary, #6b5d52);
   z-index: 10;
   display: flex;
   align-items: center;
@@ -61,7 +61,7 @@
 
 .planner-header {
   padding: 20px 20px 14px;
-  border-bottom: 0.5px solid var(--border, rgba(60, 60, 67, 0.1));
+  border-bottom: 0.5px solid var(--border, rgba(60, 40, 20, 0.08));
 }
 
 .planner-header h2 {
@@ -69,7 +69,7 @@
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--accent, #007aff);
+  color: var(--accent, #c2703e);
   font-weight: 600;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .planner-location {
-  color: var(--text, #8e8e93);
+  color: var(--text, #9c8e82);
   font-size: 14px;
 }
 
@@ -91,7 +91,7 @@
 
 .planner-section {
   padding: 18px 0;
-  border-bottom: 0.5px solid var(--border, rgba(60, 60, 67, 0.1));
+  border-bottom: 0.5px solid var(--border, rgba(60, 40, 20, 0.08));
 }
 
 .planner-section:last-child {
@@ -102,7 +102,7 @@
   margin: 0 0 12px;
   font-size: 15px;
   font-weight: 600;
-  color: var(--text-h, #1c1c1e);
+  color: var(--text-h, #2c2320);
 }
 
 .form-row {
@@ -117,7 +117,7 @@
   flex-direction: column;
   gap: 4px;
   font-size: 12px;
-  color: var(--text, #8e8e93);
+  color: var(--text, #9c8e82);
   font-weight: 500;
 }
 
@@ -127,13 +127,13 @@
   border-radius: 10px;
   font-size: 16px;
   font-family: var(--sans);
-  color: var(--text-h, #1c1c1e);
-  background: var(--bg, #f2f2f7);
+  color: var(--text-h, #2c2320);
+  background: var(--bg, #faf6f2);
 }
 
 .form-row input:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--accent-light, rgba(0, 122, 255, 0.1));
+  box-shadow: 0 0 0 3px var(--accent-light, rgba(194, 112, 62, 0.1));
 }
 
 .time-breakdown {
@@ -147,7 +147,7 @@
   align-items: center;
   gap: 12px;
   padding: 10px 12px;
-  background: var(--bg, #f2f2f7);
+  background: var(--bg, #faf6f2);
   border-radius: 10px;
 }
 
@@ -164,12 +164,56 @@
 
 .time-item strong {
   font-size: 13px;
-  color: var(--text-h, #1c1c1e);
+  color: var(--text-h, #2c2320);
 }
 
 .time-item span {
   font-size: 13px;
-  color: var(--text, #8e8e93);
+  color: var(--text, #9c8e82);
+}
+
+.time-edit-row {
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.time-input {
+  width: 56px;
+  padding: 3px 6px;
+  border: 1px solid var(--border, #e0d5cc);
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--card-bg, white);
+  color: var(--text-h, #2c2320);
+  text-align: center;
+}
+
+.time-input:focus {
+  outline: none;
+  border-color: var(--accent, #c2703e);
+}
+
+.time-unit {
+  font-size: 12px;
+  color: var(--text-light, #b0a398) !important;
+}
+
+.time-formatted {
+  font-size: 12px;
+  color: var(--text, #9c8e82) !important;
+}
+
+.time-reset {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: var(--accent, #c2703e);
+  cursor: pointer;
+  padding: 2px 4px;
+  text-decoration: underline;
 }
 
 .time-total {
@@ -177,26 +221,26 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background: var(--accent-light, rgba(0, 122, 255, 0.1));
+  background: var(--accent-light, rgba(194, 112, 62, 0.1));
   border-radius: 10px;
   margin-top: 4px;
 }
 
 .time-total strong {
   font-size: 14px;
-  color: var(--accent, #007aff);
+  color: var(--accent, #c2703e);
 }
 
 .total-value {
   font-size: 20px;
   font-weight: 700;
-  color: var(--accent, #007aff);
+  color: var(--accent, #c2703e);
 }
 
 .time-return {
   text-align: center;
   font-size: 14px;
-  color: var(--text, #8e8e93);
+  color: var(--text, #9c8e82);
   padding: 4px 0;
 }
 
@@ -219,18 +263,18 @@
 }
 
 .companion-option input {
-  accent-color: var(--accent, #007aff);
+  accent-color: var(--accent, #c2703e);
 }
 
 .warning {
   font-size: 11px;
-  color: var(--red, #ff3b30);
+  color: var(--red, #c85040);
   font-style: italic;
 }
 
 .location-hint {
   font-style: italic;
-  color: var(--accent, #007aff);
+  color: var(--accent, #c2703e);
   font-weight: 400;
 }
 
@@ -248,8 +292,8 @@
 }
 
 .kid-note {
-  background: rgba(0, 122, 255, 0.08);
-  color: #0055b3;
+  background: rgba(91, 143, 185, 0.1);
+  color: #3d6d8e;
 }
 
 .warning-note {
@@ -262,7 +306,7 @@
   flex-direction: column;
   gap: 0;
   margin-bottom: 14px;
-  background: var(--bg, #f2f2f7);
+  background: var(--bg, #faf6f2);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -272,7 +316,7 @@
   justify-content: space-between;
   padding: 10px 14px;
   font-size: 14px;
-  border-bottom: 0.5px solid var(--border, rgba(60, 60, 67, 0.1));
+  border-bottom: 0.5px solid var(--border, rgba(60, 40, 20, 0.08));
 }
 
 .detail-row:last-child {
@@ -280,11 +324,11 @@
 }
 
 .detail-row span:first-child {
-  color: var(--text, #8e8e93);
+  color: var(--text, #9c8e82);
 }
 
 .detail-row span:last-child {
-  color: var(--text-h, #1c1c1e);
+  color: var(--text-h, #2c2320);
   font-weight: 500;
   text-align: right;
   max-width: 60%;
@@ -306,8 +350,8 @@
 }
 
 .highlight-chip {
-  background: var(--accent-light, rgba(0, 122, 255, 0.1));
-  color: var(--accent, #007aff);
+  background: var(--accent-light, rgba(194, 112, 62, 0.1));
+  color: var(--accent, #c2703e);
   padding: 4px 12px;
   border-radius: 14px;
   font-size: 13px;
@@ -318,7 +362,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  background: var(--bg, #f2f2f7);
+  background: var(--bg, #faf6f2);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -330,7 +374,7 @@
   font-size: 14px;
   cursor: pointer;
   padding: 10px 14px;
-  border-bottom: 0.5px solid var(--border, rgba(60, 60, 67, 0.1));
+  border-bottom: 0.5px solid var(--border, rgba(60, 40, 20, 0.08));
 }
 
 .pack-item:last-child {
@@ -338,7 +382,7 @@
 }
 
 .pack-item input {
-  accent-color: var(--accent, #007aff);
+  accent-color: var(--accent, #c2703e);
 }
 
 .pack-item .checked {
@@ -378,7 +422,7 @@
 .save-plan-btn {
   flex: 1;
   padding: 14px;
-  background: var(--accent, #007aff);
+  background: var(--accent, #c2703e);
   color: white;
   border: none;
   border-radius: var(--radius, 12px);
@@ -394,7 +438,7 @@
 .delete-plan-btn {
   padding: 14px 20px;
   background: rgba(255, 59, 48, 0.1);
-  color: var(--red, #ff3b30);
+  color: var(--red, #c85040);
   border: none;
   border-radius: var(--radius, 12px);
   font-size: 15px;
@@ -403,7 +447,7 @@
 }
 
 .delete-plan-btn:hover {
-  background: var(--red, #ff3b30);
+  background: var(--red, #c85040);
   color: white;
 }
 

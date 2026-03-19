@@ -23,6 +23,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Reservation required for parking. Shuttle available from Sausalito.",
     sourceUrl: "https://www.nps.gov/muwo/index.htm",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=250&fit=crop"
   },
   {
@@ -48,6 +49,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring & Fall",
     parkingInfo: "Free parking at Lands End Lookout visitor center.",
     sourceUrl: "https://www.nps.gov/goga/planyourvisit/landsend.htm",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop"
   },
   {
@@ -73,6 +75,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring (wildflowers) & Fall",
     parkingInfo: "Stanford Avenue staging area fills early on weekends. Arrive before 8am.",
     sourceUrl: "https://www.ebparks.org/parks/mission-peak",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
   },
   {
@@ -98,6 +101,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free parking at Tennessee Valley trailhead. Can fill up on weekends.",
     sourceUrl: "https://www.nps.gov/goga/planyourvisit/tennessee-valley.htm",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
@@ -123,6 +127,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring & Summer",
     parkingInfo: "Start at Old Mill Park in Mill Valley. Shuttle back from Stinson Beach on weekends.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/dipsea-trail",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop"
   },
   {
@@ -148,6 +153,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Multiple free parking areas throughout the park.",
     sourceUrl: "https://www.ebparks.org/parks/tilden-regional",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
   },
 
@@ -175,6 +181,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring (wildflowers) & Fall",
     parkingInfo: "Free with Library Park Pass. Hacienda entrance or Mockingbird Hill entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/almaden-quicksilver-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=250&fit=crop"
   },
   {
@@ -200,6 +207,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring (wildflowers)",
     parkingInfo: "Free with Library Park Pass. Main entrance on McKean Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/calero-county-park--2",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
   },
   {
@@ -225,6 +233,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring & Fall",
     parkingInfo: "Free with Library Park Pass. Main lot on Mt. Hamilton Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/joseph-d-grant-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=250&fit=crop"
   },
   {
@@ -250,6 +259,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring & Fall",
     parkingInfo: "Free with Library Park Pass. Sandy Wool Lake lot or Downing Rd lot.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/ed-r-levin-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
   },
   {
@@ -275,6 +285,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (great summer escape)",
     parkingInfo: "Free with Library Park Pass. Main entrance on Sanborn Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/sanborn-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop"
   },
   {
@@ -300,6 +311,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring through Fall",
     parkingInfo: "Free with Library Park Pass. Multiple lots near park entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/mount-madonna-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=250&fit=crop"
   },
   {
@@ -325,6 +337,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free with Library Park Pass. Stevens Canyon Rd entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/stevens-creek-county-park--2",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
@@ -350,6 +363,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free with Library Park Pass. Main lot on Garden Hill Dr.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/vasona-lake-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
   },
   {
@@ -375,6 +389,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (splash pad in summer)",
     parkingInfo: "Free with Library Park Pass. Hellyer Ave entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/hellyer-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400&h=250&fit=crop"
   },
   {
@@ -400,6 +415,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring & Fall",
     parkingInfo: "Free with Library Park Pass. Alma Bridge Rd lot.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/lexington-reservoir-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=250&fit=crop"
   },
 
@@ -427,6 +443,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Fall & Spring (migration seasons)",
     parkingInfo: "Free with Library Park Pass. Ample parking with ADA-accessible spots.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/alviso-slough-trail",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400&h=250&fit=crop"
   },
   {
@@ -452,6 +469,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring (check closure status year-round)",
     parkingInfo: "Free with Library Park Pass. Live Oak entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/anderson-lake-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=250&fit=crop"
   },
   {
@@ -477,6 +495,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring & Fall",
     parkingInfo: "Free with Library Park Pass. Basic facilities with restrooms and picnic tables.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/chesbro-reservoir-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
   },
   {
@@ -502,6 +521,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free with Library Park Pass. Open 8 AM to sunset.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/chitactac-adams-heritage-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=250&fit=crop"
   },
   {
@@ -527,6 +547,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free with Library Park Pass at multiple trailheads. $6 fee at Hellyer Park entrance.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/coyote-creek-parkway",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
@@ -552,6 +573,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring & Fall",
     parkingInfo: "Free with Library Park Pass at Harvey Bear entrance. Vehicle fee at Coyote Lake entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/coyote-lake-harvey-bear-ranch-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
   },
   {
@@ -577,6 +599,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (Mon, Thu-Sun 8AM-4PM)",
     parkingInfo: "Free with Library Park Pass. Ample parking.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/field-sports-park/rifle-and-pistol-range",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
   },
   {
@@ -602,6 +625,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free with Library Park Pass. Dell Avenue entrance (1250 Dell Ave, Campbell).",
     sourceUrl: "https://www.alltrails.com/trail/us/california/los-gatos-creek-trail--5",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=250&fit=crop"
   },
   {
@@ -627,6 +651,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (exposed — bring sun protection in summer)",
     parkingInfo: "Free with Library Park Pass. Snell Avenue entrance.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/martial-cottle-park-loop",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400&h=250&fit=crop"
   },
   {
@@ -652,6 +677,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (Thu-Mon, closed Tue-Wed)",
     parkingInfo: "Free with Library Park Pass. OHV stickers mandatory.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/metcalf-motorcycle-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
   },
   {
@@ -677,6 +703,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free with Library Park Pass. Multiple trailheads along Capitol Avenue.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/penitencia-creek-park-loop",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
   },
   {
@@ -702,6 +729,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (arrive before 9 AM on weekends)",
     parkingInfo: "Free with Library Park Pass but lots fill early on weekends. Arrive early!",
     sourceUrl: "https://www.alltrails.com/trail/us/california/deer-hollow-farm-trail-loop--3",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
   },
   {
@@ -727,6 +755,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Spring (wildflowers) & Fall",
     parkingInfo: "Free with Library Park Pass. Pueblo Day Use Area entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/santa-teresa-county-park",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=250&fit=crop"
   },
   {
@@ -752,6 +781,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (shaded trails great in summer)",
     parkingInfo: "Free with Library Park Pass. Limited roadside parking on Stevens Canyon Rd.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/table-mountain-trail-loop-via-charcoal-and-table-mountain-fire-roads",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop"
   },
   {
@@ -777,6 +807,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Fall through Spring",
     parkingInfo: "Free with Library Park Pass. Main entrance with restrooms.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/uvas-reservoir",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=250&fit=crop"
   },
   {
@@ -802,6 +833,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (trails can be muddy after rain)",
     parkingInfo: "Free with Library Park Pass. Lot 4 closest to trailheads. Open 8 AM to sunset.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/villa-montalvo-trail",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=250&fit=crop"
   },
 
@@ -829,7 +861,62 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free parking but lots fill by 9am on weekends. Arrive early! Additional overflow lot on Cristo Rey Dr.",
     sourceUrl: "https://www.openspace.org/preserves/rancho-san-antonio",
+    category: "outdoors",
     image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
+  },
+
+  // === Cafes & Tea ===
+  {
+    id: 301,
+    name: "Voyager Craft Coffee",
+    location: "Santa Clara, CA",
+    region: "Santa Clara County",
+    lat: 37.3234,
+    lng: -121.9612,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.7,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets inside the cafe.",
+    kidNotes: "Family-friendly space. Kids enjoy pastries and non-coffee drinks.",
+    description: "A specialty coffee roaster and cafe known for globally inspired craft drinks, in-house roasted beans, and creative latte art.",
+    highlights: ["Globally inspired lattes (Tokyo, Bali, Manila)", "In-house roasted beans", "Avocado toast & guava croissant", "Cold brew growlers"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking and nearby lots.",
+    sourceUrl: "https://www.voyagercraftcoffee.com",
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop"
+  },
+  {
+    id: 302,
+    name: "Wow Tea",
+    location: "Cupertino, CA",
+    region: "Santa Clara County",
+    lat: 37.3382,
+    lng: -122.0324,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.6,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets allowed inside.",
+    kidNotes: "Kids love the fruit teas and smoothies. Wide variety of non-caffeinated options.",
+    description: "A popular bubble tea shop offering fresh fruit teas, classic milk teas, smoothies, and specialty drinks with customizable toppings.",
+    highlights: ["Brown Sugar Pearl Milk Tea", "Strawberry Matcha", "Cheese Mousse Green Tea", "Yakult fruit tea series"],
+    bestSeason: "Year-round",
+    parkingInfo: "Shopping center parking available.",
+    sourceUrl: null,
+    image: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=400&h=250&fit=crop"
   },
 ]
 

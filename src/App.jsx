@@ -1,27 +1,28 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import SearchBar from './components/SearchBar'
 import SpotList from './components/SpotList'
 import MapView from './components/MapView'
 import VisitPlanner from './components/VisitPlanner'
 import SavedPlans from './components/SavedPlans'
-import { SAMPLE_SPOTS } from './data/spots'
+import AuthButton from './components/AuthButton'
+import useAuth from './hooks/useAuth'
+import useFirestore from './hooks/useFirestore'
+import useSpots from './hooks/useSpots'
 import './App.css'
 
-function loadFromStorage(key, fallback) {
-  try {
-    const val = localStorage.getItem(key)
-    return val ? JSON.parse(val) : fallback
-  } catch { return fallback }
-}
-
 function App() {
-  const [spots] = useState(SAMPLE_SPOTS)
-  const [filteredSpots, setFilteredSpots] = useState(SAMPLE_SPOTS)
+  const { user, loading, login, logout, hasConfig, googleAccessToken, refreshGoogleToken, authError } = useAuth()
+  const { spots, loading: spotsLoading, error: spotsError } = useSpots(user)
+  const {
+    starred, savedPlans, toggleStar, savePlan, deletePlan,
+    familyGroup, familyPlans, familyMembers,
+    createFamilyGroup, joinFamilyGroup, leaveFamilyGroup,
+  } = useFirestore(user)
+
+  const [filteredSpots, setFilteredSpots] = useState(spots)
   const [selectedSpot, setSelectedSpot] = useState(null)
   const [planningSpot, setPlanningSpot] = useState(null)
   const [mapCenter, setMapCenter] = useState([37.7749, -122.4194])
-  const [starred, setStarred] = useState(() => loadFromStorage('starredSpots', []))
-  const [savedPlans, setSavedPlans] = useState(() => loadFromStorage('savedPlans', {}))
   const [activeTab, setActiveTab] = useState('explore')
   const [filters, setFilters] = useState({
     petFriendly: false,
@@ -29,35 +30,20 @@ function App() {
     libraryParkPass: false,
     starredOnly: false,
     difficulty: 'all',
+    category: 'all',
   })
 
-  const toggleStar = useCallback((spotId) => {
-    setStarred((prev) => {
-      const next = prev.includes(spotId) ? prev.filter((id) => id !== spotId) : [...prev, spotId]
-      localStorage.setItem('starredSpots', JSON.stringify(next))
-      return next
-    })
-  }, [])
+  // Re-apply filters when spots data updates (e.g. after Firestore loads)
+  useEffect(() => {
+    setFilteredSpots(applyFilters(spots, filters))
+  }, [spots])
 
-  const savePlan = useCallback((spotId, plan) => {
-    setSavedPlans((prev) => {
-      const next = { ...prev, [spotId]: plan }
-      localStorage.setItem('savedPlans', JSON.stringify(next))
-      return next
-    })
-  }, [])
-
-  const deletePlan = useCallback((spotId) => {
-    setSavedPlans((prev) => {
-      const next = { ...prev }
-      delete next[spotId]
-      localStorage.setItem('savedPlans', JSON.stringify(next))
-      return next
-    })
-  }, [])
+  // Merge own plans with family plans for the Plans tab
+  const mergedPlans = familyGroup ? { ...familyPlans, ...savedPlans } : savedPlans
 
   const applyFilters = useCallback((spotList, f) => {
     return spotList.filter((s) => {
+      if (f.category && f.category !== 'all' && (s.category || 'outdoors') !== f.category) return false
       if (f.petFriendly && !s.petFriendly) return false
       if (f.kidFriendly && !s.kidFriendly) return false
       if (f.libraryParkPass && !s.libraryParkPass) return false
@@ -114,14 +100,25 @@ function App() {
     setFilteredSpots(applyFilters(spots, newFilters))
   }
 
-  const planCount = Object.keys(savedPlans).length
+  const planCount = Object.keys(mergedPlans).length
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">Stardust</h1>
-        <p className="app-subtitle">Discover trails, museums, heritage sites & hidden gems</p>
+        <div className="app-header-row">
+          <div>
+            <h1 className="app-title">Stardust</h1>
+            <p className="app-subtitle">Discover trails, museums, heritage sites & hidden gems</p>
+          </div>
+          {hasConfig && <AuthButton user={user} onLogin={login} onLogout={logout} />}
+        </div>
       </header>
+
+      {authError && (
+        <div style={{ background: '#f8d7da', color: '#721c24', padding: '10px 16px', fontSize: '13px', textAlign: 'center' }}>
+          Login error: {authError}
+        </div>
+      )}
 
       {activeTab === 'explore' && (
         <main className="page">
@@ -165,10 +162,18 @@ function App() {
       {activeTab === 'plans' && (
         <main className="page">
           <SavedPlans
-            plans={savedPlans}
+            plans={mergedPlans}
             spots={spots}
             onDeletePlan={deletePlan}
             onOpenPlan={(spot) => { setPlanningSpot(spot) }}
+            googleAccessToken={googleAccessToken}
+            onRefreshGoogleToken={refreshGoogleToken}
+            familyProps={user && hasConfig ? {
+              user, familyGroup, familyMembers,
+              onCreateGroup: createFamilyGroup,
+              onJoinGroup: joinFamilyGroup,
+              onLeaveGroup: leaveFamilyGroup,
+            } : null}
           />
         </main>
       )}
