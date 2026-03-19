@@ -1,11 +1,11 @@
 .search-bar {
   background: var(--card-bg);
-  padding: 12px 16px 14px;
+  padding: 10px 16px 10px;
   border-bottom: 0.5px solid var(--border);
 }
 
 .search-form {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .search-input-wrap {
@@ -14,7 +14,7 @@
   background: var(--bg);
   border: none;
   border-radius: 10px;
-  padding: 0 12px;
+  padding: 0 10px;
   transition: box-shadow 0.2s;
 }
 
@@ -23,8 +23,8 @@
 }
 
 .search-icon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   color: var(--text);
   flex-shrink: 0;
 }
@@ -33,8 +33,8 @@
   flex: 1;
   border: none;
   background: none;
-  padding: 10px;
-  font-size: 16px;
+  padding: 8px 8px;
+  font-size: 15px;
   color: var(--text-h);
   outline: none;
   font-family: var(--sans);
@@ -47,7 +47,7 @@
 .location-btn {
   background: none;
   border: none;
-  padding: 8px;
+  padding: 6px;
   color: var(--accent);
   border-radius: 8px;
   display: flex;
@@ -58,92 +58,92 @@
   background: var(--accent-light);
 }
 
-.quick-regions {
+/* Single chip row — all filters inline */
+.chip-row {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
 }
 
-.quick-label {
+.chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+.chip-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.chip {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 14px;
+  padding: 4px 12px;
   font-size: 12px;
-  color: var(--text);
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--sans);
+  transition: all 0.15s;
+  white-space: nowrap;
+  line-height: 1.4;
 }
 
-.region-chip {
+/* Region chips */
+.chip.region {
   background: var(--accent-light);
   color: var(--accent);
-  border: none;
-  border-radius: 16px;
-  padding: 5px 14px;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s;
 }
 
-.region-chip:hover {
+.chip.region:hover {
   background: rgba(194, 112, 62, 0.18);
 }
 
-.filters {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.filter-toggle {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 13px;
+/* Toggle chips (filters) */
+.chip.toggle {
   background: var(--bg);
-  padding: 6px 12px;
-  border-radius: 16px;
-  transition: all 0.2s;
+  color: var(--text);
 }
 
-.filter-toggle:has(input:checked) {
+.chip.toggle.on {
+  background: var(--accent);
+  color: white;
+}
+
+.chip.toggle.lib.on {
+  background: var(--orange);
+}
+
+.chip.toggle.star.on {
+  background: #ff9500;
+}
+
+/* Cycle chips (difficulty, category) */
+.chip.cycle {
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.chip.cycle.on {
   background: var(--accent-light);
+  color: var(--accent);
 }
 
-.filter-toggle input[type="checkbox"] {
-  accent-color: var(--accent);
-  width: 14px;
-  height: 14px;
-}
-
-.filter-label {
-  color: var(--text-h);
+/* Clear button */
+.chip.clear {
+  background: none;
+  color: var(--text);
   font-weight: 500;
-  font-size: 13px;
+  padding: 4px 8px;
+  font-size: 11px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-.category-select,
-.difficulty-select {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 16px;
-  font-size: 13px;
-  color: var(--text-h);
-  background: var(--bg);
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.category-select:focus,
-.difficulty-select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--accent-light);
-}
-
-.library-pass-toggle .filter-label {
-  color: var(--orange);
-}
-
-.starred-toggle .filter-label {
-  color: #ff9500;
+.chip.clear:hover {
+  color: var(--red);
 }

@@ -1,7 +1,7 @@
 .spot-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .spot-card {
@@ -23,9 +23,10 @@
   box-shadow: 0 0 0 2px var(--accent), var(--shadow-lg);
 }
 
+/* Image */
 .spot-image-wrap {
   position: relative;
-  height: 140px;
+  height: 120px;
   overflow: hidden;
 }
 
@@ -37,182 +38,34 @@
 
 .difficulty-pill {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 3px 12px;
-  border-radius: 14px;
-  font-size: 12px;
+  top: 8px;
+  right: 8px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: capitalize;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-.difficulty-pill.easy {
-  background: rgba(52, 199, 89, 0.85);
-  color: white;
-}
-
-.difficulty-pill.moderate {
-  background: rgba(255, 149, 0, 0.85);
-  color: white;
-}
-
-.difficulty-pill.hard {
-  background: rgba(255, 59, 48, 0.85);
-  color: white;
-}
-
-.difficulty-pill.cafe {
-  background: rgba(139, 90, 43, 0.85);
-  color: white;
-}
-
-.spot-info {
-  padding: 12px 14px;
-}
-
-.spot-name {
-  font-size: 17px;
-  font-weight: 600;
-  margin: 0 0 2px;
-  color: var(--text-h);
-  letter-spacing: -0.2px;
-}
-
-.spot-location {
-  font-size: 13px;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-
-.spot-stats {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 8px;
-}
-
-.divider {
-  color: var(--border);
-}
-
-.spot-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.stars {
-  color: #ff9500;
-  font-size: 14px;
-}
-
-.rating-number {
-  color: var(--text);
-  font-size: 13px;
-  margin-left: 4px;
-}
-
-.spot-tags {
-  display: flex;
-  gap: 4px;
-}
-
-.tag {
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-weight: 600;
-}
-
-.tag.pet {
-  background: var(--green-light);
-  color: var(--green-dark);
-}
-
-.tag.kid {
-  background: rgba(91, 143, 185, 0.1);
-  color: var(--blue);
-}
-
-.tag.no-pet {
-  background: var(--bg);
-  color: var(--text);
-}
-
-.tag.library-pass {
-  background: rgba(255, 149, 0, 0.12);
-  color: #c77600;
-}
-
-.spot-desc {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-  margin-bottom: 10px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.source-link {
-  display: inline-block;
-  font-size: 12px;
-  color: var(--accent);
-  margin-bottom: 8px;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.source-link:hover {
-  text-decoration: underline;
-}
-
-.plan-btn {
-  width: 100%;
-  padding: 10px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  border-radius: var(--radius);
-  font-size: 15px;
-  font-weight: 600;
-  transition: opacity 0.2s;
-}
-
-.plan-btn:hover {
-  opacity: 0.85;
-}
-
-.no-results {
-  text-align: center;
-  padding: 48px 24px;
-  color: var(--text);
-}
-
-.no-results p:first-child {
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
+.difficulty-pill.easy { background: rgba(52, 199, 89, 0.85); color: white; }
+.difficulty-pill.moderate { background: rgba(255, 149, 0, 0.85); color: white; }
+.difficulty-pill.hard { background: rgba(255, 59, 48, 0.85); color: white; }
+.difficulty-pill.cafe { background: rgba(139, 90, 43, 0.85); color: white; }
 
 .star-btn {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 8px;
+  left: 8px;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   display: flex;
   align-items: center;
@@ -231,45 +84,108 @@
   color: white;
 }
 
-.spot-name-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* Info section */
+.spot-info {
+  padding: 10px 12px;
 }
 
-.planned-badge {
-  font-size: 11px;
-  padding: 1px 8px;
-  border-radius: 10px;
+.spot-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.spot-name-col {
+  min-width: 0;
+}
+
+.spot-name {
+  font-size: 15px;
   font-weight: 600;
-  background: var(--green-light);
-  color: var(--green-dark);
+  margin: 0;
+  color: var(--text-h);
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spot-location {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+/* Compact plan button */
+.plan-btn {
+  flex-shrink: 0;
+  padding: 4px 14px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: opacity 0.2s;
   white-space: nowrap;
 }
 
-.plan-btn.has-plan {
-  background: var(--green);
+.plan-btn:hover { opacity: 0.85; }
+.plan-btn.has-plan { background: var(--green); }
+
+/* Bottom row — stats, rating, tags */
+.spot-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.plan-btn.has-plan:hover {
-  opacity: 0.85;
+.stat {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
 }
 
-.fee-badge {
+.stars {
+  color: #ff9500;
   font-size: 12px;
-  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.rating-num {
+  color: var(--text);
+  font-size: 11px;
+  margin-left: 2px;
+}
+
+.spot-tags {
+  display: flex;
+  gap: 3px;
+}
+
+.tag {
+  font-size: 10px;
+  padding: 1px 6px;
   border-radius: 8px;
   font-weight: 600;
-  margin-bottom: 6px;
-  display: inline-block;
 }
 
-.fee-badge.free {
-  background: var(--green-light);
-  color: var(--green-dark);
+.tag.pet { background: var(--green-light); color: var(--green-dark); }
+.tag.kid { background: rgba(91, 143, 185, 0.1); color: var(--blue); }
+.tag.lib { background: rgba(255, 149, 0, 0.12); color: #c77600; }
+.tag.fee { background: rgba(255, 149, 0, 0.12); color: #c77600; }
+
+.no-results {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text);
 }
 
-.fee-badge.paid {
-  background: rgba(255, 149, 0, 0.12);
-  color: #c77600;
+.no-results p:first-child {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
 }

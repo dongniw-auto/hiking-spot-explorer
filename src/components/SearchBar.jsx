@@ -2,10 +2,16 @@ import { useState } from 'react'
 import './SearchBar.css'
 
 const REGIONS = [
-  { name: 'San Francisco Bay Area', lat: 37.7749, lng: -122.4194 },
-  { name: 'Santa Clara County', lat: 37.3541, lng: -121.9552 },
-  { name: 'All Bay Area', lat: 37.5585, lng: -122.1711 },
+  { name: 'San Francisco Bay Area', short: 'SF Bay', lat: 37.7749, lng: -122.4194 },
+  { name: 'Santa Clara County', short: 'Santa Clara', lat: 37.3541, lng: -121.9552 },
+  { name: 'All Bay Area', short: 'All Bay', lat: 37.5585, lng: -122.1711 },
 ]
+
+const DIFFICULTIES = ['all', 'easy', 'moderate', 'hard']
+const CATEGORIES = ['all', 'outdoors', 'cafe']
+
+const DIFF_LABELS = { all: 'Any', easy: 'Easy', moderate: 'Med', hard: 'Hard' }
+const CAT_LABELS = { all: 'All', outdoors: 'Outdoors', cafe: 'Cafes' }
 
 export default function SearchBar({ onSearch, onLocationSearch, filters, onFilterChange }) {
   const [query, setQuery] = useState('')
@@ -49,6 +55,20 @@ export default function SearchBar({ onSearch, onLocationSearch, filters, onFilte
     }
   }
 
+  const toggle = (key) => onFilterChange({ ...filters, [key]: !filters[key] })
+  const cycleDifficulty = () => {
+    const i = DIFFICULTIES.indexOf(filters.difficulty)
+    onFilterChange({ ...filters, difficulty: DIFFICULTIES[(i + 1) % DIFFICULTIES.length] })
+  }
+  const cycleCategory = () => {
+    const i = CATEGORIES.indexOf(filters.category || 'all')
+    onFilterChange({ ...filters, category: CATEGORIES[(i + 1) % CATEGORIES.length] })
+  }
+
+  const activeCount = [filters.petFriendly, filters.kidFriendly, filters.libraryParkPass, filters.starredOnly].filter(Boolean).length
+    + (filters.difficulty !== 'all' ? 1 : 0)
+    + ((filters.category || 'all') !== 'all' ? 1 : 0)
+
   return (
     <div className="search-bar">
       <form className="search-form" onSubmit={handleSubmit}>
@@ -60,7 +80,7 @@ export default function SearchBar({ onSearch, onLocationSearch, filters, onFilte
           <input
             type="text"
             className="search-input"
-            placeholder="Search places by name, city, or region..."
+            placeholder="Search places..."
             value={query}
             onChange={(e) => {
               setQuery(e.target.value)
@@ -68,7 +88,7 @@ export default function SearchBar({ onSearch, onLocationSearch, filters, onFilte
             }}
           />
           <button type="button" className="location-btn" onClick={handleUseMyLocation} title="Use my location">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
               <circle cx="12" cy="12" r="3" />
               <path d="M12 2v4M12 18v4M2 12h4M18 12h4" />
             </svg>
@@ -76,67 +96,46 @@ export default function SearchBar({ onSearch, onLocationSearch, filters, onFilte
         </div>
       </form>
 
-      <div className="quick-regions">
-        <span className="quick-label">Quick search:</span>
+      <div className="chip-row">
         {REGIONS.map((r) => (
-          <button key={r.name} className="region-chip" onClick={() => handleRegionClick(r)}>
-            {r.name}
+          <button key={r.name} className="chip region" onClick={() => handleRegionClick(r)}>
+            {r.short}
           </button>
         ))}
-      </div>
 
-      <div className="filters">
-        <label className="filter-toggle">
-          <input
-            type="checkbox"
-            checked={filters.petFriendly}
-            onChange={(e) => onFilterChange({ ...filters, petFriendly: e.target.checked })}
-          />
-          <span className="filter-label">Pet-Friendly</span>
-        </label>
-        <label className="filter-toggle">
-          <input
-            type="checkbox"
-            checked={filters.kidFriendly}
-            onChange={(e) => onFilterChange({ ...filters, kidFriendly: e.target.checked })}
-          />
-          <span className="filter-label">Kid-Friendly</span>
-        </label>
-        <label className="filter-toggle library-pass-toggle">
-          <input
-            type="checkbox"
-            checked={filters.libraryParkPass}
-            onChange={(e) => onFilterChange({ ...filters, libraryParkPass: e.target.checked })}
-          />
-          <span className="filter-label">Library Park Pass</span>
-        </label>
-        <label className="filter-toggle starred-toggle">
-          <input
-            type="checkbox"
-            checked={filters.starredOnly}
-            onChange={(e) => onFilterChange({ ...filters, starredOnly: e.target.checked })}
-          />
-          <span className="filter-label">Starred Only</span>
-        </label>
-        <select
-          className="category-select"
-          value={filters.category || 'all'}
-          onChange={(e) => onFilterChange({ ...filters, category: e.target.value })}
-        >
-          <option value="all">All Categories</option>
-          <option value="outdoors">Outdoors</option>
-          <option value="cafe">Cafes & Tea</option>
-        </select>
-        <select
-          className="difficulty-select"
-          value={filters.difficulty}
-          onChange={(e) => onFilterChange({ ...filters, difficulty: e.target.value })}
-        >
-          <option value="all">All Difficulties</option>
-          <option value="easy">Easy</option>
-          <option value="moderate">Moderate</option>
-          <option value="hard">Hard</option>
-        </select>
+        <span className="chip-divider" />
+
+        <button className={`chip toggle ${filters.petFriendly ? 'on' : ''}`} onClick={() => toggle('petFriendly')}>
+          Pets
+        </button>
+        <button className={`chip toggle ${filters.kidFriendly ? 'on' : ''}`} onClick={() => toggle('kidFriendly')}>
+          Kids
+        </button>
+        <button className={`chip toggle lib ${filters.libraryParkPass ? 'on' : ''}`} onClick={() => toggle('libraryParkPass')}>
+          Free Pass
+        </button>
+        <button className={`chip toggle star ${filters.starredOnly ? 'on' : ''}`} onClick={() => toggle('starredOnly')}>
+          Saved
+        </button>
+
+        <button className={`chip cycle ${filters.difficulty !== 'all' ? 'on' : ''}`} onClick={cycleDifficulty}>
+          {DIFF_LABELS[filters.difficulty]}
+        </button>
+        <button className={`chip cycle ${(filters.category || 'all') !== 'all' ? 'on' : ''}`} onClick={cycleCategory}>
+          {CAT_LABELS[filters.category || 'all']}
+        </button>
+
+        {activeCount > 0 && (
+          <button
+            className="chip clear"
+            onClick={() => onFilterChange({
+              petFriendly: false, kidFriendly: false, libraryParkPass: false,
+              starredOnly: false, difficulty: 'all', category: 'all',
+            })}
+          >
+            Clear
+          </button>
+        )}
       </div>
     </div>
   )
