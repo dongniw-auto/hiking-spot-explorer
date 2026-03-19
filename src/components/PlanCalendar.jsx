@@ -111,6 +111,11 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const [weekStart, setWeekStart] = useState(() => getWeekStart(today))
+  const [selectedDay, setSelectedDay] = useState(() => {
+    const d = new Date(today)
+    return d
+  })
+  const [calView, setCalView] = useState('day') // 'day' | 'week'
   const bodyRef = useRef(null)
   const [syncingId, setSyncingId] = useState(null)
   const [syncedIds, setSyncedIds] = useState(new Set())
@@ -253,6 +258,16 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
         </button>
         <div className="cal-nav-title">
           <strong>{weekLabel}</strong>
+          <div className="cal-view-toggle">
+            <button
+              className={`cal-view-btn ${calView === 'day' ? 'active' : ''}`}
+              onClick={() => setCalView('day')}
+            >Day</button>
+            <button
+              className={`cal-view-btn ${calView === 'week' ? 'active' : ''}`}
+              onClick={() => setCalView('week')}
+            >Week</button>
+          </div>
           <button className="cal-today-btn" onClick={goToday}>Today</button>
           {googleAccessToken && !tokenExpired && (
             <span className="gcal-connected-badge">
