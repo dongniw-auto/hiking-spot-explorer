@@ -427,6 +427,9 @@
   .cal-day-strip {
     display: flex;
   }
+  .cal-nav-title strong {
+    font-size: 13px;
+  }
 }
 
 .cal-strip-arrow {
