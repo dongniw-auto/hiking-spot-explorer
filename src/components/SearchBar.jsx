@@ -8,10 +8,10 @@ const REGIONS = [
 ]
 
 const DIFFICULTIES = ['all', 'easy', 'moderate', 'hard']
-const CATEGORIES = ['all', 'outdoors', 'cafe', 'library', 'sports']
+const CATEGORIES = ['all', 'outdoors', 'cafe']
 
 const DIFF_LABELS = { all: 'Any', easy: 'Easy', moderate: 'Med', hard: 'Hard' }
-const CAT_LABELS = { all: 'All', outdoors: '🥾 Outdoors', cafe: '☕ Cafes', library: '📚 Library', sports: '💪 Gym' }
+const CAT_LABELS = { all: 'All', outdoors: 'Outdoors', cafe: 'Cafes' }
 
 export default function SearchBar({ onSearch, onLocationSearch, filters, onFilterChange }) {
   const [query, setQuery] = useState('')
