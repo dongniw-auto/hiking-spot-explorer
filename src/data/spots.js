@@ -996,7 +996,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on S 1st St. Easy walk from SAP Center.",
     sourceUrl: "https://www.vervecoffee.com",
-    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop"
   },
   {
     id: 404,
@@ -1100,7 +1100,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on Sacramento St. Cable car nearby.",
     sourceUrl: "https://www.saintfrankcoffee.com",
-    image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop"
   },
   {
     id: 408,
@@ -1204,7 +1204,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking or nearby garages in downtown San Jose.",
     sourceUrl: null,
-    image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop"
   },
   {
     id: 412,
@@ -1282,7 +1282,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on University Ave or parking garages nearby.",
     sourceUrl: "https://www.coupacafe.com",
-    image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop"
   },
   {
     id: 415,
@@ -1337,7 +1337,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "San Jose Convention Center garage nearby. VTA light rail (Convention Center stop) accessible.",
     sourceUrl: "https://www.sjpl.org",
     libraryCardProgram: "San Jose Public Library Card — free with proof of San Jose address. Cardholders access digital resources via Libby, Kanopy (free films), LinkedIn Learning, and more.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1568667256549-094345857637?w=400&h=250&fit=crop"
   },
   {
     id: 502,
