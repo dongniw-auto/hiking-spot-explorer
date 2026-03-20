@@ -107,10 +107,100 @@ function parseGCalEvent(ev) {
   }
 }
 
+// Renders the content of a single day column: hour grid lines, now indicator, GCal events, and hiking plans
+function DayColumnContent({ hours, gcalEvents, plans, showNowLine, nowTop, googleAccessToken, syncingId, syncedIds, onOpenPlan, syncToGCal }) {
+  return (
+    <>
+      {hours.map((h) => (
+        <div key={h} className="gcal-hour-line" />
+      ))}
+
+      {showNowLine && nowTop >= 0 && (
+        <div className="gcal-now-line" style={{ top: `${nowTop}px` }} />
+      )}
+
+      {/* Google Calendar events (grey) */}
+      {gcalEvents.map((gev) => {
+        const top = ((gev.startHour - START_HOUR) + gev.startMin / 60) * HOUR_HEIGHT
+        const height = Math.max((gev.durationMin / 60) * HOUR_HEIGHT, 20)
+        return (
+          <div
+            key={gev.id}
+            className="gcal-event gcal-event-external"
+            style={{ top: `${top}px`, height: `${height}px` }}
+          >
+            <div className="gcal-event-title">{gev.title}</div>
+            {gev.location && height > 30 && (
+              <div className="gcal-event-location">{gev.location}</div>
+            )}
+          </div>
+        )
+      })}
+
+      {/* Stardust hiking plans (accent color) */}
+      {plans.map((e) => {
+        if (!e.plan.startTime) return null
+        const trip = getTripDetails(e.spot, e.plan)
+        const [sh, sm] = e.plan.startTime.split(':').map(Number)
+        const top = ((sh - START_HOUR) + sm / 60) * HOUR_HEIGHT
+        const height = Math.max((trip.totalMin / 60) * HOUR_HEIGHT, 28)
+        const showDetails = height > 80
+        const isSyncing = syncingId === e.spotId
+        const isSynced = syncedIds.has(e.spotId)
+
+        return (
+          <div
+            key={e.spotId}
+            className="gcal-event"
+            style={{ top: `${top}px`, height: `${height}px` }}
+            onClick={() => onOpenPlan(e.spot)}
+          >
+            <div className="gcal-event-title">{e.spot.name}</div>
+            <div className="gcal-event-time">
+              {e.plan.startTime} &rarr; {trip.returnTime || '\u2014'}
+            </div>
+            {showDetails && (
+              <>
+                <div className="gcal-event-location">{e.spot.location}</div>
+                <div className="gcal-event-details">
+                  <div className="gcal-event-detail-row">
+                    <span>🚗 {formatTime(trip.drivingMin)}</span>
+                    <span> · 🥾 {formatTime(trip.hikingMin)}</span>
+                  </div>
+                  <div className="gcal-event-detail-row">
+                    <span>☕ {formatTime(trip.breakMin)}</span>
+                    <span> · ⏱ {formatTime(trip.totalMin)} total</span>
+                  </div>
+                </div>
+                <div className="gcal-event-badges">
+                  <span className={`gcal-mini-badge ${e.spot.difficulty}`}>{e.spot.difficulty}</span>
+                  {e.plan.bringPets && <span className="gcal-mini-badge pets">Pets</span>}
+                  {e.plan.bringKids && <span className="gcal-mini-badge kids">Kids</span>}
+                </div>
+                {googleAccessToken && (
+                  <button
+                    className={`gcal-sync-btn ${isSynced ? 'synced' : ''}`}
+                    onClick={(ev) => syncToGCal(e, ev)}
+                    disabled={isSyncing || isSynced}
+                  >
+                    {isSyncing ? 'Syncing...' : isSynced ? 'Synced' : '+ Add to GCal'}
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        )
+      })}
+    </>
+  )
+}
+
 export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, onRefreshGoogleToken }) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const [weekStart, setWeekStart] = useState(() => getWeekStart(today))
+  const [selectedDay, setSelectedDay] = useState(() => new Date(today))
+  const [calView, setCalView] = useState(() => (typeof window !== 'undefined' && window.matchMedia('(max-width: 599px)').matches) ? 'day' : 'week') // 'day' | 'week'
   const bodyRef = useRef(null)
   const [syncingId, setSyncingId] = useState(null)
   const [syncedIds, setSyncedIds] = useState(new Set())
@@ -125,6 +215,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     end.setDate(end.getDate() + 7)
     fetchEvents(start, end)
   }, [googleAccessToken, weekStart, fetchEvents])
+
 
   // Parse GCal events by date
   const gcalByDate = useMemo(() => {
@@ -167,16 +258,30 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     return days
   }, [weekStart, plansByDate, gcalByDate])
 
+  const stripDays = useMemo(() => {
+    const days = []
+    for (let i = -3; i <= 3; i++) {
+      const d = new Date(selectedDay)
+      d.setDate(d.getDate() + i)
+      days.push({
+        date: d,
+        dateStr: dateToStr(d),
+        dayName: DAYS[d.getDay()],
+      })
+    }
+    return days
+  }, [selectedDay])
+
   const todayStr = dateToStr(today)
   const weekEnd = new Date(weekStart)
   weekEnd.setDate(weekEnd.getDate() + 6)
 
-  // Scroll to ~8am on mount
+  // Scroll to ~8am on mount and when switching views (bodyRef points to a new container)
   useEffect(() => {
     if (bodyRef.current) {
       bodyRef.current.scrollTop = (8 - START_HOUR) * HOUR_HEIGHT
     }
-  }, [])
+  }, [calView])
 
   const weekLabel = (() => {
     const s = weekStart
@@ -190,6 +295,8 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     return `${MONTHS[s.getMonth()].slice(0, 3)} ${s.getDate()}, ${s.getFullYear()} \u2013 ${MONTHS[e.getMonth()].slice(0, 3)} ${e.getDate()}, ${e.getFullYear()}`
   })()
 
+  const dayLabel = `${MONTHS[selectedDay.getMonth()]} ${selectedDay.getDate()}, ${selectedDay.getFullYear()}`
+
   const prevWeek = () => {
     const d = new Date(weekStart)
     d.setDate(d.getDate() - 7)
@@ -200,7 +307,24 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     d.setDate(d.getDate() + 7)
     setWeekStart(d)
   }
-  const goToday = () => setWeekStart(getWeekStart(today))
+  const goToday = () => {
+    setWeekStart(getWeekStart(today))
+    setSelectedDay(new Date(today))
+  }
+
+  // Each arrow jumps 7 days so the visible strip window doesn't overlap
+  const prevStripWeek = () => {
+    const d = new Date(selectedDay)
+    d.setDate(d.getDate() - 7)
+    setSelectedDay(d)
+    setWeekStart(getWeekStart(d))
+  }
+  const nextStripWeek = () => {
+    const d = new Date(selectedDay)
+    d.setDate(d.getDate() + 7)
+    setSelectedDay(d)
+    setWeekStart(getWeekStart(d))
+  }
 
   const hours = []
   for (let h = START_HOUR; h <= END_HOUR; h++) hours.push(h)
@@ -211,6 +335,11 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
   const now = new Date()
   const nowMinutes = now.getHours() * 60 + now.getMinutes()
   const nowTop = ((now.getHours() - START_HOUR) + now.getMinutes() / 60) * HOUR_HEIGHT
+
+  const selectedDateStr = dateToStr(selectedDay)
+  const selectedDayPlans = plansByDate[selectedDateStr] || []
+  const selectedDayGcal = gcalByDate[selectedDateStr] || []
+  const showNowLineDay = selectedDateStr === todayStr && nowMinutes >= START_HOUR * 60 && nowMinutes <= END_HOUR * 60
 
   // Sync a hiking plan to Google Calendar
   const syncToGCal = useCallback(async (e, ev) => {
@@ -252,7 +381,19 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div className="cal-nav-title">
-          <strong>{weekLabel}</strong>
+          <strong>{calView === 'day' ? dayLabel : weekLabel}</strong>
+          <div className="cal-view-toggle" role="group" aria-label="Calendar view">
+            <button
+              className={`cal-view-btn ${calView === 'day' ? 'active' : ''}`}
+              aria-pressed={calView === 'day'}
+              onClick={() => setCalView('day')}
+            >Day</button>
+            <button
+              className={`cal-view-btn ${calView === 'week' ? 'active' : ''}`}
+              aria-pressed={calView === 'week'}
+              onClick={() => setCalView('week')}
+            >Week</button>
+          </div>
           <button className="cal-today-btn" onClick={goToday}>Today</button>
           {googleAccessToken && !tokenExpired && (
             <span className="gcal-connected-badge">
@@ -277,121 +418,117 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
         </button>
       </div>
 
-      <div className="gcal-container">
-        {/* Header row */}
-        <div className="gcal-header">
-          <div className="gcal-header-gutter" />
-          {weekDays.map((day) => {
-            const isToday = day.dateStr === todayStr
+      {calView === 'day' && (
+        <div className="cal-day-strip">
+          <button className="cal-strip-arrow" onClick={prevStripWeek}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          {stripDays.map((d) => {
+            const isSelected = d.dateStr === selectedDateStr
+            const isToday = d.dateStr === todayStr
             return (
-              <div key={day.dateStr} className="gcal-header-day">
-                <div className="gcal-header-day-name">{day.dayName}</div>
-                <div className={`gcal-header-day-num ${isToday ? 'today-num' : ''}`}>
-                  {day.date.getDate()}
-                </div>
-              </div>
+              <button
+                key={d.dateStr}
+                className={`cal-day-pill ${isSelected ? 'selected' : ''} ${isToday && !isSelected ? 'is-today' : ''}`}
+                aria-pressed={isSelected}
+                onClick={() => { const nd = new Date(d.date); setSelectedDay(nd); setWeekStart(getWeekStart(nd)) }}
+              >
+                <span className="cal-pill-name">{d.dayName}</span>
+                <span className="cal-pill-num">{d.date.getDate()}</span>
+              </button>
             )
           })}
+          <button className="cal-strip-arrow" onClick={nextStripWeek}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
+      )}
 
-        {/* Time grid body */}
-        <div className="gcal-body" ref={bodyRef}>
-          <div className="gcal-time-col">
-            {hours.map((h) => (
-              <div key={h} className="gcal-time-label">{formatHour(h)}</div>
-            ))}
+      {calView === 'week' ? (
+        <div className="gcal-container">
+          {/* Header row */}
+          <div className="gcal-header">
+            <div className="gcal-header-gutter" />
+            {weekDays.map((day) => {
+              const isToday = day.dateStr === todayStr
+              return (
+                <div key={day.dateStr} className="gcal-header-day">
+                  <div className="gcal-header-day-name">{day.dayName}</div>
+                  <div className={`gcal-header-day-num ${isToday ? 'today-num' : ''}`}>
+                    {day.date.getDate()}
+                  </div>
+                </div>
+              )
+            })}
           </div>
 
-          {weekDays.map((day) => {
-            const isToday = day.dateStr === todayStr
-            const showNowLine = isToday && nowMinutes >= START_HOUR * 60 && nowMinutes <= END_HOUR * 60
-            return (
-              <div key={day.dateStr} className={`gcal-day-col ${isToday ? 'today-col' : ''}`}>
-                {hours.map((h) => (
-                  <div key={h} className="gcal-hour-line" />
-                ))}
+          {/* Time grid body */}
+          <div className="gcal-body" ref={bodyRef}>
+            <div className="gcal-time-col">
+              {hours.map((h) => (
+                <div key={h} className="gcal-time-label">{formatHour(h)}</div>
+              ))}
+            </div>
 
-                {showNowLine && nowTop >= 0 && (
-                  <div className="gcal-now-line" style={{ top: `${nowTop}px` }} />
-                )}
-
-                {/* Google Calendar events (grey) */}
-                {day.gcalEvents.map((gev) => {
-                  const top = ((gev.startHour - START_HOUR) + gev.startMin / 60) * HOUR_HEIGHT
-                  const height = Math.max((gev.durationMin / 60) * HOUR_HEIGHT, 20)
-                  return (
-                    <div
-                      key={gev.id}
-                      className="gcal-event gcal-event-external"
-                      style={{ top: `${top}px`, height: `${height}px` }}
-                    >
-                      <div className="gcal-event-title">{gev.title}</div>
-                      {gev.location && height > 30 && (
-                        <div className="gcal-event-location">{gev.location}</div>
-                      )}
-                    </div>
-                  )
-                })}
-
-                {/* Stardust hiking plans (accent color) */}
-                {day.plans.map((e) => {
-                  if (!e.plan.startTime) return null
-                  const trip = getTripDetails(e.spot, e.plan)
-                  const [sh, sm] = e.plan.startTime.split(':').map(Number)
-                  const top = ((sh - START_HOUR) + sm / 60) * HOUR_HEIGHT
-                  const height = Math.max((trip.totalMin / 60) * HOUR_HEIGHT, 28)
-                  const showDetails = height > 80
-                  const isSyncing = syncingId === e.spotId
-                  const isSynced = syncedIds.has(e.spotId)
-
-                  return (
-                    <div
-                      key={e.spotId}
-                      className="gcal-event"
-                      style={{ top: `${top}px`, height: `${height}px` }}
-                      onClick={() => onOpenPlan(e.spot)}
-                    >
-                      <div className="gcal-event-title">{e.spot.name}</div>
-                      <div className="gcal-event-time">
-                        {e.plan.startTime} &rarr; {trip.returnTime || '\u2014'}
-                      </div>
-                      {showDetails && (
-                        <>
-                          <div className="gcal-event-location">{e.spot.location}</div>
-                          <div className="gcal-event-details">
-                            <div className="gcal-event-detail-row">
-                              <span>🚗 {formatTime(trip.drivingMin)}</span>
-                              <span> · 🥾 {formatTime(trip.hikingMin)}</span>
-                            </div>
-                            <div className="gcal-event-detail-row">
-                              <span>☕ {formatTime(trip.breakMin)}</span>
-                              <span> · ⏱ {formatTime(trip.totalMin)} total</span>
-                            </div>
-                          </div>
-                          <div className="gcal-event-badges">
-                            <span className={`gcal-mini-badge ${e.spot.difficulty}`}>{e.spot.difficulty}</span>
-                            {e.plan.bringPets && <span className="gcal-mini-badge pets">Pets</span>}
-                            {e.plan.bringKids && <span className="gcal-mini-badge kids">Kids</span>}
-                          </div>
-                          {googleAccessToken && (
-                            <button
-                              className={`gcal-sync-btn ${isSynced ? 'synced' : ''}`}
-                              onClick={(ev) => syncToGCal(e, ev)}
-                              disabled={isSyncing || isSynced}
-                            >
-                              {isSyncing ? 'Syncing...' : isSynced ? 'Synced' : '+ Add to GCal'}
-                            </button>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            )
-          })}
+            {weekDays.map((day) => {
+              const isToday = day.dateStr === todayStr
+              const showNowLine = isToday && nowMinutes >= START_HOUR * 60 && nowMinutes <= END_HOUR * 60
+              return (
+                <div key={day.dateStr} className={`gcal-day-col ${isToday ? 'today-col' : ''}`}>
+                  <DayColumnContent
+                    hours={hours}
+                    gcalEvents={day.gcalEvents}
+                    plans={day.plans}
+                    showNowLine={showNowLine}
+                    nowTop={nowTop}
+                    googleAccessToken={googleAccessToken}
+                    syncingId={syncingId}
+                    syncedIds={syncedIds}
+                    onOpenPlan={onOpenPlan}
+                    syncToGCal={syncToGCal}
+                  />
+                </div>
+              )
+            })}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="gcal-container">
+          {/* Header: single day */}
+          <div className="gcal-header gcal-header-single">
+            <div className="gcal-header-gutter" />
+            <div className="gcal-header-day">
+              <div className="gcal-header-day-name">{DAYS[selectedDay.getDay()]}</div>
+              <div className={`gcal-header-day-num ${selectedDateStr === todayStr ? 'today-num' : ''}`}>
+                {selectedDay.getDate()}
+              </div>
+            </div>
+          </div>
+
+          {/* Time grid: single column */}
+          <div className="gcal-body gcal-body-day" ref={bodyRef}>
+            <div className="gcal-time-col">
+              {hours.map((h) => (
+                <div key={h} className="gcal-time-label">{formatHour(h)}</div>
+              ))}
+            </div>
+            <div className={`gcal-day-col ${selectedDateStr === todayStr ? 'today-col' : ''}`}>
+              <DayColumnContent
+                hours={hours}
+                gcalEvents={selectedDayGcal}
+                plans={selectedDayPlans}
+                showNowLine={showNowLineDay}
+                nowTop={nowTop}
+                googleAccessToken={googleAccessToken}
+                syncingId={syncingId}
+                syncedIds={syncedIds}
+                onOpenPlan={onOpenPlan}
+                syncToGCal={syncToGCal}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {unscheduled.length > 0 && (
         <div className="cal-unscheduled">
