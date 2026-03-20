@@ -107,14 +107,99 @@ function parseGCalEvent(ev) {
   }
 }
 
+// Renders the content of a single day column: hour grid lines, now indicator, GCal events, and hiking plans
+function DayColumnContent({ hours, gcalEvents, plans, showNowLine, nowTop, googleAccessToken, syncingId, syncedIds, onOpenPlan, syncToGCal }) {
+  return (
+    <>
+      {hours.map((h) => (
+        <div key={h} className="gcal-hour-line" />
+      ))}
+
+      {showNowLine && nowTop >= 0 && (
+        <div className="gcal-now-line" style={{ top: `${nowTop}px` }} />
+      )}
+
+      {/* Google Calendar events (grey) */}
+      {gcalEvents.map((gev) => {
+        const top = ((gev.startHour - START_HOUR) + gev.startMin / 60) * HOUR_HEIGHT
+        const height = Math.max((gev.durationMin / 60) * HOUR_HEIGHT, 20)
+        return (
+          <div
+            key={gev.id}
+            className="gcal-event gcal-event-external"
+            style={{ top: `${top}px`, height: `${height}px` }}
+          >
+            <div className="gcal-event-title">{gev.title}</div>
+            {gev.location && height > 30 && (
+              <div className="gcal-event-location">{gev.location}</div>
+            )}
+          </div>
+        )
+      })}
+
+      {/* Stardust hiking plans (accent color) */}
+      {plans.map((e) => {
+        if (!e.plan.startTime) return null
+        const trip = getTripDetails(e.spot, e.plan)
+        const [sh, sm] = e.plan.startTime.split(':').map(Number)
+        const top = ((sh - START_HOUR) + sm / 60) * HOUR_HEIGHT
+        const height = Math.max((trip.totalMin / 60) * HOUR_HEIGHT, 28)
+        const showDetails = height > 80
+        const isSyncing = syncingId === e.spotId
+        const isSynced = syncedIds.has(e.spotId)
+
+        return (
+          <div
+            key={e.spotId}
+            className="gcal-event"
+            style={{ top: `${top}px`, height: `${height}px` }}
+            onClick={() => onOpenPlan(e.spot)}
+          >
+            <div className="gcal-event-title">{e.spot.name}</div>
+            <div className="gcal-event-time">
+              {e.plan.startTime} &rarr; {trip.returnTime || '\u2014'}
+            </div>
+            {showDetails && (
+              <>
+                <div className="gcal-event-location">{e.spot.location}</div>
+                <div className="gcal-event-details">
+                  <div className="gcal-event-detail-row">
+                    <span>🚗 {formatTime(trip.drivingMin)}</span>
+                    <span> · 🥾 {formatTime(trip.hikingMin)}</span>
+                  </div>
+                  <div className="gcal-event-detail-row">
+                    <span>☕ {formatTime(trip.breakMin)}</span>
+                    <span> · ⏱ {formatTime(trip.totalMin)} total</span>
+                  </div>
+                </div>
+                <div className="gcal-event-badges">
+                  <span className={`gcal-mini-badge ${e.spot.difficulty}`}>{e.spot.difficulty}</span>
+                  {e.plan.bringPets && <span className="gcal-mini-badge pets">Pets</span>}
+                  {e.plan.bringKids && <span className="gcal-mini-badge kids">Kids</span>}
+                </div>
+                {googleAccessToken && (
+                  <button
+                    className={`gcal-sync-btn ${isSynced ? 'synced' : ''}`}
+                    onClick={(ev) => syncToGCal(e, ev)}
+                    disabled={isSyncing || isSynced}
+                  >
+                    {isSyncing ? 'Syncing...' : isSynced ? 'Synced' : '+ Add to GCal'}
+                  </button>
+                )}
+              </>
+            )}
+          </div>
+        )
+      })}
+    </>
+  )
+}
+
 export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, onRefreshGoogleToken }) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const [weekStart, setWeekStart] = useState(() => getWeekStart(today))
-  const [selectedDay, setSelectedDay] = useState(() => {
-    const d = new Date(today)
-    return d
-  })
+  const [selectedDay, setSelectedDay] = useState(() => new Date(today))
   const [calView, setCalView] = useState(() => window.innerWidth >= 600 ? 'week' : 'day') // 'day' | 'week'
   const bodyRef = useRef(null)
   const [syncingId, setSyncingId] = useState(null)
@@ -218,6 +303,8 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     return `${MONTHS[s.getMonth()].slice(0, 3)} ${s.getDate()}, ${s.getFullYear()} \u2013 ${MONTHS[e.getMonth()].slice(0, 3)} ${e.getDate()}, ${e.getFullYear()}`
   })()
 
+  const dayLabel = `${MONTHS[selectedDay.getMonth()]} ${selectedDay.getDate()}, ${selectedDay.getFullYear()}`
+
   const prevWeek = () => {
     const d = new Date(weekStart)
     d.setDate(d.getDate() - 7)
@@ -228,8 +315,12 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     d.setDate(d.getDate() + 7)
     setWeekStart(d)
   }
-  const goToday = () => setWeekStart(getWeekStart(today))
+  const goToday = () => {
+    setWeekStart(getWeekStart(today))
+    setSelectedDay(new Date(today))
+  }
 
+  // Each arrow jumps 7 days so the visible strip window doesn't overlap
   const prevStripWeek = () => {
     const d = new Date(selectedDay)
     d.setDate(d.getDate() - 7)
@@ -296,7 +387,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div className="cal-nav-title">
-          <strong>{weekLabel}</strong>
+          <strong>{calView === 'day' ? dayLabel : weekLabel}</strong>
           <div className="cal-view-toggle">
             <button
               className={`cal-view-btn ${calView === 'day' ? 'active' : ''}`}
@@ -387,86 +478,18 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
               const showNowLine = isToday && nowMinutes >= START_HOUR * 60 && nowMinutes <= END_HOUR * 60
               return (
                 <div key={day.dateStr} className={`gcal-day-col ${isToday ? 'today-col' : ''}`}>
-                  {hours.map((h) => (
-                    <div key={h} className="gcal-hour-line" />
-                  ))}
-
-                  {showNowLine && nowTop >= 0 && (
-                    <div className="gcal-now-line" style={{ top: `${nowTop}px` }} />
-                  )}
-
-                  {/* Google Calendar events (grey) */}
-                  {day.gcalEvents.map((gev) => {
-                    const top = ((gev.startHour - START_HOUR) + gev.startMin / 60) * HOUR_HEIGHT
-                    const height = Math.max((gev.durationMin / 60) * HOUR_HEIGHT, 20)
-                    return (
-                      <div
-                        key={gev.id}
-                        className="gcal-event gcal-event-external"
-                        style={{ top: `${top}px`, height: `${height}px` }}
-                      >
-                        <div className="gcal-event-title">{gev.title}</div>
-                        {gev.location && height > 30 && (
-                          <div className="gcal-event-location">{gev.location}</div>
-                        )}
-                      </div>
-                    )
-                  })}
-
-                  {/* Stardust hiking plans (accent color) */}
-                  {day.plans.map((e) => {
-                    if (!e.plan.startTime) return null
-                    const trip = getTripDetails(e.spot, e.plan)
-                    const [sh, sm] = e.plan.startTime.split(':').map(Number)
-                    const top = ((sh - START_HOUR) + sm / 60) * HOUR_HEIGHT
-                    const height = Math.max((trip.totalMin / 60) * HOUR_HEIGHT, 28)
-                    const showDetails = height > 80
-                    const isSyncing = syncingId === e.spotId
-                    const isSynced = syncedIds.has(e.spotId)
-
-                    return (
-                      <div
-                        key={e.spotId}
-                        className="gcal-event"
-                        style={{ top: `${top}px`, height: `${height}px` }}
-                        onClick={() => onOpenPlan(e.spot)}
-                      >
-                        <div className="gcal-event-title">{e.spot.name}</div>
-                        <div className="gcal-event-time">
-                          {e.plan.startTime} &rarr; {trip.returnTime || '\u2014'}
-                        </div>
-                        {showDetails && (
-                          <>
-                            <div className="gcal-event-location">{e.spot.location}</div>
-                            <div className="gcal-event-details">
-                              <div className="gcal-event-detail-row">
-                                <span>🚗 {formatTime(trip.drivingMin)}</span>
-                                <span> · 🥾 {formatTime(trip.hikingMin)}</span>
-                              </div>
-                              <div className="gcal-event-detail-row">
-                                <span>☕ {formatTime(trip.breakMin)}</span>
-                                <span> · ⏱ {formatTime(trip.totalMin)} total</span>
-                              </div>
-                            </div>
-                            <div className="gcal-event-badges">
-                              <span className={`gcal-mini-badge ${e.spot.difficulty}`}>{e.spot.difficulty}</span>
-                              {e.plan.bringPets && <span className="gcal-mini-badge pets">Pets</span>}
-                              {e.plan.bringKids && <span className="gcal-mini-badge kids">Kids</span>}
-                            </div>
-                            {googleAccessToken && (
-                              <button
-                                className={`gcal-sync-btn ${isSynced ? 'synced' : ''}`}
-                                onClick={(ev) => syncToGCal(e, ev)}
-                                disabled={isSyncing || isSynced}
-                              >
-                                {isSyncing ? 'Syncing...' : isSynced ? 'Synced' : '+ Add to GCal'}
-                              </button>
-                            )}
-                          </>
-                        )}
-                      </div>
-                    )
-                  })}
+                  <DayColumnContent
+                    hours={hours}
+                    gcalEvents={day.gcalEvents}
+                    plans={day.plans}
+                    showNowLine={showNowLine}
+                    nowTop={nowTop}
+                    googleAccessToken={googleAccessToken}
+                    syncingId={syncingId}
+                    syncedIds={syncedIds}
+                    onOpenPlan={onOpenPlan}
+                    syncToGCal={syncToGCal}
+                  />
                 </div>
               )
             })}
@@ -493,84 +516,18 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
               ))}
             </div>
             <div className={`gcal-day-col ${selectedDateStr === todayStr ? 'today-col' : ''}`}>
-              {hours.map((h) => (
-                <div key={h} className="gcal-hour-line" />
-              ))}
-
-              {showNowLineDay && nowTop >= 0 && (
-                <div className="gcal-now-line" style={{ top: `${nowTop}px` }} />
-              )}
-
-              {selectedDayGcal.map((gev) => {
-                const top = ((gev.startHour - START_HOUR) + gev.startMin / 60) * HOUR_HEIGHT
-                const height = Math.max((gev.durationMin / 60) * HOUR_HEIGHT, 20)
-                return (
-                  <div
-                    key={gev.id}
-                    className="gcal-event gcal-event-external"
-                    style={{ top: `${top}px`, height: `${height}px` }}
-                  >
-                    <div className="gcal-event-title">{gev.title}</div>
-                    {gev.location && height > 30 && (
-                      <div className="gcal-event-location">{gev.location}</div>
-                    )}
-                  </div>
-                )
-              })}
-
-              {selectedDayPlans.map((e) => {
-                if (!e.plan.startTime) return null
-                const trip = getTripDetails(e.spot, e.plan)
-                const [sh, sm] = e.plan.startTime.split(':').map(Number)
-                const top = ((sh - START_HOUR) + sm / 60) * HOUR_HEIGHT
-                const height = Math.max((trip.totalMin / 60) * HOUR_HEIGHT, 28)
-                const showDetails = height > 80
-                const isSyncing = syncingId === e.spotId
-                const isSynced = syncedIds.has(e.spotId)
-
-                return (
-                  <div
-                    key={e.spotId}
-                    className="gcal-event"
-                    style={{ top: `${top}px`, height: `${height}px` }}
-                    onClick={() => onOpenPlan(e.spot)}
-                  >
-                    <div className="gcal-event-title">{e.spot.name}</div>
-                    <div className="gcal-event-time">
-                      {e.plan.startTime} &rarr; {trip.returnTime || '\u2014'}
-                    </div>
-                    {showDetails && (
-                      <>
-                        <div className="gcal-event-location">{e.spot.location}</div>
-                        <div className="gcal-event-details">
-                          <div className="gcal-event-detail-row">
-                            <span>🚗 {formatTime(trip.drivingMin)}</span>
-                            <span> · 🥾 {formatTime(trip.hikingMin)}</span>
-                          </div>
-                          <div className="gcal-event-detail-row">
-                            <span>☕ {formatTime(trip.breakMin)}</span>
-                            <span> · ⏱ {formatTime(trip.totalMin)} total</span>
-                          </div>
-                        </div>
-                        <div className="gcal-event-badges">
-                          <span className={`gcal-mini-badge ${e.spot.difficulty}`}>{e.spot.difficulty}</span>
-                          {e.plan.bringPets && <span className="gcal-mini-badge pets">Pets</span>}
-                          {e.plan.bringKids && <span className="gcal-mini-badge kids">Kids</span>}
-                        </div>
-                        {googleAccessToken && (
-                          <button
-                            className={`gcal-sync-btn ${isSynced ? 'synced' : ''}`}
-                            onClick={(ev) => syncToGCal(e, ev)}
-                            disabled={isSyncing || isSynced}
-                          >
-                            {isSyncing ? 'Syncing...' : isSynced ? 'Synced' : '+ Add to GCal'}
-                          </button>
-                        )}
-                      </>
-                    )}
-                  </div>
-                )
-              })}
+              <DayColumnContent
+                hours={hours}
+                gcalEvents={selectedDayGcal}
+                plans={selectedDayPlans}
+                showNowLine={showNowLineDay}
+                nowTop={nowTop}
+                googleAccessToken={googleAccessToken}
+                syncingId={syncingId}
+                syncedIds={syncedIds}
+                onOpenPlan={onOpenPlan}
+                syncToGCal={syncToGCal}
+              />
             </div>
           </div>
         </div>
