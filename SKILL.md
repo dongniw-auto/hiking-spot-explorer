@@ -1,7 +1,7 @@
 ---
 name: stardust
 description: >
-  Stardust hiking/parks explorer app. Use when working on the Stardust React app,
+  Stardust parks & spots explorer app. Use when working on the Stardust React app,
   modifying code, fixing bugs, adding features, or deploying changes. Auto-loads
   when editing any file in this project.
 allowed-tools: Read, Edit, Write, Glob, Grep, Bash(npm *), Bash(git *)
@@ -10,9 +10,9 @@ allowed-tools: Read, Edit, Write, Glob, Grep, Bash(npm *), Bash(git *)
 # Stardust Dev Skill
 
 ## Project Overview
-**Stardust** is a React + Vite single-page app for exploring parks, hiking spots, cafes, and hidden gems in the Bay Area. Deployed to GitHub Pages.
+**Stardust** is a React + Vite single-page app for exploring parks, trails, cafes, and hidden gems in the Bay Area. Deployed to GitHub Pages.
 
-- **GitHub repo:** `dongniw-auto/stardust` (alias of `dongniw-auto/hiking-spot-explorer`)
+- **GitHub repo:** `dongniw-auto/stardust`
 - **Live site:** https://dongniw-auto.github.io/stardust/
 - **Firebase project:** `stardust-8ee28` (GCP)
 
