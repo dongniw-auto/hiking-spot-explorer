@@ -503,3 +503,78 @@
 .gcal-body-day {
   grid-template-columns: 48px 1fr;
 }
+
+/* Route toggle section */
+.route-toggle-section {
+  margin-top: 12px;
+}
+
+.route-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: none;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 10px;
+}
+
+.route-toggle-btn:hover {
+  opacity: 0.85;
+}
+
+.route-toggle-btn.active {
+  background: var(--accent);
+  color: white;
+}
+
+.route-map-container {
+  height: 300px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .route-map-container {
+    height: 380px;
+  }
+}
+
+.route-map-empty {
+  padding: 16px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+/* Numbered route markers */
+.route-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.route-marker-pin {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent, #c2703e);
+  border: 3px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+}

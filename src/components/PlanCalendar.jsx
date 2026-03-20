@@ -1,4 +1,7 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet'
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import useGoogleCalendar from '../hooks/useGoogleCalendar'
 import './PlanCalendar.css'
 
@@ -107,6 +110,77 @@ function parseGCalEvent(ev) {
   }
 }
 
+function createNumberedIcon(n) {
+  return L.divIcon({
+    className: 'route-marker',
+    html: `<div class="route-marker-pin">${n}</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -28],
+  })
+}
+
+function FitBounds({ positions }) {
+  const map = useMap()
+  useEffect(() => {
+    if (positions.length >= 2) {
+      map.fitBounds(L.latLngBounds(positions), { padding: [30, 30] })
+    } else if (positions.length === 1) {
+      map.setView(positions[0], 13)
+    }
+  }, [map]) // keyed MapContainer remounts fresh per day — runs once
+  return null
+}
+
+function DayRouteMap({ plans, dateKey }) {
+  const spots = plans
+    .filter((e) => e.spot.lat != null && e.spot.lng != null)
+    .sort((a, b) => {
+      if (!a.plan.startTime) return 1
+      if (!b.plan.startTime) return -1
+      return a.plan.startTime.localeCompare(b.plan.startTime)
+    })
+
+  if (spots.length === 0) {
+    return <div className="route-map-empty">No spots with location data for this day.</div>
+  }
+
+  const positions = spots.map((e) => [e.spot.lat, e.spot.lng])
+
+  return (
+    <MapContainer key={dateKey} center={positions[0]} zoom={11} className="route-map-container" scrollWheelZoom={false}>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <FitBounds positions={positions} />
+      {positions.length >= 2 && (
+        <Polyline positions={positions} color="#c2703e" weight={3} opacity={0.8} />
+      )}
+      {spots.map((e, i) => (
+        <Marker
+          key={e.spotId}
+          position={[e.spot.lat, e.spot.lng]}
+          icon={createNumberedIcon(i + 1)}
+        >
+          <Popup>
+            <div style={{ minWidth: '140px' }}>
+              <strong style={{ fontSize: '13px' }}>{i + 1}. {e.spot.name}</strong>
+              <div style={{ fontSize: '11px', color: '#9c8e82', marginTop: '2px' }}>{e.spot.location}</div>
+              {e.plan.startTime && (
+                <div style={{ fontSize: '11px', marginTop: '4px' }}>Start: {e.plan.startTime}</div>
+              )}
+              {e.spot.difficulty && (
+                <div style={{ fontSize: '11px', marginTop: '2px', textTransform: 'capitalize' }}>{e.spot.difficulty} · {e.spot.distance} mi</div>
+              )}
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+    </MapContainer>
+  )
+}
+
 // Renders the content of a single day column: hour grid lines, now indicator, GCal events, and hiking plans
 function DayColumnContent({ hours, gcalEvents, plans, showNowLine, nowTop, googleAccessToken, syncingId, syncedIds, onOpenPlan, syncToGCal }) {
   return (
@@ -204,6 +278,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
   const bodyRef = useRef(null)
   const [syncingId, setSyncingId] = useState(null)
   const [syncedIds, setSyncedIds] = useState(new Set())
+  const [showRoute, setShowRoute] = useState(false)
 
   const { calendarEvents, loadingEvents, fetchEvents, createEvent, tokenExpired, error: gcalError } = useGoogleCalendar(googleAccessToken)
 
@@ -540,6 +615,24 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
               />
             </div>
           </div>
+        </div>
+      )}
+
+      {calView === 'day' && selectedDayPlans.length > 0 && (
+        <div className="route-toggle-section">
+          <button
+            className={`route-toggle-btn ${showRoute ? 'active' : ''}`}
+            onClick={() => setShowRoute((v) => !v)}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="14" height="14">
+              <circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/>
+              <path d="M5 7v4a6 6 0 0 0 6 6h2M19 7v4"/>
+            </svg>
+            {showRoute ? 'Hide Route' : 'Show Route'}
+          </button>
+          {showRoute && (
+            <DayRouteMap plans={selectedDayPlans} dateKey={selectedDateStr} />
+          )}
         </div>
       )}
 
