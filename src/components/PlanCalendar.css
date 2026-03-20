@@ -491,3 +491,12 @@
   color: var(--text-h);
   line-height: 1.2;
 }
+
+/* Day view grid overrides */
+.gcal-header-day {
+  grid-template-columns: 48px 1fr;
+}
+
+.gcal-body-day {
+  grid-template-columns: 48px 1fr;
+}
