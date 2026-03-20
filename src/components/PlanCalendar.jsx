@@ -200,7 +200,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
   today.setHours(0, 0, 0, 0)
   const [weekStart, setWeekStart] = useState(() => getWeekStart(today))
   const [selectedDay, setSelectedDay] = useState(() => new Date(today))
-  const [calView, setCalView] = useState(() => (typeof window !== 'undefined' && window.matchMedia('(max-width: 599px)').matches) ? 'day' : 'week') // 'day' | 'week'
+  const [calView, setCalView] = useState(() => (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches) ? 'day' : 'week') // 'day' | 'week'
   const bodyRef = useRef(null)
   const [syncingId, setSyncingId] = useState(null)
   const [syncedIds, setSyncedIds] = useState(new Set())
@@ -312,6 +312,19 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     setSelectedDay(new Date(today))
   }
 
+  const prevDay = () => {
+    const d = new Date(selectedDay)
+    d.setDate(d.getDate() - 1)
+    setSelectedDay(d)
+    setWeekStart(getWeekStart(d))
+  }
+  const nextDay = () => {
+    const d = new Date(selectedDay)
+    d.setDate(d.getDate() + 1)
+    setSelectedDay(d)
+    setWeekStart(getWeekStart(d))
+  }
+
   // Each arrow jumps 7 days so the visible strip window doesn't overlap
   const prevStripWeek = () => {
     const d = new Date(selectedDay)
@@ -377,7 +390,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
   return (
     <div className="plan-calendar">
       <div className="cal-nav">
-        <button className="cal-nav-btn" onClick={prevWeek}>
+        <button className="cal-nav-btn" onClick={calView === 'day' ? prevDay : prevWeek}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div className="cal-nav-title">
@@ -413,7 +426,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
         {gcalError && (
           <div className="gcal-error-banner">{gcalError}</div>
         )}
-        <button className="cal-nav-btn" onClick={nextWeek}>
+        <button className="cal-nav-btn" onClick={calView === 'day' ? nextDay : nextWeek}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>

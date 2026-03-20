@@ -420,7 +420,7 @@
   padding: 0 2px;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 767px) {
   .cal-view-toggle {
     display: flex;
   }
