@@ -4,7 +4,7 @@ import { db, hasConfig } from '../firebase'
 import { SAMPLE_SPOTS } from '../data/spots'
 
 // Bump this when adding/updating spots in the static seed data
-const SEED_VERSION = 5
+const SEED_VERSION = 6
 
 const CACHE_KEY = 'cachedSpots'
 
