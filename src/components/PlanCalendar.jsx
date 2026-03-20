@@ -131,13 +131,14 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     fetchEvents(start, end)
   }, [googleAccessToken, weekStart, fetchEvents])
 
-  // Sync weekStart when selectedDay moves outside the current week
+  // Sync weekStart when selectedDay moves outside the current week (day view only)
   useEffect(() => {
+    if (calView !== 'day') return
     const start = getWeekStart(selectedDay)
     if (start.getTime() !== weekStart.getTime()) {
       setWeekStart(start)
     }
-  }, [selectedDay, weekStart])
+  }, [selectedDay, weekStart, calView])
 
   // Parse GCal events by date
   const gcalByDate = useMemo(() => {
