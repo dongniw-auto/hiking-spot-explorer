@@ -411,15 +411,6 @@
   color: white;
 }
 
-@media (max-width: 599px) {
-  .cal-view-toggle {
-    display: flex;
-  }
-  .cal-day-strip {
-    display: flex;
-  }
-}
-
 /* Day strip */
 .cal-day-strip {
   display: none; /* hidden on desktop */
@@ -427,6 +418,15 @@
   gap: 4px;
   margin-bottom: 10px;
   padding: 0 2px;
+}
+
+@media (max-width: 599px) {
+  .cal-view-toggle {
+    display: flex;
+  }
+  .cal-day-strip {
+    display: flex;
+  }
 }
 
 .cal-strip-arrow {
