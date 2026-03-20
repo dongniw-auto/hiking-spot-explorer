@@ -5,9 +5,11 @@ import MapView from './components/MapView'
 import VisitPlanner from './components/VisitPlanner'
 import SavedPlans from './components/SavedPlans'
 import AuthButton from './components/AuthButton'
+import CollectPage from './components/CollectPage'
 import useAuth from './hooks/useAuth'
 import useFirestore from './hooks/useFirestore'
 import useSpots from './hooks/useSpots'
+import useBounty from './hooks/useBounty'
 import './App.css'
 
 function App() {
@@ -105,6 +107,8 @@ function App() {
     setFilteredSpots(applyFilters(spots, newFilters))
   }
 
+  const { bounties, completedTaskIds, completeTask, totalStardust } = useBounty(spots, starred, savedPlans)
+
   const planCount = Object.keys(mergedPlans).length
 
   return (
@@ -183,6 +187,17 @@ function App() {
         </main>
       )}
 
+      {activeTab === 'collect' && (
+        <main className="page">
+          <CollectPage
+            bounties={bounties}
+            completedTaskIds={completedTaskIds}
+            completeTask={completeTask}
+            totalStardust={totalStardust}
+          />
+        </main>
+      )}
+
       {planningSpot && (
         <VisitPlanner
           spot={planningSpot}
@@ -216,6 +231,16 @@ function App() {
           </svg>
           <span>Plans</span>
           {planCount > 0 && <span className="tab-badge">{planCount}</span>}
+        </button>
+        <button
+          className={`tab-item ${activeTab === 'collect' ? 'active' : ''}`}
+          onClick={() => setActiveTab('collect')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="tab-icon">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span>Collect</span>
+          {totalStardust > 0 && <span className="tab-badge">{totalStardust}⭐</span>}
         </button>
       </nav>
     </div>
