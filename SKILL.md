@@ -73,10 +73,11 @@ docs/                     # Vite build output (deployed to GitHub Pages)
 {
   id, name, location, region, lat, lng,
   difficulty: 'easy' | 'moderate' | 'hard',
-  category: 'outdoors' | 'cafe',
+  category: 'outdoors' | 'cafe' | 'library' | 'sports',
   distance, elevationGain, estimatedHikingTime,
   rating, petFriendly, petNotes, kidFriendly, kidNotes,
-  libraryParkPass, entranceFee, description, image, sourceUrl
+  libraryParkPass, libraryCardProgram,
+  entranceFee, description, image, sourceUrl
 }
 ```
 
@@ -88,8 +89,33 @@ docs/                     # Vite build output (deployed to GitHub Pages)
 
 ## Build & Deploy
 
+### Prerequisites — local .env file
+Before building, a `.env` file must exist at the project root. It is gitignored and not committed.
+Create it once from the template:
 ```bash
-# Build
+cp .env.example .env
+# then fill in the Firebase values
+```
+If `.env` is missing, the build succeeds but Firebase config is NOT embedded — the app will silently skip auth and Firestore entirely (no Sign In button, no spots seeding).
+
+**Verify config was embedded after build:**
+```bash
+grep -o "stardust-8ee28" docs/assets/index.js | head -1
+# should print: stardust-8ee28
+```
+
+### Local dev & preview
+```bash
+npm run dev      # hot-reload dev server (port 5173+)
+npm run preview  # serves the built docs/ output (port 4173)
+```
+
+**Firebase auth on localhost:** if you see `auth/requests-from-referer-http://localhost:PORT-are-blocked`, that is a **GCP API key HTTP referrer restriction** — not a Firebase Authorized Domains issue. Fix it at:
+`GCP Console → APIs & Services → Credentials → your Browser API key → HTTP referrers`
+Add `localhost:4173/*`, `localhost:5173/*`, `localhost:5176/*` etc.
+
+### Build for production
+```bash
 npm run build
 
 # After building, bump ?v= cache-buster in docs/index.html:
@@ -99,6 +125,36 @@ npm run build
 ```
 
 Deploy by committing `docs/` changes to `main` branch — GitHub Pages serves from there automatically.
+
+## Firestore Seeding
+
+`useSpots.js` seeds `SAMPLE_SPOTS` into Firestore on first login, controlled by `SEED_VERSION`.
+
+**Rules:**
+- Bump `SEED_VERSION` (e.g. 3 → 4) every time you add or change data in `spots.js`
+- Seeding requires login — Firestore write rules require auth. Reads work for everyone once data exists.
+- Without a version bump, existing Firestore data is not updated even if `spots.js` changes
+- After a version bump, the first user to log in triggers the re-seed for everyone
+
+```js
+// src/hooks/useSpots.js
+const SEED_VERSION = 5  // bump this when spots.js changes
+```
+
+## Map Markers
+
+Each spot category has a dedicated icon in `MapView.jsx`:
+
+| Category | Color | Icon |
+|---|---|---|
+| `outdoors` | green/orange/red (by difficulty) | mountain |
+| `cafe` | brown `#8b5a2b` | mug with handle |
+| `library` | blue `#1a6b9a` | open book |
+| `sports` (gym) | purple `#6b46c1` | dumbbell |
+
+When adding a new category, add a new SVG + `createIcon()` call and handle it in `getSpotIcon()`.
+
+**Image guidelines:** use facility/space-focused Unsplash photos — no people, faces, or portraits. The photo ID `1507003211169` (Jake Nackos portrait) is a known bad one to avoid.
 
 ## Common Mistakes — Read Before Writing Code
 
