@@ -182,7 +182,7 @@ When adding a new category, add a new SVG + `createIcon()` call and handle it in
 - **`npm run build` resets `docs/index.html`** — every build regenerates the file with bare paths, stripping your `?v=` params. Always re-add the cache-buster after building. Use the `/deploy` skill to avoid forgetting this step.
 - **Firestore serves stale spot images until re-seed runs** — when `spots.js` images change, bump `SEED_VERSION` in `useSpots.js`. The re-seed only runs when a logged-in user visits with a new SEED_VERSION. Until then, the app shows cached Firestore data even after rebuild. Users may need to sign out and back in.
 - **Preview server must be stopped + restarted after rebuild** — `preview_eval(window.location.reload())` is not enough; the static file server caches the old bundle. Use `preview_stop` then `preview_start` to pick up new `docs/assets/index.js`.
-- **When fixing spot images, use Python regex with `sourceUrl` as anchor** — the `sourceUrl` field is unique per spot and sits just before `category` and `image`. Pattern: `(sourceUrl:[^\n]*{anchor}[^\n]*\n\s+category:[^\n]*\n\s+image:\s*")[^"]*(")`
+- **When fixing spot images, use line-by-line Python, NOT regex** — multi-line regex with `re.DOTALL` and `\s+` can match across many lines, silently deleting entire spot entries. Instead: split by `\n`, find the `sourceUrl` line containing the anchor, then find the next `image:` line within 5 lines and replace it directly.
 - **Always preview on a real mobile device before pushing `docs/`** — the dev server (`npm run dev`) won't show you layout bugs that only appear at phone widths. At minimum, use browser DevTools at 375px width before committing the build.
 
 ### CSS Responsive Patterns
