@@ -440,7 +440,7 @@ export default function TodayCard({ spots = SAMPLE_SPOTS }) {
             ))}
           </div>
 
-          <p style={styles.setupPrompt} style={{ marginTop: 28 }}>How are you feeling?</p>
+          <p style={{ ...styles.setupPrompt, marginTop: 16 }}>How are you feeling?</p>
           <div style={styles.moodRow}>
             {MOOD_OPTIONS.map(opt => (
               <button
@@ -655,13 +655,13 @@ const FONT = `-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Robo
 
 const styles = {
   root: {
-    minHeight: "100vh",
+    minHeight: "calc(100vh - 140px)",
     backgroundColor: COLORS.bg,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontFamily: FONT,
-    padding: "24px 16px",
+    padding: "12px 16px",
   },
 
   // ── Setup ──
@@ -685,7 +685,7 @@ const styles = {
     color: COLORS.text,
     letterSpacing: "0.04em",
     margin: 0,
-    marginBottom: 32,
+    marginBottom: 16,
   },
   setupPrompt: {
     fontSize: 11,
@@ -749,7 +749,7 @@ const styles = {
   },
 
   btnGo: {
-    marginTop: 24,
+    marginTop: 16,
     width: "100%",
     padding: "15px 24px",
     background: COLORS.accent,
@@ -776,7 +776,7 @@ const styles = {
   },
   imageWrap: {
     position: "relative",
-    height: 260,
+    height: 180,
     overflow: "hidden",
   },
   heroImg: {
