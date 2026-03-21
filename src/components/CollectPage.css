@@ -1,0 +1,215 @@
+.collect-page {
+  padding: 20px 16px;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Balance card */
+.collect-balance-card {
+  background: linear-gradient(135deg, #c2703e, #d4872e);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px 24px;
+  text-align: center;
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+}
+
+.collect-star-icon {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.collect-balance-value {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 6px;
+}
+
+.collect-balance-label {
+  font-size: 17px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.collect-balance-sub {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+/* Empty state */
+.collect-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.collect-empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.collect-empty h3 {
+  font-size: 18px;
+  margin: 0 0 6px;
+  color: var(--text-h);
+}
+
+.collect-empty p {
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* Section */
+.collect-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.collect-section-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-h);
+}
+
+/* Spot groups */
+.collect-bounty-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.collect-spot-group {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.collect-spot-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  padding: 10px 14px 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* Task card */
+.collect-task-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  gap: 12px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.collect-task-card:last-child {
+  border-bottom: none;
+}
+
+.collect-task-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.collect-task-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-h);
+  flex: 1;
+  min-width: 0;
+}
+
+.collect-task-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.collect-complete-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.collect-complete-btn:active {
+  opacity: 0.8;
+}
+
+/* Completed list */
+.collect-completed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.collect-completed-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+}
+
+.collect-completed-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--green-light);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.collect-completed-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.collect-completed-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.collect-completed-spot {
+  font-size: 12px;
+  color: var(--text);
+  margin-top: 1px;
+}
+
+.collect-completed-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
