@@ -348,7 +348,7 @@ function CollectStardustModal({ spot, onSave, onClose }) {
         </div>
 
         <div style={styles.modalActions}>
-          <button style={styles.btnGhost} onClick={onClose}>Skip for now</button>
+          <button style={{ ...styles.btnGhost, width: "auto", flex: 1 }} onClick={onClose}>Skip for now</button>
           <button style={styles.btnPrimary} onClick={handleSave}>✦ Save memory</button>
         </div>
       </div>
@@ -360,7 +360,7 @@ function CollectStardustModal({ spot, onSave, onClose }) {
 // TODAY CARD — MAIN COMPONENT
 // ─────────────────────────────────────────────
 
-export default function TodayCard({ spots = SAMPLE_SPOTS }) {
+export default function TodayCard({ spots = SAMPLE_SPOTS, memories = [], onMemoryAdd }) {
   const [step, setStep] = useState("setup"); // setup | card | going | collect | done
   const [availableMinutes, setAvailableMinutes] = useState(120);
   const [mood, setMood] = useState("open");
@@ -368,7 +368,6 @@ export default function TodayCard({ spots = SAMPLE_SPOTS }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [rejections, setRejections] = useState(0);
   const [collecting, setCollecting] = useState(false);
-  const [memories, setMemories] = useState([]);
   const [showMemories, setShowMemories] = useState(false);
   const [animating, setAnimating] = useState(false);
 
@@ -403,7 +402,7 @@ export default function TodayCard({ spots = SAMPLE_SPOTS }) {
   }
 
   function handleCollect(memory) {
-    setMemories(prev => [memory, ...prev]);
+    if (onMemoryAdd) onMemoryAdd(memory);
     setCollecting(false);
     setStep("done");
   }
@@ -1012,6 +1011,7 @@ const styles = {
     display: "flex",
     gap: 10,
     marginTop: 24,
+    alignItems: "stretch",
   },
   fieldLabel: {
     fontSize: 11,

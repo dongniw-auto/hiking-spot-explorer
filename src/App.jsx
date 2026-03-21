@@ -8,6 +8,7 @@ import AuthButton from './components/AuthButton'
 import useAuth from './hooks/useAuth'
 import useFirestore from './hooks/useFirestore'
 import TodayCard from './components/TodayCard'
+import MemoriesView from './components/MemoriesView'
 import useSpots from './hooks/useSpots'
 import './App.css'
 
@@ -25,6 +26,7 @@ function App() {
   const [planningSpot, setPlanningSpot] = useState(null)
   const [mapCenter, setMapCenter] = useState([37.7749, -122.4194])
   const [activeTab, setActiveTab] = useState('today')
+  const [memories, setMemories] = useState([])
   const [filters, setFilters] = useState({
     petFriendly: false,
     kidFriendly: false,
@@ -106,6 +108,10 @@ function App() {
     setFilteredSpots(applyFilters(spots, newFilters))
   }
 
+  const handleMemoryAdd = useCallback((memory) => {
+    setMemories(prev => [memory, ...prev])
+  }, [])
+
   const planCount = Object.keys(mergedPlans).length
 
   return (
@@ -128,7 +134,7 @@ function App() {
 
       {activeTab === 'today' && (
         <main className="page">
-          <TodayCard spots={spots} />
+          <TodayCard spots={spots} memories={memories} onMemoryAdd={handleMemoryAdd} />
         </main>
       )}
 
@@ -190,6 +196,12 @@ function App() {
         </main>
       )}
 
+      {activeTab === 'memories' && (
+        <main className="page">
+          <MemoriesView memories={memories} />
+        </main>
+      )}
+
       {planningSpot && (
         <VisitPlanner
           spot={planningSpot}
@@ -210,6 +222,16 @@ function App() {
             <polyline points="12 6 12 12 16 14" />
           </svg>
           <span>Today</span>
+        </button>
+        <button
+          className={`tab-item ${activeTab === 'memories' ? 'active' : ''}`}
+          onClick={() => setActiveTab('memories')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="tab-icon">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          <span>Memories</span>
+          {memories.length > 0 && <span className="tab-badge">{memories.length}</span>}
         </button>
         <button
           className={`tab-item ${activeTab === 'explore' ? 'active' : ''}`}
