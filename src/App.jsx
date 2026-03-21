@@ -7,6 +7,7 @@ import SavedPlans from './components/SavedPlans'
 import AuthButton from './components/AuthButton'
 import useAuth from './hooks/useAuth'
 import useFirestore from './hooks/useFirestore'
+import TodayCard from './components/TodayCard'
 import useSpots from './hooks/useSpots'
 import './App.css'
 
@@ -23,7 +24,7 @@ function App() {
   const [selectedSpot, setSelectedSpot] = useState(null)
   const [planningSpot, setPlanningSpot] = useState(null)
   const [mapCenter, setMapCenter] = useState([37.7749, -122.4194])
-  const [activeTab, setActiveTab] = useState('explore')
+  const [activeTab, setActiveTab] = useState('today')
   const [filters, setFilters] = useState({
     petFriendly: false,
     kidFriendly: false,
@@ -125,6 +126,12 @@ function App() {
         </div>
       )}
 
+      {activeTab === 'today' && (
+        <main className="page">
+          <TodayCard spots={spots} />
+        </main>
+      )}
+
       {activeTab === 'explore' && (
         <main className="page">
           <SearchBar
@@ -194,6 +201,16 @@ function App() {
       )}
 
       <nav className="tab-bar">
+        <button
+          className={`tab-item ${activeTab === 'today' ? 'active' : ''}`}
+          onClick={() => setActiveTab('today')}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="tab-icon">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span>Today</span>
+        </button>
         <button
           className={`tab-item ${activeTab === 'explore' ? 'active' : ''}`}
           onClick={() => setActiveTab('explore')}
