@@ -9,7 +9,7 @@ function formatDate(iso) {
   return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })
 }
 
-export default function SavedPlans({ plans, spots, onDeletePlan, onOpenPlan, googleAccessToken, onRefreshGoogleToken, familyProps }) {
+export default function SavedPlans({ plans, spots, memories = [], onDeletePlan, onOpenPlan, googleAccessToken, onRefreshGoogleToken, familyProps }) {
   const [view, setView] = useState('calendar')
 
   const entries = Object.entries(plans).map(([spotId, plan]) => {
@@ -29,8 +29,8 @@ export default function SavedPlans({ plans, spots, onDeletePlan, onOpenPlan, goo
       <div className="plans-page-header">
         <div className="plans-title-row">
           <div>
-            <h1>My Plans</h1>
-            <p className="plans-count">{entries.length} planned visit{entries.length !== 1 ? 's' : ''}</p>
+            <h1>My Stardust</h1>
+            <p className="plans-count">{entries.length} planned · {memories.length} collected</p>
           </div>
           <div className="plans-header-actions">
             {familyProps && (
@@ -129,6 +129,31 @@ export default function SavedPlans({ plans, spots, onDeletePlan, onOpenPlan, goo
               </div>
             )
           })}
+        </div>
+      )}
+
+      {memories.length > 0 && (
+        <div className="memories-section">
+          <h2 className="memories-section-title">✦ Collected Stardust</h2>
+          <p className="memories-section-count">{memories.length} {memories.length === 1 ? 'memory' : 'memories'}</p>
+          <div className="memories-list">
+            {memories.map(m => (
+              <div key={m.id} className="memory-card">
+                <h3 className="memory-card-name">{m.spotName}</h3>
+                {m.note && <p className="memory-card-note">"{m.note}"</p>}
+                {m.tasteCard && (
+                  <p className="memory-card-taste">
+                    ☕ {m.tasteCard.drink}
+                    {m.tasteCard.flavors.length > 0 && ` · ${m.tasteCard.flavors.join(', ')}`}
+                  </p>
+                )}
+                <p className="memory-card-meta">
+                  with {m.withWho.join(', ')}
+                  {m.mood ? ` · left feeling ${m.mood}` : ''}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

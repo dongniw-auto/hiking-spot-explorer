@@ -8,7 +8,6 @@ import AuthButton from './components/AuthButton'
 import useAuth from './hooks/useAuth'
 import useFirestore from './hooks/useFirestore'
 import TodayCard from './components/TodayCard'
-import MemoriesView from './components/MemoriesView'
 import useSpots from './hooks/useSpots'
 import './App.css'
 
@@ -182,6 +181,7 @@ function App() {
           <SavedPlans
             plans={mergedPlans}
             spots={spots}
+            memories={memories}
             onDeletePlan={deletePlan}
             onOpenPlan={(spot) => { setPlanningSpot(spot) }}
             googleAccessToken={googleAccessToken}
@@ -193,12 +193,6 @@ function App() {
               onLeaveGroup: leaveFamilyGroup,
             } : null}
           />
-        </main>
-      )}
-
-      {activeTab === 'memories' && (
-        <main className="page">
-          <MemoriesView memories={memories} />
         </main>
       )}
 
@@ -224,16 +218,6 @@ function App() {
           <span>Today</span>
         </button>
         <button
-          className={`tab-item ${activeTab === 'memories' ? 'active' : ''}`}
-          onClick={() => setActiveTab('memories')}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="tab-icon">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-          </svg>
-          <span>Memories</span>
-          {memories.length > 0 && <span className="tab-badge">{memories.length}</span>}
-        </button>
-        <button
           className={`tab-item ${activeTab === 'explore' ? 'active' : ''}`}
           onClick={() => setActiveTab('explore')}
         >
@@ -253,8 +237,8 @@ function App() {
             <line x1="8" y1="2" x2="8" y2="6" />
             <line x1="3" y1="10" x2="21" y2="10" />
           </svg>
-          <span>Plans</span>
-          {planCount > 0 && <span className="tab-badge">{planCount}</span>}
+          <span>Stardust</span>
+          {(planCount > 0 || memories.length > 0) && <span className="tab-badge">{planCount + memories.length}</span>}
         </button>
       </nav>
     </div>

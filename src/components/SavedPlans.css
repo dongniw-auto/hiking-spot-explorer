@@ -190,3 +190,65 @@
   background: rgba(200, 80, 64, 0.1);
   color: var(--red);
 }
+
+/* Memories section */
+.memories-section {
+  margin-top: 32px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.memories-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--accent);
+}
+
+.memories-section-count {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+
+.memories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.memory-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.memory-card-name {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.memory-card-note {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.memory-card-taste {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+
+.memory-card-meta {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+  margin: 0;
+  opacity: 0.7;
+}
