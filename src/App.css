@@ -7,7 +7,7 @@
 /* Header */
 .app-header {
   background: var(--card-bg);
-  padding: 52px 20px 16px;
+  padding: 16px 20px 12px;
   border-bottom: 0.5px solid var(--border);
 }
 
@@ -83,15 +83,15 @@
 
 @media (max-width: 600px) {
   .app-header {
-    padding: 44px 14px 12px;
+    padding: 12px 14px 8px;
   }
 
   .app-title {
-    font-size: 26px;
+    font-size: 22px;
   }
 
   .app-subtitle {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .main-content {
