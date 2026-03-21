@@ -343,6 +343,51 @@ Adding a new category: add SVG + `createIcon()` call + handle in `getSpotIcon()`
 
 ---
 
+## Firestore Seeding
+
+`useSpots.js` seeds `SAMPLE_SPOTS` into Firestore on first login, controlled by `SEED_VERSION`.
+
+**Rules:**
+- Bump `SEED_VERSION` (e.g. 3 → 4) every time you add or change data in `spots.js`
+- Seeding requires login — Firestore write rules require auth. Reads work for everyone once data exists.
+- Without a version bump, existing Firestore data is not updated even if `spots.js` changes
+- After a version bump, the first user to log in triggers the re-seed for everyone
+
+```js
+// src/hooks/useSpots.js
+const SEED_VERSION = 5  // bump this when spots.js changes
+```
+
+## Map Markers
+
+Each spot category has a dedicated icon in `MapView.jsx`:
+
+| Category | Color | Icon |
+|---|---|---|
+| `outdoors` | green/orange/red (by difficulty) | mountain |
+| `cafe` | brown `#8b5a2b` | mug with handle |
+| `library` | blue `#1a6b9a` | open book |
+| `sports` (gym) | purple `#6b46c1` | dumbbell |
+
+When adding a new category, add a new SVG + `createIcon()` call and handle it in `getSpotIcon()`.
+
+**Image guidelines:** use facility/space-focused Unsplash photos — no people, faces, or portraits. The photo ID `1507003211169` (Jake Nackos portrait) is a known bad one to avoid.
+
+**Known bad photo IDs — never use these:**
+| Photo ID | Reason |
+|---|---|
+| `1507003211169` | Portrait (Jake Nackos) |
+| `1490730141103-6cac27aaab94` | Has people in it |
+| `1501854140801-50d01698950b` | Person silhouette (sunset) |
+| `1432405972569-32d5c51e2f55` | 404s on Unsplash |
+| `1439853949212-36089b0e7e42` | 404s on Unsplash |
+| `1526139668667-76d8c985db83` | 404s on Unsplash |
+| `1464823063530-08f10943b005` | 404s on Unsplash |
+| `1544298177-e7f813c9f24d` | 404s on Unsplash |
+| `1542856391-010f196b4859` | 404s on Unsplash |
+
+**Safe default image:** `photo-1500534314209-a25ddb2bd429` (Tennessee Valley Trail — landscape, no people). Use this when no better option exists.
+
 ## Common Mistakes — Read Before Writing Code
 
 - **`setDoc` with merge does NOT handle dot-notation as nested paths** — use `updateDoc` for nested updates

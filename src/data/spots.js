@@ -24,7 +24,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Reservation required for parking. Shuttle available from Sausalito.",
     sourceUrl: "https://www.nps.gov/muwo/index.htm",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&h=500&fit=crop"
   },
   {
     id: 2,
@@ -50,7 +50,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free parking at Lands End Lookout visitor center.",
     sourceUrl: "https://www.nps.gov/goga/planyourvisit/landsend.htm",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop"
   },
   {
     id: 3,
@@ -76,7 +76,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Stanford Avenue staging area fills early on weekends. Arrive before 8am.",
     sourceUrl: "https://www.ebparks.org/parks/mission-peak",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=500&fit=crop"
   },
   {
     id: 4,
@@ -102,7 +102,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free parking at Tennessee Valley trailhead. Can fill up on weekends.",
     sourceUrl: "https://www.nps.gov/goga/planyourvisit/tennessee-valley.htm",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=500&fit=crop"
   },
   {
     id: 5,
@@ -128,7 +128,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Start at Old Mill Park in Mill Valley. Shuttle back from Stinson Beach on weekends.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/dipsea-trail",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=500&fit=crop"
   },
   {
     id: 6,
@@ -154,7 +154,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Multiple free parking areas throughout the park.",
     sourceUrl: "https://www.ebparks.org/parks/tilden-regional",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=800&h=500&fit=crop"
   },
 
   // === Santa Clara County Parks (Library Park Pass Eligible) ===
@@ -182,7 +182,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Hacienda entrance or Mockingbird Hill entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/almaden-quicksilver-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 102,
@@ -208,7 +208,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main entrance on McKean Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/calero-county-park--2",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=500&fit=crop"
   },
   {
     id: 103,
@@ -234,7 +234,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main lot on Mt. Hamilton Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/joseph-d-grant-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=500&fit=crop"
   },
   {
     id: 104,
@@ -260,7 +260,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Sandy Wool Lake lot or Downing Rd lot.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/ed-r-levin-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=500&fit=crop"
   },
   {
     id: 105,
@@ -286,7 +286,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main entrance on Sanborn Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/sanborn-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1511497584788-876760111969?w=800&h=500&fit=crop"
   },
   {
     id: 106,
@@ -312,7 +312,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Multiple lots near park entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/mount-madonna-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&h=500&fit=crop"
   },
   {
     id: 107,
@@ -364,7 +364,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main lot on Garden Hill Dr.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/vasona-lake-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&h=500&fit=crop"
   },
   {
     id: 109,
@@ -390,7 +390,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Hellyer Ave entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/hellyer-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 110,
@@ -416,7 +416,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Alma Bridge Rd lot.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/lexington-reservoir-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=500&fit=crop"
   },
 
   // === Additional Santa Clara County Parks (Library Park Pass Eligible) ===
@@ -444,7 +444,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Ample parking with ADA-accessible spots.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/alviso-slough-trail",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 112,
@@ -470,7 +470,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Live Oak entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/anderson-lake-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=500&fit=crop"
   },
   {
     id: 113,
@@ -496,7 +496,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Basic facilities with restrooms and picnic tables.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/chesbro-reservoir-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 114,
@@ -522,7 +522,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Open 8 AM to sunset.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/chitactac-adams-heritage-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?w=800&h=500&fit=crop"
   },
   {
     id: 115,
@@ -574,7 +574,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass at Harvey Bear entrance. Vehicle fee at Coyote Lake entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/coyote-lake-harvey-bear-ranch-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 117,
@@ -600,7 +600,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Ample parking.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/field-sports-park/rifle-and-pistol-range",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 118,
@@ -626,7 +626,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Dell Avenue entrance (1250 Dell Ave, Campbell).",
     sourceUrl: "https://www.alltrails.com/trail/us/california/los-gatos-creek-trail--5",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 119,
@@ -652,7 +652,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Snell Avenue entrance.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/martial-cottle-park-loop",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 120,
@@ -678,7 +678,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. OHV stickers mandatory.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/metcalf-motorcycle-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 121,
@@ -704,7 +704,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Multiple trailheads along Capitol Avenue.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/penitencia-creek-park-loop",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=800&h=500&fit=crop"
   },
   {
     id: 122,
@@ -730,7 +730,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass but lots fill early on weekends. Arrive early!",
     sourceUrl: "https://www.alltrails.com/trail/us/california/deer-hollow-farm-trail-loop--3",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=800&h=500&fit=crop"
   },
   {
     id: 123,
@@ -756,7 +756,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Pueblo Day Use Area entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/santa-teresa-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=500&fit=crop"
   },
   {
     id: 124,
@@ -782,7 +782,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Limited roadside parking on Stevens Canyon Rd.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/table-mountain-trail-loop-via-charcoal-and-table-mountain-fire-roads",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
   },
   {
     id: 125,
@@ -808,7 +808,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main entrance with restrooms.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/uvas-reservoir",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=800&h=500&fit=crop"
   },
   {
     id: 126,
@@ -834,7 +834,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Lot 4 closest to trailheads. Open 8 AM to sunset.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/villa-montalvo-trail",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=500&fit=crop"
   },
 
   // === Other Popular Bay Area Spots (not county parks) ===
@@ -862,7 +862,7 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free parking but lots fill by 9am on weekends. Arrive early! Additional overflow lot on Cristo Rey Dr.",
     sourceUrl: "https://www.openspace.org/preserves/rancho-san-antonio",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&h=500&fit=crop"
   },
 
   // === Cafes & Tea ===
@@ -890,7 +890,7 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking and nearby lots.",
     sourceUrl: "https://www.voyagercraftcoffee.com",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=500&fit=crop"
   },
   {
     id: 302,
@@ -916,7 +916,536 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Shopping center parking available.",
     sourceUrl: null,
-    image: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=800&h=500&fit=crop"
+  },
+
+  // === Coffee Shops (Issue #16) ===
+  {
+    id: 401,
+    name: "Sightglass Coffee",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7736,
+    lng: -122.4087,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.7,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Dogs welcome on the patio.",
+    kidNotes: "Spacious interior, kid-friendly atmosphere.",
+    description: "A beloved SF institution housed in a soaring industrial space in SoMa. Known for meticulous single-origin roasts, craft espresso drinks, and a welcoming community vibe.",
+    highlights: ["Single-origin pour-overs", "House-roasted beans", "Beautiful industrial space", "Weekend brunch"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking on 7th St. BART-accessible (Civic Center/UN Plaza).",
+    sourceUrl: "https://sightglasscoffee.com",
+    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=250&fit=crop"
+  },
+  {
+    id: 402,
+    name: "Ritual Coffee Roasters",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7580,
+    lng: -122.4136,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.6,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets inside; outdoor seating varies by location.",
+    kidNotes: "Friendly staff, pastries available for kids.",
+    description: "One of San Francisco's pioneering third-wave coffee roasters. The Valencia Street flagship is a neighborhood institution with seriously good espresso and direct-trade beans.",
+    highlights: ["Direct-trade sourcing", "Excellent espresso", "Rotating single-origin filters", "Noe Valley and Mission locations"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking; BART 24th St Mission nearby.",
+    sourceUrl: "https://ritualcoffee.com",
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop"
+  },
+  {
+    id: 403,
+    name: "Verve Coffee Roasters",
+    location: "San Jose, CA",
+    region: "Santa Clara County",
+    lat: 37.3352,
+    lng: -121.8900,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.7,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Dogs welcome on the patio.",
+    kidNotes: "Bright, open space. Hot chocolate and pastries available.",
+    description: "Santa Cruz-born roaster with a beautiful San Jose outpost in the SoFA district. Award-winning coffees, gorgeous interior, and an approachable specialty coffee menu.",
+    highlights: ["Oat milk lattes", "Cold brew on tap", "Beautiful minimalist design", "Rotating seasonal espresso"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking on S 1st St. Easy walk from SAP Center.",
+    sourceUrl: "https://www.vervecoffee.com",
+    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop"
+  },
+  {
+    id: 404,
+    name: "Chromatic Coffee",
+    location: "Santa Clara, CA",
+    region: "Santa Clara County",
+    lat: 37.3542,
+    lng: -121.9545,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.6,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Patio is dog-friendly.",
+    kidNotes: "Spacious seating, great for families.",
+    description: "A beloved South Bay roaster with a dedicated following for their carefully sourced, expertly roasted beans. The airy café space is perfect for remote work or lingering over a perfect cup.",
+    highlights: ["Locally roasted beans", "Excellent flat whites", "Lively community space", "Pour-over flights"],
+    bestSeason: "Year-round",
+    parkingInfo: "Free parking lot on site.",
+    sourceUrl: "https://www.chromaticcoffee.com",
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop"
+  },
+  {
+    id: 405,
+    name: "Philz Coffee - Original Location",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7611,
+    lng: -122.4198,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.5,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets inside.",
+    kidNotes: "Hot chocolate available, baristas are very friendly.",
+    description: "The original Philz Coffee location on 24th Street in the Mission — where Phil Jaber started blending unique coffee combinations that became a Bay Area phenomenon. Every cup is made to order.",
+    highlights: ["Tesora blend", "Mint Mojito Iced Coffee", "Made-to-order pour-overs", "Neighborhood gem"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking. BART 24th St Mission nearby.",
+    sourceUrl: "https://www.philzcoffee.com",
+    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=250&fit=crop"
+  },
+  {
+    id: 406,
+    name: "Equator Coffees",
+    location: "Mill Valley, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.9063,
+    lng: -122.5447,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.6,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Dog-friendly patio.",
+    kidNotes: "Charming village setting, pastries from local bakeries.",
+    description: "A Marin County favorite since 1995. Equator roasts certified-organic, fair-trade coffees and serves them in a charming Mill Valley courtyard setting. Perfect post-hike stop after Muir Woods.",
+    highlights: ["Organic fair-trade beans", "Beautiful courtyard seating", "Excellent cold brew", "Cozy Marin vibe"],
+    bestSeason: "Year-round",
+    parkingInfo: "Village parking lot nearby.",
+    sourceUrl: "https://www.equatorcoffees.com",
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=250&fit=crop"
+  },
+  {
+    id: 407,
+    name: "Saint Frank Coffee",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7955,
+    lng: -122.4099,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.7,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets inside.",
+    kidNotes: "Welcoming vibe, delicious pastries.",
+    description: "A serene Nob Hill coffee bar known for exceptional espresso and a calm, beautiful interior. One of SF's best for a quiet focused morning or a slow afternoon with a single-origin filter.",
+    highlights: ["Outstanding espresso", "Serene atmosphere", "Rotating filter coffees", "Excellent pastries"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking on Sacramento St. Cable car nearby.",
+    sourceUrl: "https://www.saintfrankcoffee.com",
+    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop"
+  },
+  {
+    id: 408,
+    name: "Linea Caffe",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7638,
+    lng: -122.4156,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.8,
+    petFriendly: false,
+    kidFriendly: false,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets.",
+    kidNotes: "Quiet, serious coffee shop — better for adults.",
+    description: "A tiny, minimalist gem in the Mission run by a former World Barista Champion. Linea is SF's most serious espresso bar — expect perfection in every cup in a beautifully spare space.",
+    highlights: ["World-class espresso", "Minimalist design", "Limited menu done perfectly", "Knowledgeable baristas"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking on 18th St.",
+    sourceUrl: "https://www.lineacaffe.com",
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop"
+  },
+  {
+    id: 409,
+    name: "Red Bay Coffee",
+    location: "Oakland, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.8044,
+    lng: -122.2711,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.6,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Dogs welcome outside.",
+    kidNotes: "Community-focused, welcoming to all ages.",
+    description: "An Oakland-born roastery and café with a mission of radical inclusion. Red Bay sources ethically, roasts beautifully, and creates community-centered spaces across the East Bay.",
+    highlights: ["Mission-driven coffee", "Beautiful roastery space", "Cold brew on nitro", "Community events"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking in Fruitvale neighborhood. BART Fruitvale nearby.",
+    sourceUrl: "https://www.redbaycoffee.com",
+    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=250&fit=crop"
+  },
+  {
+    id: 410,
+    name: "Comal Coffee",
+    location: "Berkeley, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.8716,
+    lng: -122.2727,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.5,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Dogs welcome at outdoor tables.",
+    kidNotes: "Lively café atmosphere, good pastry selection.",
+    description: "A Berkeley neighborhood staple tucked near the Elmwood district. Excellent espresso, an inviting courtyard, and a menu focused on quality over flash make this a favorite of locals.",
+    highlights: ["Cozy courtyard", "Excellent cortados", "Neighborhood vibe", "Weekend brunch bites"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking. AC Transit accessible.",
+    sourceUrl: null,
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop"
+  },
+  {
+    id: 411,
+    name: "Coffee Mission",
+    location: "San Jose, CA",
+    region: "Santa Clara County",
+    lat: 37.3382,
+    lng: -121.8869,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.5,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Outdoor patio is dog-friendly.",
+    kidNotes: "Relaxed atmosphere, good snacks.",
+    description: "A hidden gem in downtown San Jose beloved by locals for thoughtful coffee sourcing, creative seasonal drinks, and a relaxed atmosphere far from chain-coffee blandness.",
+    highlights: ["Seasonal lattes", "Local pastry collabs", "Chill downtown vibe", "Great cold brew"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking or nearby garages in downtown San Jose.",
+    sourceUrl: null,
+    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop"
+  },
+  {
+    id: 412,
+    name: "Bicycle Coffee",
+    location: "Oakland, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7976,
+    lng: -122.2343,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.5,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Dogs welcome at outdoor areas.",
+    kidNotes: "Fun bike-themed space, great for curious kids.",
+    description: "East Oakland's community-rooted coffee brand that delivers by bicycle and runs a cozy café. Known for their rich blends, strong community ties, and commitment to the neighborhood.",
+    highlights: ["Bicycle delivery brand", "Community-rooted", "Rich blends", "East Oakland flavor"],
+    bestSeason: "Year-round",
+    parkingInfo: "Free street parking.",
+    sourceUrl: "https://www.bicyclecoffeeco.com",
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=250&fit=crop"
+  },
+  {
+    id: 413,
+    name: "Dandelion Chocolate Café",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7645,
+    lng: -122.4196,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.7,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets inside.",
+    kidNotes: "Kids love the hot chocolates and chocolate chip cookies.",
+    description: "Not just coffee — Dandelion is a bean-to-bar chocolate factory with a beautiful café in the Mission. Sip drinking chocolate, espresso, or try their legendary chocolate bonbons in a gorgeous industrial space.",
+    highlights: ["Bean-to-bar chocolate", "Drinking chocolate flights", "Factory tours (weekends)", "Incredible bonbons"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking on Valencia St. BART 16th/24th Mission nearby.",
+    sourceUrl: "https://www.dandelionchocolate.com",
+    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=250&fit=crop"
+  },
+  {
+    id: 414,
+    name: "Coupa Café",
+    location: "Palo Alto, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.4480,
+    lng: -122.1604,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.5,
+    petFriendly: true,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "Beautiful patio is dog-friendly.",
+    kidNotes: "Great hot chocolate, empanadas kids love.",
+    description: "A beloved Venezuelan-owned café on University Avenue bringing the warmth of Caracas to Palo Alto. Known for their exceptional cacao-based drinks, arepas, and charming outdoor patio.",
+    highlights: ["Venezuelan hot chocolate", "Arepas and empanadas", "Shaded patio", "Direct-sourced cacao"],
+    bestSeason: "Year-round",
+    parkingInfo: "Street parking on University Ave or parking garages nearby.",
+    sourceUrl: "https://www.coupacafe.com",
+    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop"
+  },
+  {
+    id: 415,
+    name: "Workshop Café",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7870,
+    lng: -122.4033,
+    category: "cafe",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.4,
+    petFriendly: false,
+    kidFriendly: false,
+    libraryParkPass: false,
+    entranceFee: null,
+    petNotes: "No pets inside.",
+    kidNotes: "Quiet work-focused environment.",
+    description: "A co-working-meets-café space in the heart of SF's financial district. Pay for time, get reliable WiFi, great coffee, and a dedicated desk. Ideal for remote workers and startup folks.",
+    highlights: ["Co-working desks", "Reliable high-speed WiFi", "Great espresso", "Convenient FiDi location"],
+    bestSeason: "Year-round",
+    parkingInfo: "BART Montgomery/Embarcadero nearby. Minimal street parking.",
+    sourceUrl: "https://www.workshopcafe.com",
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop"
+  },
+
+  // === Library (Issue #16) ===
+  {
+    id: 501,
+    name: "San Jose Public Library — Dr. Martin Luther King Jr. Main Branch",
+    location: "San Jose, CA",
+    region: "Santa Clara County",
+    lat: 37.3355,
+    lng: -121.8890,
+    category: "library",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.6,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: "Free",
+    petNotes: "No pets inside.",
+    kidNotes: "Excellent children's section, story time events, and youth programming on weekends.",
+    description: "The flagship branch of the San Jose Public Library system, jointly operated with San Jose State University. This stunning 8-story building features over 500,000 items, sweeping views, and a vibrant atrium. Home to the California Room, a premier local history research collection.",
+    highlights: ["Joint SJSU partnership building", "California Room local history archives", "Rooftop views", "Regular author events", "Free WiFi and computer access"],
+    bestSeason: "Year-round",
+    parkingInfo: "San Jose Convention Center garage nearby. VTA light rail (Convention Center stop) accessible.",
+    sourceUrl: "https://www.sjpl.org",
+    libraryCardProgram: "San Jose Public Library Card — free with proof of San Jose address. Cardholders access digital resources via Libby, Kanopy (free films), LinkedIn Learning, and more.",
+    image: "https://images.unsplash.com/photo-1568667256549-094345857637?w=400&h=250&fit=crop"
+  },
+  {
+    id: 502,
+    name: "Santa Clara City Library",
+    location: "Santa Clara, CA",
+    region: "Santa Clara County",
+    lat: 37.3535,
+    lng: -121.9552,
+    category: "library",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.5,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: "Free",
+    petNotes: "No pets inside.",
+    kidNotes: "Dedicated children's wing with story time and STEM programming.",
+    description: "A modern, community-focused library in the heart of Silicon Valley. The Central Park Branch is spacious with excellent digital resources, a popular maker space, and strong STEM programming for all ages.",
+    highlights: ["Makerspace with 3D printers", "STEM and coding workshops", "Seed library", "Free Kanopy film streaming", "Central Park location"],
+    bestSeason: "Year-round",
+    parkingInfo: "Free parking lot adjacent to the library.",
+    sourceUrl: "https://www.sclibrary.org",
+    libraryCardProgram: "Santa Clara City Library Card — free for Santa Clara residents. Access includes Libby e-books, Kanopy streaming (8 films/month free), Hoopla digital media, and online databases.",
+    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop"
+  },
+  {
+    id: 503,
+    name: "San Francisco Public Library — Main Branch",
+    location: "San Francisco, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.7790,
+    lng: -122.4155,
+    category: "library",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.7,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: "Free",
+    petNotes: "No pets inside.",
+    kidNotes: "Acclaimed Children's Center with story time, puppets, and youth programming throughout the year.",
+    description: "San Francisco's magnificent Civic Center main library — a landmark building housing 4 million items across 6 floors. Features the James C. Hormel LGBTQIA Center, a rooftop terrace with views, and a world-class art collection.",
+    highlights: ["Hormel LGBTQIA Center", "Rooftop terrace with Civic Center views", "Graphic Novel collection", "San Francisco History Center", "Free museum passes program"],
+    bestSeason: "Year-round",
+    parkingInfo: "Civic Center BART/Muni. Minimal street parking; Civic Center Garage nearby.",
+    sourceUrl: "https://sfpl.org",
+    libraryCardProgram: "San Francisco Public Library Card — free for San Francisco residents. Includes free Kanopy (10 films/month), Libby e-books, free museum passes to 30+ Bay Area museums, LinkedIn Learning, and more.",
+    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=250&fit=crop"
+  },
+
+  // === Villa Sports (Issue #16) ===
+  {
+    id: 601,
+    name: "Villa Sports — San Jose",
+    location: "San Jose, CA",
+    region: "Santa Clara County",
+    lat: 37.2694,
+    lng: -121.8863,
+    category: "sports",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.5,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: "Membership required",
+    petNotes: "No pets on premises.",
+    kidNotes: "Excellent family programming, youth swim lessons, junior tennis, and a children's activity center.",
+    description: "A premier luxury athletic club in South San Jose. Villa Sports features resort-style pools, tennis and pickleball courts, full fitness facilities, spa services, and extensive family programming.",
+    highlights: ["Resort-style outdoor pools", "Tennis and pickleball courts", "Full-service spa and salon", "Group fitness classes", "Kids' activity center", "Yoga and Pilates studios"],
+    bestSeason: "Year-round (outdoor pools great in summer)",
+    parkingInfo: "Large free parking lot on site.",
+    sourceUrl: "https://www.villasports.com/san-jose",
+    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=250&fit=crop"
+  },
+  {
+    id: 603,
+    name: "Villa Sports — Pleasanton",
+    location: "Pleasanton, CA",
+    region: "San Francisco Bay Area",
+    lat: 37.6624,
+    lng: -121.8747,
+    category: "sports",
+    difficulty: null,
+    distance: null,
+    elevationGain: null,
+    estimatedHikingTime: null,
+    rating: 4.4,
+    petFriendly: false,
+    kidFriendly: true,
+    libraryParkPass: false,
+    entranceFee: "Membership required",
+    petNotes: "No pets on premises.",
+    kidNotes: "Kids' Club drop-in childcare, youth fitness programs, and family swim times.",
+    description: "A beautifully appointed athletic club in the Tri-Valley area with state-of-the-art fitness equipment, aquatics, racquet sports, and a popular group fitness program. Known for its welcoming community atmosphere.",
+    highlights: ["Olympic-size lap pool", "Group fitness classes", "Personal training", "Tennis and pickleball courts", "Steam room and sauna", "On-site café"],
+    bestSeason: "Year-round",
+    parkingInfo: "Free parking on site. BART Pleasanton station nearby.",
+    sourceUrl: "https://www.villasports.com/pleasanton",
+    image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=250&fit=crop"
   },
 ]
 
