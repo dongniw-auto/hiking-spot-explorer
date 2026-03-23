@@ -12,6 +12,50 @@
 import { useState, useEffect, useCallback } from "react";
 
 // ─────────────────────────────────────────────
+// TRAVEL TIME HELPERS
+// ─────────────────────────────────────────────
+
+const SF_CENTER = { lat: 37.7749, lng: -122.4194 };
+
+// Default on-site durations (minutes) for non-trail categories
+const CATEGORY_DURATION = { cafe: 30, library: 30, sports: 60 };
+
+function haversineDistanceMiles(lat1, lng1, lat2, lng2) {
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const R = 3959;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+/** Round-trip driving time in minutes (straight-line * road factor * 2 min/mile * 2 trips) */
+function travelRoundTrip(userLat, userLng, spot) {
+  const straightMiles = haversineDistanceMiles(userLat, userLng, spot.lat, spot.lng);
+  const roadMiles = straightMiles * 1.3;
+  return Math.round(roadMiles * 2) * 2;
+}
+
+/**
+ * Activity duration in minutes.
+ * Reads estimatedDuration (sample spots) or estimatedHikingTime (real spots),
+ * with per-category fallbacks.
+ */
+function activityDuration(spot) {
+  if (spot.estimatedDuration != null) return spot.estimatedDuration;
+  if (spot.estimatedHikingTime != null) return spot.estimatedHikingTime;
+  return CATEGORY_DURATION[spot.category] ?? 60;
+}
+
+function formatDuration(minutes) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return h > 0 ? (m > 0 ? `${h}h ${m}m` : `${h}h`) : `${m}m`;
+}
+
+// ─────────────────────────────────────────────
 // SCORING ENGINE
 // ─────────────────────────────────────────────
 
@@ -56,14 +100,11 @@ export function scoreSpot(spot, { availableMinutes, mood, season, timeOfDay }) {
   let score = 0;
 
   // 1. TIME FIT (0–35 pts) — most important signal
-  const duration = spot.estimatedDuration ?? 60;
-  if (duration <= availableMinutes) {
-    // fits comfortably — score by how well it uses the time
-    const fit = 1 - Math.abs(duration - availableMinutes * 0.75) / availableMinutes;
-    score += Math.round(fit * 35);
-  } else {
-    score -= 20; // over time budget — strong penalty
-  }
+  // Spots that exceed available time are pre-filtered in getSuggestions.
+  // Here we reward spots whose activity duration best uses the available window.
+  const duration = activityDuration(spot);
+  const fit = 1 - Math.abs(duration - availableMinutes * 0.75) / availableMinutes;
+  score += Math.round(Math.max(0, fit) * 35);
 
   // 2. RECENCY (0–25 pts) — longer unvisited = higher score
   const days = daysSince(spot.lastVisited);
@@ -95,10 +136,18 @@ export function scoreSpot(spot, { availableMinutes, mood, season, timeOfDay }) {
 }
 
 /**
- * getSuggestions — returns spots ranked by score, best first
+ * getSuggestions — returns spots ranked by score, best first.
+ * Hard-filters spots where travel_time_round_trip + activity_duration > availableMinutes.
  */
 export function getSuggestions(spots, context) {
+  const { availableMinutes, userLocation } = context;
   return [...spots]
+    .filter(spot => {
+      const travel = userLocation && spot.lat != null
+        ? travelRoundTrip(userLocation.lat, userLocation.lng, spot)
+        : 0;
+      return activityDuration(spot) + travel <= availableMinutes;
+    })
     .map(spot => ({ spot, score: scoreSpot(spot, context) }))
     .sort((a, b) => b.score - a.score)
     .map(({ spot }) => spot);
@@ -363,7 +412,7 @@ function CollectStardustModal({ spot, onSave, onClose }) {
 // TODAY CARD — MAIN COMPONENT
 // ─────────────────────────────────────────────
 
-export default function TodayCard({ spots = SAMPLE_SPOTS, savedMemories = {}, onSaveMemory }) {
+export default function TodayCard({ spots = SAMPLE_SPOTS, savedMemories = {}, onSaveMemory, user, hasConfig, onLogin }) {
   const [step, setStep] = useState("setup"); // setup | card | going | collect | done
   const [availableMinutes, setAvailableMinutes] = useState(120);
   const [mood, setMood] = useState("open");
@@ -376,6 +425,7 @@ export default function TodayCard({ spots = SAMPLE_SPOTS, savedMemories = {}, on
   );
   const [showMemories, setShowMemories] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const [userLocation, setUserLocation] = useState(SF_CENTER);
 
   // Sync memories when savedMemories prop changes (e.g. Firestore load)
   useEffect(() => {
@@ -385,12 +435,22 @@ export default function TodayCard({ spots = SAMPLE_SPOTS, savedMemories = {}, on
     }
   }, [savedMemories]);
 
+  // Resolve user location for travel-time filtering; fall back to SF center
+  useEffect(() => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      () => {},
+      { timeout: 5000 }
+    );
+  }, []);
+
   const season = getCurrentSeason();
   const timeOfDay = getCurrentTimeOfDay();
   const spot = suggestions[currentIndex] ?? null;
 
   function buildSuggestions() {
-    const ranked = getSuggestions(spots, { availableMinutes, mood, season, timeOfDay });
+    const ranked = getSuggestions(spots, { availableMinutes, mood, season, timeOfDay, userLocation });
     setSuggestions(ranked);
     setCurrentIndex(0);
     setRejections(0);
@@ -474,6 +534,12 @@ export default function TodayCard({ spots = SAMPLE_SPOTS, savedMemories = {}, on
             Show me somewhere →
           </button>
 
+          {hasConfig && !user && onLogin && (
+            <button style={styles.btnGhost} onClick={onLogin}>
+              Sign in to save memories
+            </button>
+          )}
+
           {memories.length > 0 && (
             <button style={styles.btnGhost} onClick={() => setShowMemories(v => !v)}>
               ✦ {memories.length} stardust collected
@@ -530,7 +596,12 @@ export default function TodayCard({ spots = SAMPLE_SPOTS, savedMemories = {}, on
             <p style={styles.spotDesc}>{spot.description}</p>
 
             <div style={styles.spotMeta}>
-              <span style={styles.metaTag}>~{spot.estimatedDuration} min</span>
+              {spot.lat != null && (
+                <span style={styles.metaTag}>
+                  {formatDuration(Math.round(travelRoundTrip(userLocation.lat, userLocation.lng, spot) / 2))} drive
+                </span>
+              )}
+              <span style={styles.metaTag}>{formatDuration(activityDuration(spot))} on site</span>
               {spot.shaded && <span style={styles.metaTag}>🌲 shaded</span>}
               {spot.petFriendly && <span style={styles.metaTag}>🐾 pet friendly</span>}
               {spot.kidFriendly && <span style={styles.metaTag}>👶 kid friendly</span>}

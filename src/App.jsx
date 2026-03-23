@@ -131,7 +131,14 @@ function App() {
 
       {activeTab === 'today' && (
         <main className="page">
-          <TodayCard spots={spots} savedMemories={memories} onSaveMemory={saveMemory} />
+          <TodayCard
+            spots={spots}
+            savedMemories={memories}
+            onSaveMemory={saveMemory}
+            user={user}
+            hasConfig={hasConfig}
+            onLogin={login}
+          />
         </main>
       )}
 
