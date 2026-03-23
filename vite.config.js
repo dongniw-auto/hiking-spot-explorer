@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/stardust/',
+  test: {
+    environment: 'node',
+  },
   build: {
     outDir: 'docs',
     rollupOptions: {

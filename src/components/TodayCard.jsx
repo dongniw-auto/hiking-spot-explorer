@@ -43,7 +43,7 @@ function travelRoundTrip(userLat, userLng, spot) {
  * Reads estimatedDuration (sample spots) or estimatedHikingTime (real spots),
  * with per-category fallbacks.
  */
-function activityDuration(spot) {
+export function activityDuration(spot) {
   if (spot.estimatedDuration != null) return spot.estimatedDuration;
   if (spot.estimatedHikingTime != null) return spot.estimatedHikingTime;
   return CATEGORY_DURATION[spot.category] ?? 60;
