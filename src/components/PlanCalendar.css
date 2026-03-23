@@ -503,3 +503,51 @@
 .gcal-body-day {
   grid-template-columns: 48px 1fr;
 }
+
+/* Stardust memory blocks (time-positioned) */
+.cal-memory-block {
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  background: rgba(212, 135, 46, 0.14);
+  border-left: 3px solid var(--orange);
+  border-radius: 4px;
+  color: var(--orange);
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 3;
+  transition: background 0.15s;
+}
+
+.cal-memory-block:hover {
+  background: rgba(212, 135, 46, 0.22);
+}
+
+.cal-memory-block-icon {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.cal-memory-block-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 1px;
+}
+
+.cal-memory-block-name {
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cal-memory-block-time {
+  font-size: 9px;
+  opacity: 0.7;
+}

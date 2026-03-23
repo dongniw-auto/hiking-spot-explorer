@@ -26,6 +26,7 @@ function safeUpdate(ref, data) {
 export default function useFirestore(user) {
   const [starred, setStarred] = useState(() => loadLocal('starredSpots', []))
   const [savedPlans, setSavedPlans] = useState(() => loadLocal('savedPlans', {}))
+  const [memories, setMemories] = useState(() => loadLocal('stardustMemories', {}))
   const [familyGroup, setFamilyGroup] = useState(null)
   const [familyPlans, setFamilyPlans] = useState({})
   const [familyMembers, setFamilyMembers] = useState([])
@@ -42,6 +43,7 @@ export default function useFirestore(user) {
     const userDoc = doc(db, 'users', user.uid)
     const localPlans = loadLocal('savedPlans', {})
     const localStarred = loadLocal('starredSpots', [])
+    const localMemories = loadLocal('stardustMemories', {})
 
     return onSnapshot(userDoc, (snap) => {
       if (snap.exists()) {
@@ -68,6 +70,19 @@ export default function useFirestore(user) {
           updateDoc(userDoc, { plans: localPlans }).catch(() => {})
         }
 
+        // Memories: Firestore wins if non-empty, else push local
+        const firestoreMemories = data.memories || {}
+        const hasFirestoreMemories = Object.keys(firestoreMemories).length > 0
+        const hasLocalMemories = Object.keys(localMemories).length > 0
+
+        if (hasFirestoreMemories) {
+          setMemories(firestoreMemories)
+          saveLocal('stardustMemories', firestoreMemories)
+        } else if (hasLocalMemories) {
+          setMemories(localMemories)
+          updateDoc(userDoc, { memories: localMemories }).catch(() => {})
+        }
+
         if (data.familyGroupId) {
           setFamilyGroup(data.familyGroupId)
         } else {
@@ -81,6 +96,7 @@ export default function useFirestore(user) {
           photoURL: user.photoURL,
           starred: localStarred,
           plans: localPlans,
+          memories: localMemories,
           familyGroupId: null,
         })
       }
@@ -172,6 +188,23 @@ export default function useFirestore(user) {
     })
   }, [isOnline, user?.uid])
 
+  const saveMemory = useCallback((memory) => {
+    setMemories((prev) => {
+      const next = { ...prev, [memory.id]: memory }
+      saveLocal('stardustMemories', next)
+      if (isOnline) {
+        const userRef = doc(db, 'users', user.uid)
+        updateDoc(userRef, { [`memories.${memory.id}`]: memory }).catch((err) => {
+          console.warn('updateDoc failed, trying setDoc merge:', err.code)
+          return setDoc(userRef, { memories: { [memory.id]: memory } }, { merge: true })
+        }).catch((err) => {
+          console.error('Save memory failed:', err)
+        })
+      }
+      return next
+    })
+  }, [isOnline, user?.uid])
+
   // Family group management
   const createFamilyGroup = useCallback(async () => {
     if (!isOnline) return null
@@ -221,6 +254,8 @@ export default function useFirestore(user) {
     toggleStar,
     savePlan,
     deletePlan,
+    memories,
+    saveMemory,
     familyGroup,
     familyPlans,
     familyMembers,

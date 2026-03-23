@@ -144,8 +144,8 @@ src/
     MapView.jsx/css         # Leaflet map (secondary — not the default view)
     SpotList.jsx/css        # Browse view (fallback from TodayCard)
     SearchBar.jsx/css       # Filters (only visible in browse mode)
-    SavedPlans.jsx/css      # Plans tab with calendar
-    PlanCalendar.jsx/css    # Calendar + Google Calendar sync
+    SavedPlans.jsx/css      # Stardust tab — plans + memories, calendar + list, edit modal
+    PlanCalendar.jsx/css    # Calendar with Google Calendar sync + memory blocks
     AuthButton.jsx/css      # Sign in/out + avatar
     FamilyGroup.jsx/css     # Family group management
 public/
@@ -179,15 +179,15 @@ There are no streaks, no badges, no points. Just a quietly growing collection of
 
 ### Now — the soul
 - [x] Spot data with `estimatedDuration`, `shaded`, `vibes`, `bestSeasons`
-- [ ] `TodayCard.jsx` — the "just go" screen with scoring engine
+- [x] `TodayCard.jsx` — the "just go" screen with scoring engine
 - [ ] `lastVisited` + `visitCount` logged to Firestore on "Let's go" tap
-- [ ] `CollectStardust` modal — note, withWho, mood, taste card
-- [ ] Stardust memory collection in Firestore
+- [x] `CollectStardust` modal — note, withWho, mood, taste card
+- [x] Stardust memory collection in Firestore (with start/end time, editable)
+- [x] Stardust tab — calendar + list view showing both plans (future) and memories (past)
 
 ### Next — depth
 - [ ] `useSuggestion.js` — extracted scoring hook with calendar-aware time detection
 - [ ] Taste card display in spot detail view
-- [ ] Memory timeline — your atlas over time
 - [ ] Mode switching (solo / family / body)
 
 ### Later — family

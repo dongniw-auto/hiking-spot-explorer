@@ -16,6 +16,7 @@ function App() {
   const { spots, loading: spotsLoading, error: spotsError } = useSpots(user)
   const {
     starred, savedPlans, toggleStar, savePlan, deletePlan,
+    memories, saveMemory,
     familyGroup, familyPlans, familyMembers,
     createFamilyGroup, joinFamilyGroup, leaveFamilyGroup,
   } = useFirestore(user)
@@ -25,7 +26,6 @@ function App() {
   const [planningSpot, setPlanningSpot] = useState(null)
   const [mapCenter, setMapCenter] = useState([37.7749, -122.4194])
   const [activeTab, setActiveTab] = useState('today')
-  const [memories, setMemories] = useState([])
   const [filters, setFilters] = useState({
     petFriendly: false,
     kidFriendly: false,
@@ -107,11 +107,9 @@ function App() {
     setFilteredSpots(applyFilters(spots, newFilters))
   }
 
-  const handleMemoryAdd = useCallback((memory) => {
-    setMemories(prev => [memory, ...prev])
-  }, [])
-
   const planCount = Object.keys(mergedPlans).length
+  const memoryCount = Object.keys(memories).length
+  const stardustCount = planCount + memoryCount
 
   return (
     <div className="app">
@@ -133,7 +131,7 @@ function App() {
 
       {activeTab === 'today' && (
         <main className="page">
-          <TodayCard spots={spots} memories={memories} onMemoryAdd={handleMemoryAdd} />
+          <TodayCard spots={spots} savedMemories={memories} onSaveMemory={saveMemory} />
         </main>
       )}
 
@@ -176,12 +174,13 @@ function App() {
         </main>
       )}
 
-      {activeTab === 'plans' && (
+      {activeTab === 'stardust' && (
         <main className="page">
           <SavedPlans
             plans={mergedPlans}
             spots={spots}
             memories={memories}
+            onSaveMemory={saveMemory}
             onDeletePlan={deletePlan}
             onOpenPlan={(spot) => { setPlanningSpot(spot) }}
             googleAccessToken={googleAccessToken}
@@ -228,17 +227,14 @@ function App() {
           <span>Explore</span>
         </button>
         <button
-          className={`tab-item ${activeTab === 'plans' ? 'active' : ''}`}
-          onClick={() => setActiveTab('plans')}
+          className={`tab-item ${activeTab === 'stardust' ? 'active' : ''}`}
+          onClick={() => setActiveTab('stardust')}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="tab-icon">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
           </svg>
           <span>Stardust</span>
-          {(planCount > 0 || memories.length > 0) && <span className="tab-badge">{planCount + memories.length}</span>}
+          {stardustCount > 0 && <span className="tab-badge">{stardustCount}</span>}
         </button>
       </nav>
     </div>

@@ -130,11 +130,14 @@ export function getSuggestions(spots, context) {
  */
 
 export function createStardust({ spotId, spotName, note, withWho = ["solo"], mood = "", tasteCard = null }) {
+  const now = new Date();
+  const end = new Date(now.getTime() + 60 * 60 * 1000); // default 1hr duration
   return {
     id: `sd_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
     spotId,
     spotName,
-    date: new Date().toISOString(),
+    date: now.toISOString(),
+    endDate: end.toISOString(),
     note,
     withWho,
     mood,
@@ -360,7 +363,7 @@ function CollectStardustModal({ spot, onSave, onClose }) {
 // TODAY CARD — MAIN COMPONENT
 // ─────────────────────────────────────────────
 
-export default function TodayCard({ spots = SAMPLE_SPOTS, memories = [], onMemoryAdd }) {
+export default function TodayCard({ spots = SAMPLE_SPOTS, savedMemories = {}, onSaveMemory }) {
   const [step, setStep] = useState("setup"); // setup | card | going | collect | done
   const [availableMinutes, setAvailableMinutes] = useState(120);
   const [mood, setMood] = useState("open");
@@ -368,8 +371,19 @@ export default function TodayCard({ spots = SAMPLE_SPOTS, memories = [], onMemor
   const [currentIndex, setCurrentIndex] = useState(0);
   const [rejections, setRejections] = useState(0);
   const [collecting, setCollecting] = useState(false);
+  const [memories, setMemories] = useState(() =>
+    Object.values(savedMemories).sort((a, b) => b.date.localeCompare(a.date))
+  );
   const [showMemories, setShowMemories] = useState(false);
   const [animating, setAnimating] = useState(false);
+
+  // Sync memories when savedMemories prop changes (e.g. Firestore load)
+  useEffect(() => {
+    const vals = Object.values(savedMemories);
+    if (vals.length > 0) {
+      setMemories(vals.sort((a, b) => b.date.localeCompare(a.date)));
+    }
+  }, [savedMemories]);
 
   const season = getCurrentSeason();
   const timeOfDay = getCurrentTimeOfDay();
@@ -402,7 +416,8 @@ export default function TodayCard({ spots = SAMPLE_SPOTS, memories = [], onMemor
   }
 
   function handleCollect(memory) {
-    if (onMemoryAdd) onMemoryAdd(memory);
+    setMemories(prev => [memory, ...prev]);
+    if (onSaveMemory) onSaveMemory(memory);
     setCollecting(false);
     setStep("done");
   }

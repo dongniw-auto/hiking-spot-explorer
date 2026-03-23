@@ -108,7 +108,16 @@ function parseGCalEvent(ev) {
 }
 
 // Renders the content of a single day column: hour grid lines, now indicator, GCal events, and hiking plans
-function DayColumnContent({ hours, gcalEvents, plans, showNowLine, nowTop, googleAccessToken, syncingId, syncedIds, onOpenPlan, syncToGCal }) {
+function formatMemoryTime(isoDate) {
+  const d = new Date(isoDate)
+  const h = d.getHours()
+  const m = d.getMinutes()
+  const ampm = h >= 12 ? 'PM' : 'AM'
+  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h
+  return `${h12}:${String(m).padStart(2, '0')} ${ampm}`
+}
+
+function DayColumnContent({ hours, gcalEvents, plans, memories = [], showNowLine, nowTop, googleAccessToken, syncingId, syncedIds, onOpenPlan, onEditMemory, syncToGCal }) {
   return (
     <>
       {hours.map((h) => (
@@ -133,6 +142,33 @@ function DayColumnContent({ hours, gcalEvents, plans, showNowLine, nowTop, googl
             {gev.location && height > 30 && (
               <div className="gcal-event-location">{gev.location}</div>
             )}
+          </div>
+        )
+      })}
+
+      {/* Stardust memories (positioned at collection time) */}
+      {memories.map((m) => {
+        const start = new Date(m.date)
+        const end = m.endDate ? new Date(m.endDate) : new Date(start.getTime() + 60 * 60 * 1000)
+        const startHour = start.getHours()
+        const startMin = start.getMinutes()
+        const durationMin = (end - start) / 60000
+        const top = ((startHour - START_HOUR) + startMin / 60) * HOUR_HEIGHT
+        const height = Math.max((durationMin / 60) * HOUR_HEIGHT, 24)
+        if (top < 0) return null
+        return (
+          <div
+            key={m.id}
+            className="cal-memory-block"
+            style={{ top: `${top}px`, height: `${height}px` }}
+            title={m.note || m.spotName}
+            onClick={() => onEditMemory && onEditMemory(m)}
+          >
+            <span className="cal-memory-block-icon">{'\u2726'}</span>
+            <div className="cal-memory-block-info">
+              <span className="cal-memory-block-name">{m.spotName}</span>
+              <span className="cal-memory-block-time">{formatMemoryTime(m.date)} – {formatMemoryTime(end.toISOString())}</span>
+            </div>
           </div>
         )
       })}
@@ -195,7 +231,7 @@ function DayColumnContent({ hours, gcalEvents, plans, showNowLine, nowTop, googl
   )
 }
 
-export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, onRefreshGoogleToken }) {
+export default function PlanCalendar({ entries, memories = [], onOpenPlan, onEditMemory, googleAccessToken, onRefreshGoogleToken }) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const [weekStart, setWeekStart] = useState(() => getWeekStart(today))
@@ -241,6 +277,18 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
     return map
   }, [entries])
 
+  const memoriesByDate = useMemo(() => {
+    const map = {}
+    memories.forEach((m) => {
+      const dateStr = m.date ? m.date.split('T')[0] : null
+      if (dateStr) {
+        if (!map[dateStr]) map[dateStr] = []
+        map[dateStr].push(m)
+      }
+    })
+    return map
+  }, [memories])
+
   const weekDays = useMemo(() => {
     const days = []
     for (let i = 0; i < 7; i++) {
@@ -253,10 +301,11 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
         dayName: DAYS[d.getDay()],
         plans: plansByDate[dateStr] || [],
         gcalEvents: gcalByDate[dateStr] || [],
+        memories: memoriesByDate[dateStr] || [],
       })
     }
     return days
-  }, [weekStart, plansByDate, gcalByDate])
+  }, [weekStart, plansByDate, gcalByDate, memoriesByDate])
 
   const stripDays = useMemo(() => {
     const days = []
@@ -352,6 +401,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
   const selectedDateStr = dateToStr(selectedDay)
   const selectedDayPlans = plansByDate[selectedDateStr] || []
   const selectedDayGcal = gcalByDate[selectedDateStr] || []
+  const selectedDayMemories = memoriesByDate[selectedDateStr] || []
   const showNowLineDay = selectedDateStr === todayStr && nowMinutes >= START_HOUR * 60 && nowMinutes <= END_HOUR * 60
 
   // Sync a hiking plan to Google Calendar
@@ -492,12 +542,14 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
                     hours={hours}
                     gcalEvents={day.gcalEvents}
                     plans={day.plans}
+                    memories={day.memories}
                     showNowLine={showNowLine}
                     nowTop={nowTop}
                     googleAccessToken={googleAccessToken}
                     syncingId={syncingId}
                     syncedIds={syncedIds}
                     onOpenPlan={onOpenPlan}
+                    onEditMemory={onEditMemory}
                     syncToGCal={syncToGCal}
                   />
                 </div>
@@ -530,6 +582,7 @@ export default function PlanCalendar({ entries, onOpenPlan, googleAccessToken, o
                 hours={hours}
                 gcalEvents={selectedDayGcal}
                 plans={selectedDayPlans}
+                memories={selectedDayMemories}
                 showNowLine={showNowLineDay}
                 nowTop={nowTop}
                 googleAccessToken={googleAccessToken}

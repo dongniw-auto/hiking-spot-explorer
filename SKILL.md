@@ -61,8 +61,8 @@ src/
     ├── SpotList.jsx/css          # Browse view (fallback from TodayCard)
     ├── SearchBar.jsx/css         # Search + chip filters (browse mode only)
     ├── VisitPlanner.jsx/css      # Plan a visit modal
-    ├── SavedPlans.jsx/css        # Plans tab: calendar + list
-    ├── PlanCalendar.jsx/css      # Calendar with Google Calendar sync
+    ├── SavedPlans.jsx/css        # Stardust tab: plans + memories, calendar + list, edit modal
+    ├── PlanCalendar.jsx/css      # Calendar with Google Calendar sync + memory blocks
     ├── AuthButton.jsx/css        # Sign in/out + avatar
     └── FamilyGroup.jsx/css       # Family group management
 
@@ -120,7 +120,8 @@ A Stardust is a tiny personal memory attached to a place. Not a review. A feelin
   id: string,           // 'sd_<timestamp>_<random>'
   spotId: string,
   spotName: string,
-  date: ISO string,
+  date: ISO string,     // start time of the visit
+  endDate: ISO string,  // end time (defaults to start + 1hr)
   note: string,         // "found a snail, named it Gerald"
   withWho: string[],    // ['solo'] | ['spouse'] | ['kid','spouse'] etc.
   mood: string,         // how you felt leaving: 'restored','peaceful','energized','grateful','present'
@@ -133,7 +134,8 @@ A Stardust is a tiny personal memory attached to a place. Not a review. A feelin
 }
 ```
 
-Stored in Firestore: `users/{uid}/memories/{memoryId}`
+Stored in Firestore: `users/{uid}` doc under `memories` object (keyed by memory ID).
+Memories are editable after collection — tap to edit note, date, start/end time, withWho, and mood.
 
 ### Taste Card
 
@@ -239,14 +241,14 @@ The main screen. Three sub-screens:
 
 - All top-level state in `App.jsx`: `filteredSpots`, `selectedSpot`, `planningSpot`, `mapCenter`, `activeTab`, `filters`, `mode`
 - Filter shape: `{ petFriendly, kidFriendly, libraryParkPass, starredOnly, difficulty, category }`
-- Tabs: `today` (default — TodayCard), `explore` (map + list), `plans`, `atlas` (memories)
+- Tabs: `today` (default — TodayCard), `explore` (map + list), `stardust` (plans + memories calendar/list)
 - Mode: `solo | family | body`
 
 ### Data Flow
 
 - Spots loaded via `useSpots` — seeds Firestore from `SAMPLE_SPOTS` on first authenticated load
 - Falls back to localStorage when offline/unauthenticated
-- User data (starred, plans, memories, bounties) in Firestore via `useFirestore`
+- User data (starred, plans, memories, bounties) in Firestore via `useFirestore` — memories stored as object keyed by ID on user doc, with localStorage fallback
 - `lastVisited` and `visitCount` written to Firestore when user taps "Let's go" on TodayCard
 
 ### CSS Design System
@@ -464,12 +466,11 @@ When helping build new features, respect this priority order:
 - TodayCard as the default tab — one suggestion, just go
 - `lastVisited` + `visitCount` logged to Firestore on "Let's go"
 - CollectStardust modal — note, withWho, mood, taste card
-- Memories stored in Firestore
+- ~~Memories stored in Firestore~~ DONE — persisted to Firestore with start/end time, editable via Stardust tab
 
 **Next (depth):**
 - `useSuggestion.js` extracted scoring hook with calendar-aware time detection
 - Taste card display in spot detail
-- Memory timeline / atlas view
 - Mode switching (solo / family / body)
 
 **Later (family):**

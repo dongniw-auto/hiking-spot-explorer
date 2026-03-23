@@ -191,64 +191,235 @@
   color: var(--red);
 }
 
-/* Memories section */
-.memories-section {
-  margin-top: 32px;
-  border-top: 1px solid var(--border);
-  padding-top: 24px;
+/* Future plans: lighter, transient styling */
+.plan-card-future {
+  border-left: 3px solid var(--accent-light);
+  opacity: 0.85;
 }
 
-.memories-section-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 0 0 4px;
-  color: var(--accent);
-}
-
-.memories-section-count {
-  font-size: 13px;
+/* Section titles for list view */
+.list-section-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
   color: var(--text-secondary);
-  margin: 0 0 16px;
+  margin: 20px 0 8px;
+  padding: 0 2px;
 }
 
-.memories-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.list-section-title:first-child {
+  margin-top: 0;
 }
 
+/* Memory cards — warm, solid, grounded */
 .memory-card {
   background: var(--card-bg);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: 14px 16px;
   box-shadow: var(--shadow);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-left: 3px solid var(--orange);
+}
+
+.memory-card + .memory-card {
+  margin-top: 8px;
+}
+
+.memory-card-icon {
+  font-size: 18px;
+  color: var(--orange);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.memory-card-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .memory-card-name {
-  margin: 0 0 4px;
+  font-family: Georgia, 'Times New Roman', serif;
   font-size: 15px;
   font-weight: 600;
+  color: var(--text-h);
+  margin: 0 0 4px;
 }
 
 .memory-card-note {
   font-size: 13px;
-  color: var(--text-secondary);
-  font-style: italic;
+  color: var(--text);
   margin: 0 0 8px;
-  line-height: 1.5;
-}
-
-.memory-card-taste {
-  font-size: 12px;
-  color: var(--accent);
-  font-weight: 500;
-  margin: 0 0 4px;
+  line-height: 1.4;
+  font-style: italic;
 }
 
 .memory-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.memory-chip {
   font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(60, 40, 20, 0.06);
   color: var(--text-secondary);
-  letter-spacing: 0.03em;
-  margin: 0;
-  opacity: 0.7;
+}
+
+.memory-chip.date-chip {
+  background: rgba(212, 135, 46, 0.12);
+  color: var(--orange);
+}
+
+.memory-chip.mood-chip {
+  background: rgba(212, 135, 46, 0.15);
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.memory-taste-card {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.memory-taste-drink {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.memory-taste-flavors {
+  color: var(--text-secondary);
+}
+
+/* Edit memory modal */
+.memory-edit-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 13, 11, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.memory-edit-modal {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: var(--shadow-lg);
+}
+
+.memory-edit-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--orange);
+  margin: 0 0 20px;
+}
+
+.memory-edit-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.memory-edit-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.memory-edit-input {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text-h);
+  outline: none;
+}
+
+.memory-edit-input:focus {
+  border-color: var(--orange);
+}
+
+.memory-edit-textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-style: italic;
+}
+
+.memory-edit-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.memory-edit-chip {
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.memory-edit-chip.active {
+  background: rgba(212, 135, 46, 0.15);
+  border-color: var(--orange);
+  color: var(--orange);
+  font-weight: 500;
+}
+
+.memory-edit-time-row {
+  display: flex;
+  gap: 12px;
+}
+
+.memory-edit-time-row .memory-edit-label {
+  flex: 1;
+}
+
+.memory-edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.memory-edit-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.memory-edit-btn.cancel {
+  background: var(--bg);
+  color: var(--text-secondary);
+}
+
+.memory-edit-btn.save {
+  background: var(--orange);
+  color: white;
 }
