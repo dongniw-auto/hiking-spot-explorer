@@ -400,8 +400,8 @@ function CollectStardustModal({ spot, onSave, onClose }) {
         </div>
 
         <div style={styles.modalActions}>
-          <button style={{ ...styles.btnGhost, width: "auto", flex: 1 }} onClick={onClose}>Skip for now</button>
-          <button style={styles.btnPrimary} onClick={handleSave}>✦ Save memory</button>
+          <button style={{ ...styles.btnGhost, width: "auto", flex: 1 }} onClick={onClose}>Skip</button>
+          <button style={styles.btnPrimary} onClick={handleSave}>✦ Save</button>
         </div>
       </div>
     </div>
