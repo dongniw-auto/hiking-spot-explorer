@@ -400,8 +400,8 @@ function CollectStardustModal({ spot, onSave, onClose }) {
         </div>
 
         <div style={styles.modalActions}>
-          <button style={{ ...styles.btnGhost, width: "auto", flex: 1 }} onClick={onClose}>Skip for now</button>
-          <button style={styles.btnPrimary} onClick={handleSave}>✦ Save memory</button>
+          <button style={{ ...styles.btnGhost, flex: 1 }} onClick={onClose}>Skip</button>
+          <button style={{ ...styles.btnPrimary, flex: 1 }} onClick={handleSave}>✦ Save</button>
         </div>
       </div>
     </div>
@@ -1054,6 +1054,7 @@ const styles = {
     alignItems: "flex-end",
     justifyContent: "center",
     zIndex: 100,
+    paddingBottom: 62,
   },
   modalCard: {
     width: "100%",
@@ -1062,14 +1063,17 @@ const styles = {
     borderRadius: "20px 20px 0 0",
     border: `1px solid ${COLORS.border}`,
     borderBottom: "none",
-    padding: "24px 20px 40px",
-    maxHeight: "85vh",
-    overflowY: "auto",
+    padding: "24px 20px 24px",
+    maxHeight: "calc(100vh - 130px)",
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden",
     boxShadow: `0 -4px 24px ${COLORS.shadow}`,
   },
   modalHeader: {
     textAlign: "center",
     marginBottom: 24,
+    flexShrink: 0,
   },
   modalStar: {
     display: "block",
@@ -1092,12 +1096,16 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 16,
+    overflowY: "auto",
+    flex: 1,
+    minHeight: 0,
   },
   modalActions: {
     display: "flex",
     gap: 10,
     marginTop: 24,
     alignItems: "stretch",
+    flexShrink: 0,
   },
   fieldLabel: {
     fontSize: 11,
