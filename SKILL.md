@@ -417,6 +417,19 @@ When adding a new category, add a new SVG + `createIcon()` call and handle it in
 - **`fetchEvents` fetches full week window regardless of view** — day view filters client-side
 - **Mobile breakpoint is `≤ 767px`**
 
+### Bottom Sheet Modal Pattern (CollectStardust)
+
+The collect memory modal is a bottom sheet anchored via `modalOverlay` with `alignItems: flex-end`. Key rules:
+
+- **Modal must be flex column** — `display: flex`, `flexDirection: column`, `overflow: hidden` on `modalCard`
+- **Header and action buttons get `flexShrink: 0`** — they stay pinned, never scroll away
+- **Form body gets `overflowY: auto` + `flex: 1` + `minHeight: 0`** — only the body scrolls
+- **Overlay needs `paddingBottom: 62`** — clears the fixed tab bar (62px). Without this, buttons hide behind the nav
+- **Modal maxHeight uses `calc(100vh - 130px)`** — accounts for top gap + bottom nav
+- **Button labels must be compact** — use "Skip" / "Save", not "Skip for now" / "Save memory". Long labels wrap to 2 rows on small screens
+- **Both buttons get `flex: 1`** — equal width, balanced layout, always single row
+- **Always preview on iPhone SE (375×667)** — shortest common viewport, forces overflow to test scroll behavior
+
 ---
 
 ## UI Principles
