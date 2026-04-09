@@ -1,14 +1,13 @@
 export const SAMPLE_SPOTS = [
-  // === Existing Bay Area Spots ===
   {
     id: 1,
     name: "Muir Woods Trail",
     location: "Mill Valley, CA",
     region: "San Francisco Bay Area",
-    lat: 37.8970,
+    lat: 37.897,
     lng: -122.5811,
     difficulty: "easy",
-    distance: 2.0,
+    distance: 2,
     elevationGain: 200,
     estimatedHikingTime: 60,
     rating: 4.8,
@@ -24,7 +23,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Reservation required for parking. Shuttle available from Sausalito.",
     sourceUrl: "https://www.nps.gov/muwo/index.htm",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&h=500&fit=crop",
+    estimatedDuration: 60,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 2,
@@ -50,7 +54,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free parking at Lands End Lookout visitor center.",
     sourceUrl: "https://www.nps.gov/goga/planyourvisit/landsend.htm",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=500&fit=crop",
+    estimatedDuration: 90,
+    bestSeasons: ["spring", "fall"],
+    shaded: false,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 3,
@@ -76,7 +85,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Stanford Avenue staging area fills early on weekends. Arrive before 8am.",
     sourceUrl: "https://www.ebparks.org/parks/mission-peak",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&h=500&fit=crop",
+    estimatedDuration: 180,
+    bestSeasons: ["spring", "fall"],
+    shaded: false,
+    bestTimeOfDay: ["morning"],
+    vibes: ["quiet", "energized"]
   },
   {
     id: 4,
@@ -102,7 +116,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free parking at Tennessee Valley trailhead. Can fill up on weekends.",
     sourceUrl: "https://www.nps.gov/goga/planyourvisit/tennessee-valley.htm",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=500&fit=crop",
+    estimatedDuration: 75,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative", "family"]
   },
   {
     id: 5,
@@ -128,17 +147,22 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Start at Old Mill Park in Mill Valley. Shuttle back from Stinson Beach on weekends.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/dipsea-trail",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=500&fit=crop",
+    estimatedDuration: 240,
+    bestSeasons: ["spring", "summer"],
+    shaded: true,
+    bestTimeOfDay: ["morning"],
+    vibes: ["quiet", "energized"]
   },
   {
     id: 6,
     name: "Tilden Regional Park",
     location: "Berkeley, CA",
     region: "San Francisco Bay Area",
-    lat: 37.9050,
+    lat: 37.905,
     lng: -122.2436,
     difficulty: "easy",
-    distance: 3.0,
+    distance: 3,
     elevationGain: 350,
     estimatedHikingTime: 65,
     rating: 4.4,
@@ -154,10 +178,13 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Multiple free parking areas throughout the park.",
     sourceUrl: "https://www.ebparks.org/parks/tilden-regional",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=800&h=500&fit=crop",
+    estimatedDuration: 65,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative", "family"]
   },
-
-  // === Santa Clara County Parks (Library Park Pass Eligible) ===
   {
     id: 101,
     name: "Almaden Quicksilver - Senador Mine Trail",
@@ -182,7 +209,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Hacienda entrance or Mockingbird Hill entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/almaden-quicksilver-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 210,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 102,
@@ -190,7 +222,7 @@ export const SAMPLE_SPOTS = [
     location: "San Jose, CA",
     region: "Santa Clara County",
     lat: 37.1718,
-    lng: -121.7870,
+    lng: -121.787,
     difficulty: "moderate",
     distance: 5.5,
     elevationGain: 1300,
@@ -208,7 +240,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main entrance on McKean Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/calero-county-park--2",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=500&fit=crop",
+    estimatedDuration: 150,
+    bestSeasons: ["spring"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 103,
@@ -234,7 +271,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main lot on Mt. Hamilton Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/joseph-d-grant-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=800&h=500&fit=crop",
+    estimatedDuration: 210,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 104,
@@ -244,7 +286,7 @@ export const SAMPLE_SPOTS = [
     lat: 37.4627,
     lng: -121.8417,
     difficulty: "hard",
-    distance: 9.0,
+    distance: 9,
     elevationGain: 2500,
     estimatedHikingTime: 270,
     rating: 4.5,
@@ -260,17 +302,22 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Sandy Wool Lake lot or Downing Rd lot.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/ed-r-levin-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=500&fit=crop",
+    estimatedDuration: 270,
+    bestSeasons: ["spring", "fall"],
+    shaded: false,
+    bestTimeOfDay: ["morning"],
+    vibes: ["quiet", "energized"]
   },
   {
     id: 105,
     name: "Sanborn County Park - Indian Rock Loop",
     location: "Saratoga, CA",
     region: "Santa Clara County",
-    lat: 37.2560,
-    lng: -122.0640,
+    lat: 37.256,
+    lng: -122.064,
     difficulty: "moderate",
-    distance: 6.0,
+    distance: 6,
     elevationGain: 1200,
     estimatedHikingTime: 165,
     rating: 4.4,
@@ -286,7 +333,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main entrance on Sanborn Rd.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/sanborn-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1511497584788-876760111969?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1511497584788-876760111969?w=800&h=500&fit=crop",
+    estimatedDuration: 165,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 106,
@@ -312,15 +364,20 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Multiple lots near park entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/mount-madonna-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&h=500&fit=crop",
+    estimatedDuration: 135,
+    bestSeasons: ["spring", "summer", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative", "family"]
   },
   {
     id: 107,
     name: "Stevens Creek - Tony Look Trail",
     location: "Cupertino, CA",
     region: "Santa Clara County",
-    lat: 37.3100,
-    lng: -122.0780,
+    lat: 37.31,
+    lng: -122.078,
     difficulty: "easy",
     distance: 2.5,
     elevationGain: 164,
@@ -338,15 +395,20 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Stevens Canyon Rd entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/stevens-creek-county-park--2",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 108,
     name: "Vasona Lake - Los Gatos Creek Trail",
     location: "Los Gatos, CA",
     region: "Santa Clara County",
-    lat: 37.2350,
-    lng: -121.9680,
+    lat: 37.235,
+    lng: -121.968,
     difficulty: "easy",
     distance: 5.5,
     elevationGain: 108,
@@ -364,15 +426,20 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main lot on Garden Hill Dr.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/vasona-lake-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=800&h=500&fit=crop",
+    estimatedDuration: 90,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 109,
     name: "Hellyer County Park - Coyote Creek Trail",
     location: "San Jose, CA",
     region: "Santa Clara County",
-    lat: 37.2850,
-    lng: -121.8200,
+    lat: 37.285,
+    lng: -121.82,
     difficulty: "easy",
     distance: 5.9,
     elevationGain: 92,
@@ -390,15 +457,20 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Hellyer Ave entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/hellyer-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 80,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 110,
     name: "Lexington Reservoir - Limekiln Trail",
     location: "Los Gatos, CA",
     region: "Santa Clara County",
-    lat: 37.2000,
-    lng: -121.9870,
+    lat: 37.2,
+    lng: -121.987,
     difficulty: "moderate",
     distance: 4.8,
     elevationGain: 1190,
@@ -416,10 +488,13 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Alma Bridge Rd lot.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/lexington-reservoir-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&h=500&fit=crop",
+    estimatedDuration: 140,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
-
-  // === Additional Santa Clara County Parks (Library Park Pass Eligible) ===
   {
     id: 111,
     name: "Alviso Marina - Slough Trail",
@@ -444,7 +519,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Ample parking with ADA-accessible spots.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/alviso-slough-trail",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 165,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 112,
@@ -470,7 +550,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Live Oak entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/anderson-lake-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=500&fit=crop",
+    estimatedDuration: 40,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 113,
@@ -478,9 +563,9 @@ export const SAMPLE_SPOTS = [
     location: "Morgan Hill, CA",
     region: "Santa Clara County",
     lat: 37.1187,
-    lng: -121.6960,
+    lng: -121.696,
     difficulty: "easy",
-    distance: 2.0,
+    distance: 2,
     elevationGain: 100,
     estimatedHikingTime: 50,
     rating: 3.8,
@@ -496,7 +581,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Basic facilities with restrooms and picnic tables.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/chesbro-reservoir-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 114,
@@ -522,7 +612,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Open 8 AM to sunset.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/chitactac-adams-heritage-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?w=800&h=500&fit=crop",
+    estimatedDuration: 20,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 115,
@@ -530,7 +625,7 @@ export const SAMPLE_SPOTS = [
     location: "San Jose, CA",
     region: "Santa Clara County",
     lat: 37.2573,
-    lng: -121.7900,
+    lng: -121.79,
     difficulty: "easy",
     distance: 14.9,
     elevationGain: 131,
@@ -548,7 +643,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass at multiple trailheads. $6 fee at Hellyer Park entrance.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/coyote-creek-parkway",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 300,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 116,
@@ -574,7 +674,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass at Harvey Bear entrance. Vehicle fee at Coyote Lake entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/coyote-lake-harvey-bear-ranch-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 180,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 117,
@@ -600,7 +705,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Ample parking.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/field-sports-park/rifle-and-pistol-range",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 15,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 118,
@@ -626,14 +736,19 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Dell Avenue entrance (1250 Dell Ave, Campbell).",
     sourceUrl: "https://www.alltrails.com/trail/us/california/los-gatos-creek-trail--5",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 110,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 119,
     name: "Martial Cottle Park Loop",
     location: "San Jose, CA",
     region: "Santa Clara County",
-    lat: 37.2630,
+    lat: 37.263,
     lng: -121.8373,
     difficulty: "easy",
     distance: 2.4,
@@ -652,7 +767,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Snell Avenue entrance.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/martial-cottle-park-loop",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 40,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative", "family"]
   },
   {
     id: 120,
@@ -662,7 +782,7 @@ export const SAMPLE_SPOTS = [
     lat: 37.2475,
     lng: -121.7564,
     difficulty: "easy",
-    distance: 0.0,
+    distance: 0,
     elevationGain: 0,
     estimatedHikingTime: 0,
     rating: 3.8,
@@ -678,7 +798,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. OHV stickers mandatory.",
     sourceUrl: "https://parks.santaclaracounty.gov/locations/metcalf-motorcycle-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 60,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 121,
@@ -704,7 +829,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Multiple trailheads along Capitol Avenue.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/penitencia-creek-park-loop",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=800&h=500&fit=crop",
+    estimatedDuration: 25,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 122,
@@ -730,7 +860,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass but lots fill early on weekends. Arrive early!",
     sourceUrl: "https://www.alltrails.com/trail/us/california/deer-hollow-farm-trail-loop--3",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=800&h=500&fit=crop",
+    estimatedDuration: 70,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 123,
@@ -756,7 +891,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Pueblo Day Use Area entrance.",
     sourceUrl: "https://www.alltrails.com/parks/us/california/santa-teresa-county-park",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=500&fit=crop",
+    estimatedDuration: 105,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 124,
@@ -764,7 +904,7 @@ export const SAMPLE_SPOTS = [
     location: "Cupertino, CA",
     region: "Santa Clara County",
     lat: 37.2693,
-    lng: -122.1410,
+    lng: -122.141,
     difficulty: "moderate",
     distance: 5.7,
     elevationGain: 1079,
@@ -782,20 +922,25 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Limited roadside parking on Stevens Canyon Rd.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/table-mountain-trail-loop-via-charcoal-and-table-mountain-fire-roads",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=250&fit=crop",
+    estimatedDuration: 195,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 125,
     name: "Uvas Reservoir Trail",
     location: "Morgan Hill, CA",
     region: "Santa Clara County",
-    lat: 37.0670,
-    lng: -121.7000,
+    lat: 37.067,
+    lng: -121.7,
     difficulty: "easy",
     distance: 3.5,
     elevationGain: 121,
     estimatedHikingTime: 70,
-    rating: 4.0,
+    rating: 4,
     petFriendly: true,
     kidFriendly: true,
     libraryParkPass: true,
@@ -808,7 +953,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Main entrance with restrooms.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/uvas-reservoir",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=800&h=500&fit=crop",
+    estimatedDuration: 70,
+    bestSeasons: ["spring", "fall"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
   {
     id: 126,
@@ -818,7 +968,7 @@ export const SAMPLE_SPOTS = [
     lat: 37.2467,
     lng: -122.0304,
     difficulty: "moderate",
-    distance: 2.0,
+    distance: 2,
     elevationGain: 505,
     estimatedHikingTime: 60,
     rating: 4.7,
@@ -834,16 +984,19 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free with Library Park Pass. Lot 4 closest to trailheads. Open 8 AM to sunset.",
     sourceUrl: "https://www.alltrails.com/trail/us/california/villa-montalvo-trail",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=500&fit=crop",
+    estimatedDuration: 60,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
-
-  // === Other Popular Bay Area Spots (not county parks) ===
   {
     id: 201,
     name: "Rancho San Antonio - High Meadow Loop",
     location: "Cupertino, CA",
     region: "Santa Clara County",
-    lat: 37.3330,
+    lat: 37.333,
     lng: -122.0958,
     difficulty: "moderate",
     distance: 5.5,
@@ -862,10 +1015,13 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free parking but lots fill by 9am on weekends. Arrive early! Additional overflow lot on Cristo Rey Dr.",
     sourceUrl: "https://www.openspace.org/preserves/rancho-san-antonio",
     category: "outdoors",
-    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&h=500&fit=crop",
+    estimatedDuration: 150,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["quiet", "restorative"]
   },
-
-  // === Cafes & Tea ===
   {
     id: 301,
     name: "Voyager Craft Coffee",
@@ -890,7 +1046,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking and nearby lots.",
     sourceUrl: "https://www.voyagercraftcoffee.com",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=500&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 302,
@@ -916,10 +1077,13 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Shopping center parking available.",
     sourceUrl: null,
-    image: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=800&h=500&fit=crop"
+    image: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=800&h=500&fit=crop",
+    estimatedDuration: 30,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
-
-  // === Coffee Shops (Issue #16) ===
   {
     id: 401,
     name: "Sightglass Coffee",
@@ -944,14 +1108,19 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on 7th St. BART-accessible (Civic Center/UN Plaza).",
     sourceUrl: "https://sightglasscoffee.com",
-    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 402,
     name: "Ritual Coffee Roasters",
     location: "San Francisco, CA",
     region: "San Francisco Bay Area",
-    lat: 37.7580,
+    lat: 37.758,
     lng: -122.4136,
     category: "cafe",
     difficulty: null,
@@ -970,7 +1139,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking; BART 24th St Mission nearby.",
     sourceUrl: "https://ritualcoffee.com",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 403,
@@ -978,7 +1152,7 @@ export const SAMPLE_SPOTS = [
     location: "San Jose, CA",
     region: "Santa Clara County",
     lat: 37.3352,
-    lng: -121.8900,
+    lng: -121.89,
     category: "cafe",
     difficulty: null,
     distance: null,
@@ -996,7 +1170,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on S 1st St. Easy walk from SAP Center.",
     sourceUrl: "https://www.vervecoffee.com",
-    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 404,
@@ -1022,7 +1201,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free parking lot on site.",
     sourceUrl: "https://www.chromaticcoffee.com",
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 405,
@@ -1048,7 +1232,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking. BART 24th St Mission nearby.",
     sourceUrl: "https://www.philzcoffee.com",
-    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 406,
@@ -1074,7 +1263,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Village parking lot nearby.",
     sourceUrl: "https://www.equatorcoffees.com",
-    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 407,
@@ -1100,7 +1294,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on Sacramento St. Cable car nearby.",
     sourceUrl: "https://www.saintfrankcoffee.com",
-    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "quiet"]
   },
   {
     id: 408,
@@ -1126,7 +1325,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on 18th St.",
     sourceUrl: "https://www.lineacaffe.com",
-    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 409,
@@ -1152,7 +1356,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking in Fruitvale neighborhood. BART Fruitvale nearby.",
     sourceUrl: "https://www.redbaycoffee.com",
-    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 410,
@@ -1178,7 +1387,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking. AC Transit accessible.",
     sourceUrl: null,
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 411,
@@ -1204,7 +1418,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking or nearby garages in downtown San Jose.",
     sourceUrl: null,
-    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 412,
@@ -1230,7 +1449,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free street parking.",
     sourceUrl: "https://www.bicyclecoffeeco.com",
-    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 413,
@@ -1256,14 +1480,19 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on Valencia St. BART 16th/24th Mission nearby.",
     sourceUrl: "https://www.dandelionchocolate.com",
-    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 414,
     name: "Coupa Café",
     location: "Palo Alto, CA",
     region: "San Francisco Bay Area",
-    lat: 37.4480,
+    lat: 37.448,
     lng: -122.1604,
     category: "cafe",
     difficulty: null,
@@ -1282,14 +1511,19 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Street parking on University Ave or parking garages nearby.",
     sourceUrl: "https://www.coupacafe.com",
-    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
   {
     id: 415,
     name: "Workshop Café",
     location: "San Francisco, CA",
     region: "San Francisco Bay Area",
-    lat: 37.7870,
+    lat: 37.787,
     lng: -122.4033,
     category: "cafe",
     difficulty: null,
@@ -1308,17 +1542,20 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "BART Montgomery/Embarcadero nearby. Minimal street parking.",
     sourceUrl: "https://www.workshopcafe.com",
-    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=250&fit=crop",
+    estimatedDuration: 50,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "afternoon"],
+    vibes: ["focused", "social"]
   },
-
-  // === Library (Issue #16) ===
   {
     id: 501,
     name: "San Jose Public Library — Dr. Martin Luther King Jr. Main Branch",
     location: "San Jose, CA",
     region: "Santa Clara County",
     lat: 37.3355,
-    lng: -121.8890,
+    lng: -121.889,
     category: "library",
     difficulty: null,
     distance: null,
@@ -1337,7 +1574,12 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "San Jose Convention Center garage nearby. VTA light rail (Convention Center stop) accessible.",
     sourceUrl: "https://www.sjpl.org",
     libraryCardProgram: "San Jose Public Library Card — free with proof of San Jose address. Cardholders access digital resources via Libby, Kanopy (free films), LinkedIn Learning, and more.",
-    image: "https://images.unsplash.com/photo-1568667256549-094345857637?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1568667256549-094345857637?w=400&h=250&fit=crop",
+    estimatedDuration: 90,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["afternoon", "evening"],
+    vibes: ["quiet", "focused", "restorative"]
   },
   {
     id: 502,
@@ -1364,14 +1606,19 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Free parking lot adjacent to the library.",
     sourceUrl: "https://www.sclibrary.org",
     libraryCardProgram: "Santa Clara City Library Card — free for Santa Clara residents. Access includes Libby e-books, Kanopy streaming (8 films/month free), Hoopla digital media, and online databases.",
-    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=250&fit=crop",
+    estimatedDuration: 90,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["afternoon", "evening"],
+    vibes: ["quiet", "focused", "restorative"]
   },
   {
     id: 503,
     name: "San Francisco Public Library — Main Branch",
     location: "San Francisco, CA",
     region: "San Francisco Bay Area",
-    lat: 37.7790,
+    lat: 37.779,
     lng: -122.4155,
     category: "library",
     difficulty: null,
@@ -1391,10 +1638,13 @@ export const SAMPLE_SPOTS = [
     parkingInfo: "Civic Center BART/Muni. Minimal street parking; Civic Center Garage nearby.",
     sourceUrl: "https://sfpl.org",
     libraryCardProgram: "San Francisco Public Library Card — free for San Francisco residents. Includes free Kanopy (10 films/month), Libby e-books, free museum passes to 30+ Bay Area museums, LinkedIn Learning, and more.",
-    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=250&fit=crop",
+    estimatedDuration: 90,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["afternoon", "evening"],
+    vibes: ["quiet", "focused", "restorative"]
   },
-
-  // === Villa Sports (Issue #16) ===
   {
     id: 601,
     name: "Villa Sports — San Jose",
@@ -1419,7 +1669,12 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round (outdoor pools great in summer)",
     parkingInfo: "Large free parking lot on site.",
     sourceUrl: "https://www.villasports.com/san-jose",
-    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=250&fit=crop"
+    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=250&fit=crop",
+    estimatedDuration: 105,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "midday", "afternoon"],
+    vibes: ["energized", "social"]
   },
   {
     id: 603,
@@ -1445,8 +1700,13 @@ export const SAMPLE_SPOTS = [
     bestSeason: "Year-round",
     parkingInfo: "Free parking on site. BART Pleasanton station nearby.",
     sourceUrl: "https://www.villasports.com/pleasanton",
-    image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=250&fit=crop"
-  },
+    image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=250&fit=crop",
+    estimatedDuration: 105,
+    bestSeasons: ["spring", "summer", "fall", "winter"],
+    shaded: true,
+    bestTimeOfDay: ["morning", "midday", "afternoon"],
+    vibes: ["energized", "social"]
+  }
 ]
 
 export const PACK_LIST_TEMPLATES = {
