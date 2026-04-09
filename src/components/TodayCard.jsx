@@ -94,7 +94,15 @@ function daysSince(timestamp) {
 
 /**
  * scoreSpot — pure function, no side effects
- * Returns a number 0–100. Higher = show this spot today.
+ * Returns a number. Higher = show this spot today.
+ *
+ * Reads the full enriched spot schema produced by scripts/enrich-spots.mjs:
+ *   - estimatedDuration   → time fit
+ *   - bestSeasons         → seasonal fit
+ *   - shaded              → summer bonus
+ *   - bestTimeOfDay       → time-of-day fit
+ *   - vibes               → mood match (6 values: quiet, restorative,
+ *                           energized, focused, social, family)
  */
 export function scoreSpot(spot, { availableMinutes, mood, season, timeOfDay }) {
   let score = 0;
@@ -117,20 +125,37 @@ export function scoreSpot(spot, { availableMinutes, mood, season, timeOfDay }) {
   // 3. STARRED BUT NEVER VISITED bonus (15 pts)
   if (spot.starred && spot.visitCount === 0) score += 15;
 
-  // 4. SEASONAL FIT (0–10 pts)
+  // 4. SEASONAL FIT (0–18 pts)
   if (spot.bestSeasons?.includes(season)) score += 10;
   if (spot.shaded && season === "summer")  score += 8;
 
-  // 5. TIME OF DAY FIT (0–8 pts)
+  // 5. TIME OF DAY FIT (0–13 pts)
   if (spot.bestTimeOfDay?.includes(timeOfDay)) score += 8;
   // cafes are great in morning/afternoon
   if (spot.category === "cafe" && ["morning", "afternoon"].includes(timeOfDay)) score += 5;
   // libraries shine in afternoon/evening
   if (spot.category === "library" && ["afternoon", "evening"].includes(timeOfDay)) score += 5;
 
-  // 6. MOOD MATCH (0–7 pts)
-  if (mood === "need quiet" && spot.vibes?.includes("quiet")) score += 7;
-  if (mood === "open"       && spot.vibes?.includes("social")) score += 3;
+  // 6. VIBE / MOOD MATCH (−6 to +13 pts)
+  // Reads the full vibe vocabulary produced by scripts/enrich-spots.mjs.
+  // "need quiet" rewards quiet/restorative/focused and actively penalizes
+  // energized/social (you said you need calm — we listen).
+  // "open" stays welcoming: modest bonuses across the board, with a
+  // slightly bigger lift for restorative because grounding is Stardust's
+  // whole point.
+  const vibes = spot.vibes || [];
+  if (mood === "need quiet") {
+    if (vibes.includes("quiet"))       score += 7;
+    if (vibes.includes("restorative")) score += 4;
+    if (vibes.includes("focused"))     score += 2;
+    if (vibes.includes("energized"))   score -= 3;
+    if (vibes.includes("social"))      score -= 3;
+  } else if (mood === "open") {
+    if (vibes.includes("restorative")) score += 4;
+    if (vibes.includes("social"))      score += 3;
+    if (vibes.includes("energized"))   score += 2;
+    if (vibes.includes("quiet"))       score += 2;
+  }
 
   return Math.max(0, score);
 }

@@ -143,3 +143,83 @@ describe('scoreSpot', () => {
     expect(scoreSpot(goodMorning, ctx)).toBeGreaterThan(scoreSpot(badMorning, ctx))
   })
 })
+
+// ─── scoreSpot — vibe / mood matching (6-vibe vocabulary) ────────────────────
+//
+// These tests cover the enriched vibe vocabulary produced by
+// scripts/enrich-spots.mjs: quiet, restorative, energized, focused, social, family.
+// The scoring engine should reward vibes that match the user's mood and
+// actively penalize vibes that conflict under "need quiet".
+
+describe('scoreSpot — vibe matching', () => {
+  const QUIET_CTX = { ...BASE_CONTEXT, mood: 'need quiet' }
+  const OPEN_CTX = { ...BASE_CONTEXT, mood: 'open' }
+
+  it('need quiet: restorative vibe gives a bonus on top of quiet', () => {
+    const quietOnly = { ...LANDS_END, vibes: ['quiet'] }
+    const quietRestorative = { ...LANDS_END, vibes: ['quiet', 'restorative'] }
+    expect(scoreSpot(quietRestorative, QUIET_CTX)).toBeGreaterThan(scoreSpot(quietOnly, QUIET_CTX))
+  })
+
+  it('need quiet: focused vibe gives a smaller bonus', () => {
+    const noFocused = { ...LANDS_END, vibes: ['quiet'] }
+    const withFocused = { ...LANDS_END, vibes: ['quiet', 'focused'] }
+    expect(scoreSpot(withFocused, QUIET_CTX)).toBeGreaterThan(scoreSpot(noFocused, QUIET_CTX))
+  })
+
+  it('need quiet: energized vibe is penalized (anti-match)', () => {
+    const calm = { ...LANDS_END, vibes: ['quiet'] }
+    const energized = { ...LANDS_END, vibes: ['quiet', 'energized'] }
+    expect(scoreSpot(energized, QUIET_CTX)).toBeLessThan(scoreSpot(calm, QUIET_CTX))
+  })
+
+  it('need quiet: social vibe is penalized (anti-match)', () => {
+    const calm = { ...LANDS_END, vibes: ['quiet'] }
+    const social = { ...LANDS_END, vibes: ['quiet', 'social'] }
+    expect(scoreSpot(social, QUIET_CTX)).toBeLessThan(scoreSpot(calm, QUIET_CTX))
+  })
+
+  it('need quiet: a purely energized+social spot scores worse than a neutral one', () => {
+    // Regression: the old engine only rewarded `quiet` and ignored other vibes,
+    // so a loud gym-class cafe would tie with a generic spot. Now it shouldn't.
+    const neutral = { ...LANDS_END, vibes: [] }
+    const loud = { ...LANDS_END, vibes: ['energized', 'social'] }
+    expect(scoreSpot(loud, QUIET_CTX)).toBeLessThan(scoreSpot(neutral, QUIET_CTX))
+  })
+
+  it('open: restorative vibe gives a bonus (grounding is Stardust\'s north star)', () => {
+    const generic = { ...LANDS_END, vibes: [] }
+    const restorative = { ...LANDS_END, vibes: ['restorative'] }
+    expect(scoreSpot(restorative, OPEN_CTX)).toBeGreaterThan(scoreSpot(generic, OPEN_CTX))
+  })
+
+  it('open: social vibe still gives a bonus', () => {
+    const solo = { ...LANDS_END, vibes: ['quiet'] }
+    const social = { ...LANDS_END, vibes: ['quiet', 'social'] }
+    expect(scoreSpot(social, OPEN_CTX)).toBeGreaterThan(scoreSpot(solo, OPEN_CTX))
+  })
+
+  it('open: restorative beats pure social (grounding > hype)', () => {
+    const social = { ...LANDS_END, vibes: ['social'] }
+    const restorative = { ...LANDS_END, vibes: ['restorative'] }
+    expect(scoreSpot(restorative, OPEN_CTX)).toBeGreaterThan(scoreSpot(social, OPEN_CTX))
+  })
+
+  it('handles missing vibes field without throwing', () => {
+    const noVibes = { ...LANDS_END }
+    delete noVibes.vibes
+    expect(() => scoreSpot(noVibes, QUIET_CTX)).not.toThrow()
+    expect(() => scoreSpot(noVibes, OPEN_CTX)).not.toThrow()
+  })
+
+  it('handles all 6 vibes simultaneously without throwing', () => {
+    const everything = {
+      ...LANDS_END,
+      vibes: ['quiet', 'restorative', 'energized', 'focused', 'social', 'family'],
+    }
+    expect(() => scoreSpot(everything, QUIET_CTX)).not.toThrow()
+    expect(() => scoreSpot(everything, OPEN_CTX)).not.toThrow()
+    // Under "need quiet" the mix still scores positively (quiet +7, restorative +4, focused +2, energized -3, social -3 = net +7)
+    expect(scoreSpot(everything, QUIET_CTX)).toBeGreaterThan(0)
+  })
+})
