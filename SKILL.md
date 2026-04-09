@@ -312,8 +312,18 @@ GitHub Pages serves from `docs/` on `main` automatically.
 - First logged-in user after version bump triggers re-seed for everyone
 
 ```js
-const SEED_VERSION = 5  // bump when spots.js changes
+const SEED_VERSION = 12  // bump when spots.js changes
 ```
+
+### Enrichment pipeline
+
+When you add new spots or change a spot's `category` / `difficulty` / `description`, re-derive the scoring fields (`estimatedDuration`, `bestSeasons`, `shaded`, `bestTimeOfDay`, `vibes`) consumed by `useSuggestion.js`:
+
+```bash
+npm run enrich:spots   # runs scripts/enrich-spots.mjs — idempotent
+```
+
+Then review the diff, bump `SEED_VERSION`, and commit `spots.js` + `useSpots.js` together. Full notes in `scripts/README.md`.
 
 ---
 
@@ -347,21 +357,6 @@ Adding a new category: add SVG + `createIcon()` call + handle in `getSpotIcon()`
 | `1542856391-010f196b4859` | 404s |
 
 ---
-
-## Firestore Seeding
-
-`useSpots.js` seeds `SAMPLE_SPOTS` into Firestore on first login, controlled by `SEED_VERSION`.
-
-**Rules:**
-- Bump `SEED_VERSION` (e.g. 3 → 4) every time you add or change data in `spots.js`
-- Seeding requires login — Firestore write rules require auth. Reads work for everyone once data exists.
-- Without a version bump, existing Firestore data is not updated even if `spots.js` changes
-- After a version bump, the first user to log in triggers the re-seed for everyone
-
-```js
-// src/hooks/useSpots.js
-const SEED_VERSION = 5  // bump this when spots.js changes
-```
 
 ## Map Markers
 

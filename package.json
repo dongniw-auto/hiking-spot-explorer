@@ -8,7 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "enrich:spots": "node scripts/enrich-spots.mjs",
+    "add:spots": "node --env-file=.env scripts/add-spots.mjs"
   },
   "dependencies": {
     "firebase": "^12.10.0",
